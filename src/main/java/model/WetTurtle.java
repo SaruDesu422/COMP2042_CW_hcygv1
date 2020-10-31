@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
 
 import javafx.scene.image.Image;
 
@@ -38,10 +38,10 @@ public class WetTurtle extends Actor{
 			setX(600);
 	}
 	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:src/main/java/p4_group_8_repo/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:src/main/java/p4_group_8_repo/TurtleAnimation2Wet.png", w, h, true, true);
-		turtle3 = new Image("file:src/main/java/p4_group_8_repo/TurtleAnimation3Wet.png", w, h, true, true);
-		turtle4 = new Image("file:src/main/java/p4_group_8_repo/TurtleAnimation4Wet.png", w, h, true, true);
+		turtle1 = new Image("file:src/main/java/view/images/TurtleAnimation1.png", w, h, true, true);
+		turtle2 = new Image("file:src/main/java/view/images/TurtleAnimation2Wet.png", w, h, true, true);
+		turtle3 = new Image("file:src/main/java/view/images/TurtleAnimation3Wet.png", w, h, true, true);
+		turtle4 = new Image("file:src/main/java/view/images/TurtleAnimation4Wet.png", w, h, true, true);
 		setX(xpos);
 		setY(ypos);
 		speed = s;

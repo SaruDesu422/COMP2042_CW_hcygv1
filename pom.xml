@@ -86,7 +86,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.2.1</version>
           <configuration>
-            <mainClass>p4_group_8_repo.Main</mainClass>
+            <mainClass>view.Main</mainClass>
           </configuration>
         </plugin>
       </plugins>

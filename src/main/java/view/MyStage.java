@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package view;
 
 import java.io.File;
 
@@ -29,7 +29,7 @@ public class MyStage extends World{
 	}
 	
 	public void playMusic() {
-		String musicFile = "src/main/java/p4_group_8_repo/Frogger Main Song Theme (loop).mp3";   
+		String musicFile = "src/main/java/view/audio/Frogger Main Song Theme (loop).mp3";   
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

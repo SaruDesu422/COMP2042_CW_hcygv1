@@ -1,4 +1,5 @@
-package p4_group_8_repo;
+package view;
+import model.*;
 
 
 import java.util.ArrayList;

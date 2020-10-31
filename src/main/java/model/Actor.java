@@ -1,4 +1,5 @@
-package p4_group_8_repo;
+package model;
+import view.*;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
