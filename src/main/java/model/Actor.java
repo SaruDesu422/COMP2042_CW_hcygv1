@@ -1,11 +1,10 @@
 package model;
-import view.*;
+import view.frames.*;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 
 import java.util.ArrayList;
-
 
 public abstract class Actor extends ImageView{
 

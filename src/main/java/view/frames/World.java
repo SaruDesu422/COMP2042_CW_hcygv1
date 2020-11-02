@@ -1,4 +1,4 @@
-package view;
+package view.frames;
 import model.*;
 
 
@@ -8,6 +8,8 @@ import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -64,6 +66,7 @@ public abstract class World extends Pane {
     		
 		});
     }
+    
 
     public void createTimer() {
         timer = new AnimationTimer() {
