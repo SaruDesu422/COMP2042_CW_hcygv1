@@ -5,6 +5,30 @@ import javafx.scene.image.Image;
 public class Log extends Actor {
 
 	private double speed;
+
+	/**
+	* This method configures .
+    *
+    * @param  imageLink  link for image
+	* @param  size       size of log
+	* @param  xpos       x coordinate
+	* @param  ypos       y coordinate
+	* @param  s          speed
+	* @see               Image of log
+	*/
+	public Log(String imageLink, int size, int xpos, int ypos, double s) {
+		setImage(new Image(imageLink, size, size, true, true));
+		setX(xpos);
+		setY(ypos);
+		speed = s;
+	}
+
+	/**
+	* This method moves object that is out of pane to
+	* initial position.
+    *
+    * @param  now  current frame
+	*/
 	@Override
 	public void act(long now) {
 		move(speed , 0);
@@ -14,13 +38,11 @@ public class Log extends Actor {
 			setX(700);
 	}
 	
-	public Log(String imageLink, int size, int xpos, int ypos, double s) {
-		setImage(new Image(imageLink, size,size, true, true));
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		
-	}
+	/**
+	* This method returns true of log is moving to the left.
+    *
+    * @return     returns true if log is moving to the left
+	*/
 	public boolean getLeft() {
 		return speed < 0;
 	}

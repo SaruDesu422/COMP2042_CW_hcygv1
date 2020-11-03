@@ -22,6 +22,12 @@ public class MainMenu extends BorderPane{
 	private ImageView infoBG;
 	private App app;
 
+	/**
+	* This method calls the initialize method and main controller
+	* for actions on the buttons.
+    *
+    * @param  app  application
+	*/
     public MainMenu(App app) {
 		this.app = app;
 		initialize();
@@ -29,6 +35,12 @@ public class MainMenu extends BorderPane{
 		MainController mainController = new MainController(this);
 	}
 
+	/**
+	* This method initializes the positions of the buttons
+	* and the background of the main menu pane.
+    *
+    * @see     Main menu pane
+	*/
 	public void initialize() {
 		this.setPrefSize(600, 800);
 		// configure start button shape
@@ -45,7 +57,6 @@ public class MainMenu extends BorderPane{
 
 		btn_start = new Button();
 		btn_start.setGraphic(startBG);
-		btn_start.setStyle("-fx-border-color: black");
 		btn_start.setShape(start);
 		btn_start.setPrefSize(200, 100);
 
@@ -60,42 +71,67 @@ public class MainMenu extends BorderPane{
 		
 		btn_info = new Button();
 		btn_info.setGraphic(infoBG);
-		btn_info.setStyle("-fx-border-color: black");
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
 		// configure position of buttons and background
 		add(new BackgroundImage("file:src/main/java/view/images/iKogsKW.png"));
-		this.setCenter(btn_start);
-		this.setTop(btn_info);
-		BorderPane.setAlignment(btn_info, Pos.TOP_RIGHT);
-		BorderPane.setMargin(btn_info, new Insets(25,25,25,25));
-		BorderPane.setMargin(btn_start, new Insets(300,0,0,0));
+		setCenter(btn_start);
+		setTop(btn_info);
+		setAlignment(btn_info, Pos.TOP_RIGHT);
+		setMargin(btn_info, new Insets(25,25,25,25));
+		setMargin(btn_start, new Insets(300,0,0,0));
 	}
 	
+	/**
+	* This method adds actor to pane.
+	*
+    * @see     Actor
+	*/
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
-    
-    public void remove(Actor actor) {
-        getChildren().remove(actor);
-    }
 
+	/**
+	* This method returns configurations of start button.
+	*
+    * @return  Start button
+	*/
     public Button getStartButton() {
 		return this.btn_start;
 	}
 
+	/**
+	* This method returns configurations of info button.
+	*
+    * @return  Info button
+	*/
 	public Button getInfoButton() {
 		return this.btn_info;
 	}
 
+	/**
+	* This method returns current start button background.
+	*
+    * @return  Start button background
+	*/
 	public ImageView getStartBG() {
 		return this.startBG;
 	}
 	
+	/**
+	* This method returns current info button background.
+	*
+    * @return  Info button background
+	*/
 	public ImageView getInfoBG() {
 		return this.infoBG;
 	}
 
+	/**
+	* This method returns current application config.
+	*
+    * @return  Application
+	*/
 	public App getApp() {
 		return this.app;
 	}

@@ -1,6 +1,5 @@
 package view;
 
-import model.*;
 import view.frames.MainMenu;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -24,8 +23,8 @@ public class App extends Application {
 		primaryStage.setResizable(false);
 
 		mainMenu = new MainMenu(this);
-		Scene startscene = new Scene(mainMenu, 600, 800);
-		primaryStage.setScene(startscene);
+		Scene menuscene = new Scene(mainMenu, 600, 800);
+		primaryStage.setScene(menuscene);
 		primaryStage.show();
 	}
 
