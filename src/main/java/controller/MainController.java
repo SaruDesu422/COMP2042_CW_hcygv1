@@ -4,16 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.Scene;
-import view.App;
-import view.Level;
+import view.Game;
 import view.MainMenu;
 
 public class MainController {
     
     private MainMenu mainMenu;
-    private App app;
-    Level level;
 
     /**
     * This method controls the start and info buttons in the
@@ -22,25 +18,18 @@ public class MainController {
 	*/
     public MainController(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
-        this.app = mainMenu.getApp();
-        mainMenu.getStartButton().setOnAction(this::handleButtonStart);
-        mainMenu.getStartButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonStartMouseIn);
-        mainMenu.getStartButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonStartMouseOut);
-        mainMenu.getInfoButton().setOnAction(this::handleButtonInfo);
-        mainMenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonInfoMouseIn);
-        mainMenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonInfoMouseOut);
     }
 
     /**
-    * This method redirects current stage to first level pane.
+    * When Start Button is clicked, start game by changing 
+    * page to first level.
     *
-    * @see     first level scene is loaded
+    * @see      ActionEvent
 	*/
-    private void handleButtonStart(ActionEvent event) {
-        this.level = new Level(mainMenu, 1);
-        Scene levelScene = new Scene(level.getCurrentStage(), 600, 800);
-        app.getPrimaryStage().setScene(levelScene);
-        app.getPrimaryStage().show();
+    public void handleButtonStart(ActionEvent event) {
+        Game game = new Game(mainMenu);
+        game.startNextLevel();
+        mainMenu.getApp().changePage(game.getStage());
     }
     
     /**
@@ -48,7 +37,7 @@ public class MainController {
     *
     * @see     info scene is loaded
 	*/
-    private void handleButtonInfo(ActionEvent event) {
+    public void handleButtonInfo(ActionEvent event) {
         // go to info page
     }
 
@@ -58,7 +47,7 @@ public class MainController {
     *
     * @see     image of start button
 	*/
-    private void handleButtonStartMouseIn(MouseEvent event) {
+    public void handleButtonStartMouseIn(MouseEvent event) {
         ImageView startMouseIn = new ImageView(new Image("file:media/images/download.png"));
 		startMouseIn.setFitHeight(100);
 		startMouseIn.setPreserveRatio(true);
@@ -71,8 +60,10 @@ public class MainController {
     *
     * @see     image of start button
 	*/
-    private void handleButtonStartMouseOut(MouseEvent event) {
-        ImageView startMouseOut = mainMenu.getStartBG();
+    public void handleButtonStartMouseOut(MouseEvent event) {
+        ImageView startMouseOut = new ImageView(new Image("file:media/images/download.png"));
+		startMouseOut.setFitHeight(100);
+		startMouseOut.setPreserveRatio(true);
         mainMenu.getStartButton().setGraphic(startMouseOut);
     }
 
@@ -82,7 +73,7 @@ public class MainController {
     *
     * @see     image of info button
 	*/
-    private void handleButtonInfoMouseIn(MouseEvent event) {
+    public void handleButtonInfoMouseIn(MouseEvent event) {
         ImageView infoMouseIn = new ImageView(new Image("file:media/images/info.png"));
         infoMouseIn.setFitHeight(30);
 		infoMouseIn.setFitWidth(30);
@@ -95,8 +86,10 @@ public class MainController {
     *
     * @see     image of info button
 	*/
-    private void handleButtonInfoMouseOut(MouseEvent event) {
-        ImageView infoMouseOut = mainMenu.getInfoBG();
+    public void handleButtonInfoMouseOut(MouseEvent event) {
+        ImageView infoMouseOut = new ImageView(new Image("file:media/images/info.png"));
+        infoMouseOut.setFitHeight(30);
+		infoMouseOut.setFitWidth(30);
         mainMenu.getInfoButton().setGraphic(infoMouseOut);
     }
 }

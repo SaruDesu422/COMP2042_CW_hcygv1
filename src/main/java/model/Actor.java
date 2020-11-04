@@ -60,6 +60,16 @@ public abstract class Actor extends ImageView{
         }
         return someArray;
     }
+    public <A extends Actor> A getOneIntersectingObject(java.lang.Class<A> cls) {
+        ArrayList<A> someArray = new ArrayList<A>();
+        for (A actor: getWorld().getObjects(cls)) {
+            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
+                someArray.add(actor);
+                break;
+            }
+        }
+        return someArray.get(0);
+    }
     
     // public void manageInput(InputEvent e) {}
 

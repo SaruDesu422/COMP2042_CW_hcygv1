@@ -15,11 +15,11 @@ public class Animal extends Actor {
 	private final double START_Y = 679.8;
 	private final int IMAGE_SIZE = 40;
 	private final int MAX_Y = 800;
-	private final double MOVEMENT_Y = 13.3333333*2;
+	private final double MOVEMENT_Y = 13.333333*2;
 	private final double MOVEMENT_X = 10.666666*2;
 
 	int points = 0;
-	int end = 5;
+	int end = 0;
 	private boolean repeat = false;
 	boolean noMove = false;
 	boolean carDeath = false;
@@ -265,6 +265,7 @@ public class Animal extends Actor {
 		else if (getIntersectingObjects(End.class).size() >= 1) {
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			/* if end already activated */
+			System.out.println("Reached end");
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
 				end--;
 				points -= CHANGE_SCORE;

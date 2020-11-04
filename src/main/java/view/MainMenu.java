@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -16,11 +17,10 @@ import javafx.scene.shape.Rectangle;
 public class MainMenu extends BorderPane{
 
 	private Button btn_start;
-	private ImageView startBG;
 	private Button btn_info;
-	private ImageView infoBG;
 	private App app;
-	private int lvl;
+
+	private MainController controller;
 
 	/**
 	* This method calls the initialize method and main controller
@@ -30,11 +30,7 @@ public class MainMenu extends BorderPane{
 	*/
     public MainMenu(App app) {
 		this.app = app;
-		this.lvl = 1;
 		initialize();
-		/* configure actions on buttons */
-		@SuppressWarnings("unused")
-		MainController mainController = new MainController(this);
 	}
 
 	/**
@@ -53,7 +49,7 @@ public class MainMenu extends BorderPane{
 		start.setWidth(200);
 		start.setStrokeWidth(10);
 		/* configure start button background */
-		startBG = new ImageView(new Image("file:media/images/pngegg.png"));
+		ImageView startBG = new ImageView(new Image("file:media/images/pngegg.png"));
 		startBG.setFitHeight(100);
 		startBG.setPreserveRatio(true);
 
@@ -67,7 +63,7 @@ public class MainMenu extends BorderPane{
 		circle.setRadius(15);
 		circle.setStrokeWidth(5);
 		/* configure info button background */
-		infoBG = new ImageView(new Image("file:media/images/info.png"));
+		ImageView infoBG = new ImageView(new Image("file:media/images/info.png"));
 		infoBG.setFitHeight(30);
 		infoBG.setFitWidth(30);
 		
@@ -77,11 +73,21 @@ public class MainMenu extends BorderPane{
 		btn_info.setPrefSize(30, 30);
 		/* configure position of buttons and background */
 		add(new BackgroundImage("file:media/images/iKogsKW.png"));
+		
 		setCenter(btn_start);
 		setTop(btn_info);
 		setAlignment(btn_info, Pos.TOP_RIGHT);
 		setMargin(btn_info, new Insets(25,25,25,25));
 		setMargin(btn_start, new Insets(300,0,0,0));
+
+		controller = new MainController(this);
+		
+		btn_start.setOnAction(controller::handleButtonStart);
+        btn_start.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonStartMouseIn);
+        btn_start.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonStartMouseOut);
+        btn_info.setOnAction(controller::handleButtonInfo);
+        btn_info.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonInfoMouseIn);
+        btn_info.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonInfoMouseOut);
 	}
 	
 	/**
@@ -112,41 +118,11 @@ public class MainMenu extends BorderPane{
 	}
 
 	/**
-	* This method returns current start button background.
-	*
-    * @return  Start button background
-	*/
-	public ImageView getStartBG() {
-		return this.startBG;
-	}
-	
-	/**
-	* This method returns current info button background.
-	*
-    * @return  Info button background
-	*/
-	public ImageView getInfoBG() {
-		return this.infoBG;
-	}
-
-	/**
 	* This method returns current application config.
 	*
     * @return  Application
 	*/
 	public App getApp() {
 		return this.app;
-	}
-
-	public int getCurrentLevel() {
-		return this.lvl;
-	}
-
-	public void setCurrentLevel() {
-		this.lvl++;
-	}
-
-	public void resetCurrentLevel() {
-		this.lvl = 1;
 	}
 }
