@@ -6,6 +6,7 @@ import java.util.Random;
 import javafx.scene.image.Image;
 
 public class Obstacle extends Actor {
+	
 	private final int LIMIT_LEFT = -200;
 	private final int LIMIT_RIGHT = 600;
 	private int speed;

@@ -16,21 +16,25 @@ import javafx.scene.layout.Pane;
 
 
 public abstract class World extends Pane {
+
     private AnimationTimer timer;
     Animal animal;
     MyStage background;
     ScoreBoard scoreBoard;
     App app;
     
+    /**
+    * This method sets the image of the start button when the cursor is not
+    * hovering over it anymore.
+    *
+    * @see     image of start button
+	*/
     public World() {
-    	
     	sceneProperty().addListener(new ChangeListener<Scene>() {
-
 			@Override
 			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
 				if (newValue != null) {
 					newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
 						@Override
 						public void handle(KeyEvent event) {
 							if(getOnKeyReleased() != null) 
@@ -42,11 +46,8 @@ public abstract class World extends Pane {
 								}
 							}
 						}
-						
 					});
-					
 					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 						@Override
 						public void handle(KeyEvent event) {
 							if(getOnKeyPressed() != null) 
@@ -58,12 +59,9 @@ public abstract class World extends Pane {
 								}
 							}
 						}
-						
 					});
 				}
-				
 			}
-    		
 		});
     }
     
@@ -73,10 +71,10 @@ public abstract class World extends Pane {
             public void handle(long now) {
                 act(now);
                 List<Actor> actors = getObjects(Actor.class);
-                
                 for (Actor anActor: actors) {
                 	anActor.act(now);
                 }
+                System.out.println(animal.getPoints());
                 // if (animal.resetScore()) {
             	// 	setNumber(animal.getPoints());
                 // }

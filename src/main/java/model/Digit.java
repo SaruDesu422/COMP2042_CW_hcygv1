@@ -3,11 +3,10 @@ package model;
 import javafx.scene.image.Image;
 
 public class Digit extends Actor{
+
 	private final int DIM = 30;
 	Image im1;
-	@Override
-	public void act(long now) {}
-	
+
 	/**
 	* This method sets image for digits.
 	*
@@ -23,4 +22,7 @@ public class Digit extends Actor{
 		setX(x);
 		setY(y);
 	}
+	
+	@Override
+	public void act(long now) {}
 }

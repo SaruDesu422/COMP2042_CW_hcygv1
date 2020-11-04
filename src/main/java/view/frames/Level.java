@@ -5,6 +5,7 @@ import model.*;
 import javafx.animation.AnimationTimer;
 
 public class Level{
+    
     AnimationTimer timer;
     Animal animal;
     MyStage background;
@@ -75,7 +76,6 @@ public class Level{
 
     }
 
-    
     public MyStage getCurrentStage() {
         return this.background;
     }

@@ -3,11 +3,9 @@ package model;
 import javafx.scene.image.Image;
 
 public class BackgroundImage extends Actor{
-
+	
 	private final int MAX_X = 600;
 	private final int MAX_Y = 800;
-	@Override
-	public void act(long now) {}
 
 	/**
 	* This method sets background image.
@@ -18,4 +16,7 @@ public class BackgroundImage extends Actor{
 	public BackgroundImage(String imageLink) {
 		setImage(new Image(imageLink, MAX_X, MAX_Y, false, true));
 	}
+	
+	@Override
+	public void act(long now) {}
 }

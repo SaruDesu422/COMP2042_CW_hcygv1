@@ -61,9 +61,7 @@ public abstract class Actor extends ImageView{
         return someArray;
     }
     
-    // public void manageInput(InputEvent e) {
-        
-    // }
+    // public void manageInput(InputEvent e) {}
 
     /**
 	* This method must be overriden for use.

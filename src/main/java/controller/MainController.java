@@ -10,10 +10,16 @@ import view.frames.Level;
 import view.frames.MainMenu;
 
 public class MainController {
+    
     private MainMenu mainmenu;
     private App app;
     Level level;
 
+    /**
+    * This method controls the start and info buttons in the
+    * main menu pane.
+	*
+	*/
     public MainController(MainMenu mainmenu) {
         this.mainmenu = mainmenu;
         this.app = mainmenu.getApp();
@@ -25,42 +31,71 @@ public class MainController {
         mainmenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonInfoMouseOut);
     }
 
+    /**
+    * This method redirects current stage to first level pane.
+    *
+    * @see     first level scene is loaded
+	*/
     private void handleButtonStart(ActionEvent event) {
-        // go to level1
         this.level = new Level();
         Scene levelScene = new Scene(level.getCurrentStage(), 600, 800);
         app.getPrimaryStage().setScene(levelScene);
         app.getPrimaryStage().show();
     }
     
+    /**
+    * This method redirects current stage to info pane.
+    *
+    * @see     info scene is loaded
+	*/
     private void handleButtonInfo(ActionEvent event) {
         // go to info page
     }
 
+    /**
+    * This method sets the image of the start button when the cursor is 
+    * hovering over it.
+    *
+    * @see     image of start button
+	*/
     private void handleButtonStartMouseIn(MouseEvent event) {
-        // animate mouse in start
         ImageView startMouseIn = new ImageView(new Image("file:src/main/java/view/images/download.png"));
 		startMouseIn.setFitHeight(100);
 		startMouseIn.setPreserveRatio(true);
         mainmenu.getStartButton().setGraphic(startMouseIn);
     }
 
+    /**
+    * This method sets the image of the start button when the cursor is not
+    * hovering over it anymore.
+    *
+    * @see     image of start button
+	*/
     private void handleButtonStartMouseOut(MouseEvent event) {
-        // animate mouse out start
         ImageView startMouseOut = mainmenu.getStartBG();
         mainmenu.getStartButton().setGraphic(startMouseOut);
     }
 
+    /**
+    * This method sets the image of the info button when the cursor is 
+    * hovering over it.
+    *
+    * @see     image of info button
+	*/
     private void handleButtonInfoMouseIn(MouseEvent event) {
-        // animate mouse in info
         ImageView infoMouseIn = new ImageView(new Image("file:src/main/java/view/images/info.png"));
         infoMouseIn.setFitHeight(30);
 		infoMouseIn.setFitWidth(30);
         mainmenu.getInfoButton().setGraphic(infoMouseIn);
     }
     
+    /**
+    * This method sets the image of the info button when the cursor is not
+    * hovering over it anymore.
+    *
+    * @see     image of info button
+	*/
     private void handleButtonInfoMouseOut(MouseEvent event) {
-        // animate mouse out info
         ImageView infoMouseOut = mainmenu.getInfoBG();
         mainmenu.getInfoButton().setGraphic(infoMouseOut);
     }
