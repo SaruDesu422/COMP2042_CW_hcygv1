@@ -56,7 +56,7 @@ public class ScoreBoardController {
     private void handleButtonMenu(ActionEvent event) {
         //go to menu
         MainMenu mainMenu = this.scoreBoard.getMainMenu();
-        
+        mainMenu.resetCurrentLevel();
         Scene menuscene = mainMenu.getApp().getMainScene();
         mainMenu.getApp().getPrimaryStage().setScene(menuscene);
         mainMenu.getApp().getPrimaryStage().show();

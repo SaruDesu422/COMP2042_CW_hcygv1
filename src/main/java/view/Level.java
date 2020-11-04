@@ -17,9 +17,11 @@ public class Level{
     public Level(MainMenu mainMenu, int lvl) {
         this.mainMenu = mainMenu;
         if (lvl == 1) {
+            System.out.println("Initializing level 1");
             init_level1();
         }
         if (lvl == 2) {
+            System.out.println("Initializing level 2");
             init_level2();
         }
     }
@@ -124,10 +126,6 @@ public class Level{
         start();
     }
 
-    public void nextLevel() {
-        
-    }
-
     public MyStage getCurrentStage() {
         return this.background;
     }
@@ -146,7 +144,7 @@ public class Level{
                 }
                 // if all ends are activated
             	if (animal.getStop()) {
-            		System.out.println("STOPP:");
+            		System.out.println("Finished level: " + mainMenu.getCurrentLevel());
             		background.stopMusic();
                     stop();
                     // change to scoreboard

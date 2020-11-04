@@ -145,4 +145,8 @@ public class MainMenu extends BorderPane{
 	public void setCurrentLevel() {
 		this.lvl++;
 	}
+
+	public void resetCurrentLevel() {
+		this.lvl = 1;
+	}
 }
