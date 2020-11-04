@@ -1,6 +1,5 @@
 package view;
 
-import view.frames.MainMenu;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,6 +9,8 @@ public class App extends Application {
 	AnimationTimer timer;
 	MainMenu mainMenu;
 	private Stage primaryStage;
+	ScoreBoard scoreBoard;
+	Scene menuscene;
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -23,12 +24,20 @@ public class App extends Application {
 		primaryStage.setResizable(false);
 
 		mainMenu = new MainMenu(this);
-		Scene menuscene = new Scene(mainMenu, 600, 800);
+		menuscene = new Scene(mainMenu, 600, 800);
 		primaryStage.setScene(menuscene);
+
+		// scoreBoard = new ScoreBoard(this);
+		// Scene scorescene = new Scene(scoreBoard, 600, 800);
+		// primaryStage.setScene(scorescene);
 		primaryStage.show();
 	}
 
 	public Stage getPrimaryStage() {
 		return this.primaryStage;
+	}
+
+	public Scene getMainScene() {
+		return this.menuscene;
 	}
 }

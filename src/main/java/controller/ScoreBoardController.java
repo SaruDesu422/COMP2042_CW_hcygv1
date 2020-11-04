@@ -5,29 +5,28 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
-import view.App;
-import view.frames.Level;
-import view.frames.MainMenu;
-import view.frames.ScoreBoard;
+import view.Level;
+import view.MainMenu;
+import view.ScoreBoard;
 
-public class LevelController {
+public class ScoreBoardController {
     
-    private Level level;
     private ScoreBoard scoreBoard;
-    private App app;
-    private MainMenu mainmenu;
+    Level level;
 
     /**
     * This method controls the continue and menu buttons in the
     * scoreboard pane.
 	*
 	*/
-    public LevelController(ScoreBoard scoreBoard) {
+    public ScoreBoardController(ScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
-        this.app = scoreBoard.getApp();
-        scoreBoard.getContinueButton().setOnAction(this::handleButtonContinue);
-        scoreBoard.getContinueButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonContinueMouseIn);
-        scoreBoard.getContinueButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonContinueMouseOut);
+        MainMenu mainMenu = this.scoreBoard.getMainMenu();
+        if (mainMenu.getCurrentLevel() < 2) {
+            scoreBoard.getContinueButton().setOnAction(this::handleButtonContinue);
+            scoreBoard.getContinueButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonContinueMouseIn);
+            scoreBoard.getContinueButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonContinueMouseOut);
+        }
         scoreBoard.getMenuButton().setOnAction(this::handleButtonMenu);
         scoreBoard.getMenuButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonMenuMouseIn);
         scoreBoard.getMenuButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonMenuMouseOut);
@@ -39,8 +38,14 @@ public class LevelController {
     * @see     next level scene is loaded
 	*/
     private void handleButtonContinue(ActionEvent event) {
-        // go to next level
+        MainMenu mainMenu = this.scoreBoard.getMainMenu();
+        
+        mainMenu.setCurrentLevel();
+        this.level = new Level(mainMenu, mainMenu.getCurrentLevel());
 
+        Scene levelScene = new Scene(level.getCurrentStage(), 600, 800);
+        mainMenu.getApp().getPrimaryStage().setScene(levelScene);
+        mainMenu.getApp().getPrimaryStage().show();
     }
 
     /**
@@ -50,10 +55,11 @@ public class LevelController {
 	*/
     private void handleButtonMenu(ActionEvent event) {
         //go to menu
-        this.mainmenu = new MainMenu(scoreBoard.getApp());
-        Scene menuscene = new Scene(this.mainmenu, 600, 800);
-        app.getPrimaryStage().setScene(menuscene);
-        app.getPrimaryStage().show();
+        MainMenu mainMenu = this.scoreBoard.getMainMenu();
+        
+        Scene menuscene = mainMenu.getApp().getMainScene();
+        mainMenu.getApp().getPrimaryStage().setScene(menuscene);
+        mainMenu.getApp().getPrimaryStage().show();
     }
 
     /**
@@ -63,7 +69,7 @@ public class LevelController {
     * @see     image of continue button
 	*/
     private void handleButtonContinueMouseIn(MouseEvent event) {
-        ImageView continueMouseIn = new ImageView(new Image("file:src/main/java/view/images/info.png"));
+        ImageView continueMouseIn = new ImageView(new Image("file:media/images/info.png"));
         continueMouseIn.setFitHeight(100);
 		continueMouseIn.setPreserveRatio(true);
         scoreBoard.getContinueButton().setGraphic(continueMouseIn);
@@ -87,7 +93,7 @@ public class LevelController {
     * @see     image of main menu button
 	*/
     private void handleButtonMenuMouseIn(MouseEvent event) {
-        ImageView menuMouseIn = new ImageView(new Image("file:src/main/java/view/images/info.png"));
+        ImageView menuMouseIn = new ImageView(new Image("file:media/images/info.png"));
         menuMouseIn.setFitHeight(30);
 		menuMouseIn.setFitWidth(30);
         scoreBoard.getMenuButton().setGraphic(menuMouseIn);

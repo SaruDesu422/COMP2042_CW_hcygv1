@@ -1,12 +1,11 @@
 package model;
 
 import java.lang.Math;
-import java.util.Random;
 
 import javafx.scene.image.Image;
 
 public class Turtle extends Actor{
-	
+
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE = 130;
@@ -26,9 +25,9 @@ public class Turtle extends Actor{
 	* @see          position of turtle
 	*/
 	public Turtle(int xpos, int ypos, int s) {
-		turtle1 = new Image("file:src/main/java/view/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
-		turtle2 = new Image("file:src/main/java/view/images/TurtleAnimation2.png", SIZE, SIZE, true, true);
-		turtle3 = new Image("file:src/main/java/view/images/TurtleAnimation3.png", SIZE, SIZE, true, true);
+		turtle1 = new Image("file:media/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
+		turtle2 = new Image("file:media/images/TurtleAnimation2.png", SIZE, SIZE, true, true);
+		turtle3 = new Image("file:media/images/TurtleAnimation3.png", SIZE, SIZE, true, true);
 		setX(xpos);
 		setY(ypos);
 		speed = s;

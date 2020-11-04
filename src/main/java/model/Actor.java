@@ -1,5 +1,5 @@
 package model;
-import view.frames.*;
+import view.*;
 
 import javafx.scene.image.ImageView;
 

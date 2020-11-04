@@ -17,7 +17,7 @@ public class Digit extends Actor{
 	* @see       Image of end
 	*/
 	public Digit(int n, int x, int y) {
-		im1 = new Image("file:src/main/java/view/images/" + n + ".png", DIM, DIM, true, true);
+		im1 = new Image("file:media/images/" + n + ".png", DIM, DIM, true, true);
 		setImage(im1);
 		setX(x);
 		setY(y);

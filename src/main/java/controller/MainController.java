@@ -6,12 +6,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import view.App;
-import view.frames.Level;
-import view.frames.MainMenu;
+import view.Level;
+import view.MainMenu;
 
 public class MainController {
     
-    private MainMenu mainmenu;
+    private MainMenu mainMenu;
     private App app;
     Level level;
 
@@ -20,15 +20,15 @@ public class MainController {
     * main menu pane.
 	*
 	*/
-    public MainController(MainMenu mainmenu) {
-        this.mainmenu = mainmenu;
-        this.app = mainmenu.getApp();
-        mainmenu.getStartButton().setOnAction(this::handleButtonStart);
-        mainmenu.getStartButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonStartMouseIn);
-        mainmenu.getStartButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonStartMouseOut);
-        mainmenu.getInfoButton().setOnAction(this::handleButtonInfo);
-        mainmenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonInfoMouseIn);
-        mainmenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonInfoMouseOut);
+    public MainController(MainMenu mainMenu) {
+        this.mainMenu = mainMenu;
+        this.app = mainMenu.getApp();
+        mainMenu.getStartButton().setOnAction(this::handleButtonStart);
+        mainMenu.getStartButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonStartMouseIn);
+        mainMenu.getStartButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonStartMouseOut);
+        mainMenu.getInfoButton().setOnAction(this::handleButtonInfo);
+        mainMenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_ENTERED, this::handleButtonInfoMouseIn);
+        mainMenu.getInfoButton().addEventHandler(MouseEvent.MOUSE_EXITED, this::handleButtonInfoMouseOut);
     }
 
     /**
@@ -37,7 +37,7 @@ public class MainController {
     * @see     first level scene is loaded
 	*/
     private void handleButtonStart(ActionEvent event) {
-        this.level = new Level();
+        this.level = new Level(mainMenu, 1);
         Scene levelScene = new Scene(level.getCurrentStage(), 600, 800);
         app.getPrimaryStage().setScene(levelScene);
         app.getPrimaryStage().show();
@@ -59,10 +59,10 @@ public class MainController {
     * @see     image of start button
 	*/
     private void handleButtonStartMouseIn(MouseEvent event) {
-        ImageView startMouseIn = new ImageView(new Image("file:src/main/java/view/images/download.png"));
+        ImageView startMouseIn = new ImageView(new Image("file:media/images/download.png"));
 		startMouseIn.setFitHeight(100);
 		startMouseIn.setPreserveRatio(true);
-        mainmenu.getStartButton().setGraphic(startMouseIn);
+        mainMenu.getStartButton().setGraphic(startMouseIn);
     }
 
     /**
@@ -72,8 +72,8 @@ public class MainController {
     * @see     image of start button
 	*/
     private void handleButtonStartMouseOut(MouseEvent event) {
-        ImageView startMouseOut = mainmenu.getStartBG();
-        mainmenu.getStartButton().setGraphic(startMouseOut);
+        ImageView startMouseOut = mainMenu.getStartBG();
+        mainMenu.getStartButton().setGraphic(startMouseOut);
     }
 
     /**
@@ -83,10 +83,10 @@ public class MainController {
     * @see     image of info button
 	*/
     private void handleButtonInfoMouseIn(MouseEvent event) {
-        ImageView infoMouseIn = new ImageView(new Image("file:src/main/java/view/images/info.png"));
+        ImageView infoMouseIn = new ImageView(new Image("file:media/images/info.png"));
         infoMouseIn.setFitHeight(30);
 		infoMouseIn.setFitWidth(30);
-        mainmenu.getInfoButton().setGraphic(infoMouseIn);
+        mainMenu.getInfoButton().setGraphic(infoMouseIn);
     }
     
     /**
@@ -96,7 +96,7 @@ public class MainController {
     * @see     image of info button
 	*/
     private void handleButtonInfoMouseOut(MouseEvent event) {
-        ImageView infoMouseOut = mainmenu.getInfoBG();
-        mainmenu.getInfoButton().setGraphic(infoMouseOut);
+        ImageView infoMouseOut = mainMenu.getInfoBG();
+        mainMenu.getInfoButton().setGraphic(infoMouseOut);
     }
 }

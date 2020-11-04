@@ -1,9 +1,8 @@
-package view.frames;
+package view;
 
 import model.Actor;
-import controller.LevelController;
+import controller.ScoreBoardController;
 import model.BackgroundImage;
-import view.App;
 
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
@@ -18,14 +17,20 @@ public class ScoreBoard extends BorderPane{
     private ImageView continueBG;
     private Button btn_menu;
     private ImageView menuBG;
-    private App app;
+    private MainMenu mainMenu;
 
-    public ScoreBoard(App app) {
-        this.app = app;
-        initialize();
+    public ScoreBoard(MainMenu mainMenu) {
+        this.mainMenu = mainMenu;
+        if (mainMenu.getCurrentLevel() == 2) {
+            lastScore();
+        }
+        else{
+            initialize();
+        }
         // configure actions on button
-        LevelController levelController = new LevelController(this);
-    }
+        @SuppressWarnings("unused")
+        ScoreBoardController scoreBoardController = new ScoreBoardController(this);
+        }
 
     public void initialize() {
         this.setPrefSize(600, 800);
@@ -37,7 +42,7 @@ public class ScoreBoard extends BorderPane{
 		continueShape.setWidth(200);
 		continueShape.setStrokeWidth(10);
         // configure continue button background
-        continueBG = new ImageView(new Image("file:src/main/java/view/images/pngegg.png"));
+        continueBG = new ImageView(new Image("file:media/images/pngegg.png"));
         continueBG.setFitHeight(100);
         continueBG.setPreserveRatio(true);
 
@@ -54,7 +59,7 @@ public class ScoreBoard extends BorderPane{
 		menuShape.setWidth(200);
 		menuShape.setStrokeWidth(10);
         // configure menu button background
-        menuBG = new ImageView(new Image("file:src/main/java/view/images/pngegg.png"));
+        menuBG = new ImageView(new Image("file:media/images/pngegg.png"));
         menuBG.setFitHeight(100);
         menuBG.setPreserveRatio(true);
 
@@ -63,13 +68,37 @@ public class ScoreBoard extends BorderPane{
         btn_menu.setShape(menuShape);
         btn_menu.setPrefSize(200, 100);
         
-        add(new BackgroundImage("file:src/main/java/view/images/.png"));
-        setCenter(btn_continue);
-        setCenter(btn_menu);
-        setMargin(btn_continue, new Insets(300, 0, 0, 125));
-        setMargin(btn_menu, new Insets(300, 125, 0, 0));
+        add(new BackgroundImage("file:media/images/.png"));
+        setLeft(btn_continue);
+        setRight(btn_menu);
+        setMargin(btn_continue, new Insets(500, 0, 0, 50));
+        setMargin(btn_menu, new Insets(500, 50, 0, 0));
     }
     
+    public void lastScore() {
+        this.setPrefSize(600, 800);
+        // configure menu button shape
+        Rectangle menuShape = new Rectangle();
+        menuShape.setArcHeight(50);
+		menuShape.setArcWidth(50);
+		menuShape.setHeight(100);
+		menuShape.setWidth(200);
+		menuShape.setStrokeWidth(10);
+        // configure menu button background
+        menuBG = new ImageView(new Image("file:media/images/pngegg.png"));
+        menuBG.setFitHeight(100);
+        menuBG.setPreserveRatio(true);
+
+        btn_menu = new Button();
+        btn_menu.setGraphic(menuBG);
+        btn_menu.setShape(menuShape);
+        btn_menu.setPrefSize(200, 100);
+        
+        add(new BackgroundImage("file:media/images/.png"));
+        setCenter(btn_menu);
+        setMargin(btn_menu, new Insets(300, 0, 0, 0));
+    }
+
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
@@ -90,7 +119,7 @@ public class ScoreBoard extends BorderPane{
         return this.menuBG;
     }
 
-    public App getApp() {
-        return this.app;
+    public MainMenu getMainMenu() {
+        return this.mainMenu;
     }
 }

@@ -1,7 +1,6 @@
 package model;
 
 import java.lang.Math;
-import java.util.Random;
 
 import javafx.scene.image.Image;
 
@@ -27,10 +26,10 @@ public class WetTurtle extends Actor{
 	* @see          position of wet turtle
 	*/
 	public WetTurtle(int xpos, int ypos, int s) {
-		turtle1 = new Image("file:src/main/java/view/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
-		turtle2 = new Image("file:src/main/java/view/images/TurtleAnimation2Wet.png", SIZE, SIZE, true, true);
-		turtle3 = new Image("file:src/main/java/view/images/TurtleAnimation3Wet.png", SIZE, SIZE, true, true);
-		turtle4 = new Image("file:src/main/java/view/images/TurtleAnimation4Wet.png", SIZE, SIZE, true, true);
+		turtle1 = new Image("file:media/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
+		turtle2 = new Image("file:media/images/TurtleAnimation2Wet.png", SIZE, SIZE, true, true);
+		turtle3 = new Image("file:media/images/TurtleAnimation3Wet.png", SIZE, SIZE, true, true);
+		turtle4 = new Image("file:media/images/TurtleAnimation4Wet.png", SIZE, SIZE, true, true);
 		setX(xpos);
 		setY(ypos);
 		speed = s;

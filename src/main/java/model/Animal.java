@@ -19,7 +19,7 @@ public class Animal extends Actor {
 	private final double MOVEMENT_X = 10.666666*2;
 
 	int points = 0;
-	int end = 0;
+	int end = 5;
 	private boolean repeat = false;
 	boolean noMove = false;
 	boolean carDeath = false;
@@ -41,14 +41,14 @@ public class Animal extends Actor {
 		setImage(new Image(imageLink, IMAGE_SIZE, IMAGE_SIZE, true, true));
 		setX(START_X);
 		setY(START_Y + MOVEMENT_Y);
-		Image imgW1 = new Image("file:src/main/java/view/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgA1 = new Image("file:src/main/java/view/images/froggerLeft.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgS1 = new Image("file:src/main/java/view/images/froggerDown.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgD1 = new Image("file:src/main/java/view/images/froggerRight.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgW2 = new Image("file:src/main/java/view/images/froggerUpJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgA2 = new Image("file:src/main/java/view/images/froggerLeftJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgS2 = new Image("file:src/main/java/view/images/froggerDownJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgD2 = new Image("file:src/main/java/view/images/froggerRightJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgW1 = new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgA1 = new Image("file:media/images/froggerLeft.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgS1 = new Image("file:media/images/froggerDown.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgD1 = new Image("file:media/images/froggerRight.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgW2 = new Image("file:media/images/froggerUpJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgA2 = new Image("file:media/images/froggerLeftJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgS2 = new Image("file:media/images/froggerDownJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgD2 = new Image("file:media/images/froggerRightJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
 		/* configure position WHEN key is pressed */
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
@@ -204,7 +204,7 @@ public class Animal extends Actor {
 				setY(START_Y + MOVEMENT_Y);
 				carDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/main/java/view/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+				setImage(new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 				noMove = false;
 				if (points > CHANGE_SCORE) {
 					points -= CHANGE_SCORE;
@@ -212,7 +212,7 @@ public class Animal extends Actor {
 				}
 			}
 			else {
-				setImage(new Image("file:src/main/java/view/images/cardeath" + carD + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+				setImage(new Image("file:media/images/cardeath" + carD + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 			}
 		}
 		/* configure water death image */
@@ -221,12 +221,12 @@ public class Animal extends Actor {
 			if ((now) % 11 == 0) {
 				waterD++;
 			}
-			if (carD == 5) {
+			if (waterD == 5) {
 				setX(START_X);
 				setY(START_Y + MOVEMENT_Y);
 				waterDeath = false;
 				waterD = 0;
-				setImage(new Image("file:src/main/java/view/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+				setImage(new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 				noMove = false;
 				if (points > CHANGE_SCORE) {
 					points -= CHANGE_SCORE;
@@ -234,7 +234,7 @@ public class Animal extends Actor {
 				}
 			}
 			else {
-				setImage(new Image("file:src/main/java/view/images/waterdeath" + waterD + ".png", IMAGE_SIZE,IMAGE_SIZE , true, true));
+				setImage(new Image("file:media/images/waterdeath" + waterD + ".png", IMAGE_SIZE,IMAGE_SIZE , true, true));
 			}
 		}
 		/* car death */
@@ -245,20 +245,20 @@ public class Animal extends Actor {
 		/* stand on log */
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
 			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2, 0);
+				move(-1, 0);
 			else
-				move (.75, 0);
+				move (.375, 0);
 		}
 		/* stand on turtle */
 		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1, 0);
+			move(-.5, 0);
 		}
 		/* death by wet turtle */
 		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 				waterDeath = true;
 			} else {
-				move(-1, 0);
+				move(-.5, 0);
 			}
 		}
 		/* reach end */

@@ -1,9 +1,8 @@
-package view.frames;
+package view;
 
 import model.Actor;
 import controller.MainController;
 import model.BackgroundImage;
-import view.App;
 
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
@@ -21,6 +20,7 @@ public class MainMenu extends BorderPane{
 	private Button btn_info;
 	private ImageView infoBG;
 	private App app;
+	private int lvl;
 
 	/**
 	* This method calls the initialize method and main controller
@@ -30,8 +30,10 @@ public class MainMenu extends BorderPane{
 	*/
     public MainMenu(App app) {
 		this.app = app;
+		this.lvl = 1;
 		initialize();
 		/* configure actions on buttons */
+		@SuppressWarnings("unused")
 		MainController mainController = new MainController(this);
 	}
 
@@ -51,7 +53,7 @@ public class MainMenu extends BorderPane{
 		start.setWidth(200);
 		start.setStrokeWidth(10);
 		/* configure start button background */
-		startBG = new ImageView(new Image("file:src/main/java/view/images/pngegg.png"));
+		startBG = new ImageView(new Image("file:media/images/pngegg.png"));
 		startBG.setFitHeight(100);
 		startBG.setPreserveRatio(true);
 
@@ -65,7 +67,7 @@ public class MainMenu extends BorderPane{
 		circle.setRadius(15);
 		circle.setStrokeWidth(5);
 		/* configure info button background */
-		infoBG = new ImageView(new Image("file:src/main/java/view/images/info.png"));
+		infoBG = new ImageView(new Image("file:media/images/info.png"));
 		infoBG.setFitHeight(30);
 		infoBG.setFitWidth(30);
 		
@@ -74,7 +76,7 @@ public class MainMenu extends BorderPane{
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
 		/* configure position of buttons and background */
-		add(new BackgroundImage("file:src/main/java/view/images/iKogsKW.png"));
+		add(new BackgroundImage("file:media/images/iKogsKW.png"));
 		setCenter(btn_start);
 		setTop(btn_info);
 		setAlignment(btn_info, Pos.TOP_RIGHT);
@@ -134,5 +136,13 @@ public class MainMenu extends BorderPane{
 	*/
 	public App getApp() {
 		return this.app;
+	}
+
+	public int getCurrentLevel() {
+		return this.lvl;
+	}
+
+	public void setCurrentLevel() {
+		this.lvl++;
 	}
 }
