@@ -1,8 +1,13 @@
 package model;
 
+import java.lang.Math;
+import java.util.Random;
+
 import javafx.scene.image.Image;
 
 public class Log extends Actor {
+	private final int LIMIT_LEFT = -180;
+	private final int LIMIT_RIGHT = 600;
 
 	private double speed;
 
@@ -14,7 +19,7 @@ public class Log extends Actor {
 	* @param  xpos       x coordinate
 	* @param  ypos       y coordinate
 	* @param  s          speed
-	* @see               Image of log
+	* @see               image of log
 	*/
 	public Log(String imageLink, int size, int xpos, int ypos, double s) {
 		setImage(new Image(imageLink, size, size, true, true));
@@ -24,24 +29,24 @@ public class Log extends Actor {
 	}
 
 	/**
-	* This method moves object that is out of pane to
-	* initial position.
+	* This method sets 
     *
     * @param  now  current frame
 	*/
 	@Override
 	public void act(long now) {
+		double rng = (int)Math.random() * 3;
 		move(speed , 0);
-		if (getX()>600 && speed>0)
-			setX(-180);
-		if (getX()<-300 && speed<0)
-			setX(700);
+		if (getX() > LIMIT_RIGHT && speed > 0)
+			setX(LIMIT_LEFT - rng * 10);
+		if (getX() < LIMIT_LEFT && speed < 0)
+			setX(LIMIT_RIGHT + rng * 10);
 	}
 	
 	/**
 	* This method returns true of log is moving to the left.
     *
-    * @return     returns true if log is moving to the left
+    * @return     returns boolean comparison of speed < 0
 	*/
 	public boolean getLeft() {
 		return speed < 0;

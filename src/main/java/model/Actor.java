@@ -9,7 +9,9 @@ public abstract class Actor extends ImageView{
 
     /**
 	* This method set position after movement.
-	*
+    *
+    * @param  dx  change in x coordinate
+    * @param  dy  change in y coordinate
 	*/
     public void move(double dx, double dy) {
         setX(getX() + dx);
@@ -63,5 +65,10 @@ public abstract class Actor extends ImageView{
         
     // }
 
+    /**
+	* This method must be overriden for use.
+    *
+    * @param  now  current frame
+	*/
     public abstract void act(long now);
 }

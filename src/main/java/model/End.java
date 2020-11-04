@@ -14,7 +14,7 @@ public class End extends Actor{
 	*
 	* @param  x  x coordinate
 	* @param  y  y coordinate
-	* @see       Image of end
+	* @see       image of end
 	*/
 	public End(int x, int y) {
 		setX(x);

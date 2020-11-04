@@ -1,8 +1,13 @@
 package model;
 
+import java.lang.Math;
+import java.util.Random;
+
 import javafx.scene.image.Image;
 
 public class WetTurtle extends Actor{
+	private final int LIMIT_LEFT = -130;
+	private final int LIMIT_RIGHT = 600;
 	private final int SIZE = 130;
 	Image turtle1;
 	Image turtle2;
@@ -13,12 +18,13 @@ public class WetTurtle extends Actor{
 	boolean sunk = false;
 
 	/**
-	* This method initializes .
+	* This method initializes the image and starting position of wet turtles.
     *
 	* @param  xpos  x coordinate
 	* @param  ypos  y coordinate
 	* @param  s     speed
-	* @see          Image of wet turtle
+	* @see          image of wet turtle
+	* @see          position of wet turtle
 	*/
 	public WetTurtle(int xpos, int ypos, int s) {
 		turtle1 = new Image("file:src/main/java/view/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
@@ -32,10 +38,13 @@ public class WetTurtle extends Actor{
 	}
 
 	/**
-	* This method configures actions and image of wet turtle.
+	* This method sets the position of wet turtle when is out of frame
+	* and starts the animation for the wet turtle.
+	* This method also randomizes the distance between each wet turtles.
     *
     * @param  now  current frame
-	* @see         Movement of wet turtle
+	* @see         position of wet turtle
+	* @see         animation of wet turtle
 	*/
 	@Override
 	public void act(long now) {
@@ -47,25 +56,27 @@ public class WetTurtle extends Actor{
 			setImage(turtle1);
 			sunk = false;
 		}
-		else if (now/900000000 %4 == 2) {
+		else if (now/900000000 % 4 == 2) {
 			setImage(turtle3);
 			sunk = false;
 		} 
-		else if (now/900000000 %4 == 3) {
+		else if (now/900000000 % 4 == 3) {
 			setImage(turtle4);
 			sunk = true;
 		}
-		move(speed , 0);
-		if (getX() > 600 && speed>0)
-			setX(-200);
-		if (getX() < -75 && speed<0)
-			setX(600);
+		/* wet turtle out of frame */
+		double rng = (int)Math.random() * 3;
+		move(speed, 0);
+		if (getX() > LIMIT_RIGHT && speed > 0)
+			setX(LIMIT_LEFT - rng * 10);
+		if (getX() < LIMIT_LEFT && speed < 0)
+			setX(LIMIT_RIGHT + rng * 10);
 	}
 
 	/**
 	* This method returns the value of sunk.
     *
-	* @return      Returns value of sunk
+	* @return      returns value of sunk
 	*/
 	public boolean isSunk() {
 		return sunk;

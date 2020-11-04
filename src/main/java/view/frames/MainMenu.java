@@ -31,7 +31,7 @@ public class MainMenu extends BorderPane{
     public MainMenu(App app) {
 		this.app = app;
 		initialize();
-		// configure actions on buttons
+		/* configure actions on buttons */
 		MainController mainController = new MainController(this);
 	}
 
@@ -43,14 +43,14 @@ public class MainMenu extends BorderPane{
 	*/
 	public void initialize() {
 		this.setPrefSize(600, 800);
-		// configure start button shape
+		/* configure start button shape */
 		Rectangle start = new Rectangle();
 		start.setArcHeight(50);
 		start.setArcWidth(50);
 		start.setHeight(100);
 		start.setWidth(200);
 		start.setStrokeWidth(10);
-		// configure start button background
+		/* configure start button background */
 		startBG = new ImageView(new Image("file:src/main/java/view/images/pngegg.png"));
 		startBG.setFitHeight(100);
 		startBG.setPreserveRatio(true);
@@ -60,11 +60,11 @@ public class MainMenu extends BorderPane{
 		btn_start.setShape(start);
 		btn_start.setPrefSize(200, 100);
 
-		// configure info button shape
+		/* configure info button shape */
 		Circle circle = new Circle();
 		circle.setRadius(15);
 		circle.setStrokeWidth(5);
-		// configure info button background
+		/* configure info button background */
 		infoBG = new ImageView(new Image("file:src/main/java/view/images/info.png"));
 		infoBG.setFitHeight(30);
 		infoBG.setFitWidth(30);
@@ -73,7 +73,7 @@ public class MainMenu extends BorderPane{
 		btn_info.setGraphic(infoBG);
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
-		// configure position of buttons and background
+		/* configure position of buttons and background */
 		add(new BackgroundImage("file:src/main/java/view/images/iKogsKW.png"));
 		setCenter(btn_start);
 		setTop(btn_info);

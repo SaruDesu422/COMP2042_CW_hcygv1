@@ -1,8 +1,13 @@
 package model;
 
+import java.lang.Math;
+import java.util.Random;
+
 import javafx.scene.image.Image;
 
 public class Turtle extends Actor{
+	private final int LIMIT_LEFT = -130;
+	private final int LIMIT_RIGHT = 600;
 	private final int SIZE = 130;
 	Image turtle1;
 	Image turtle2;
@@ -11,10 +16,13 @@ public class Turtle extends Actor{
 	boolean bool = true;
 
 	/**
-	* This method returns position of certain object.
+	* This method initializes the image and starting position of turtles.
     *
-    * @param  cls  array of object location
-	* @return      Returns array of position of an object
+	* @param  xpos  x coordinate
+	* @param  ypos  y coordinate
+	* @param  s     speed
+	* @see          image of turtle
+	* @see          position of turtle
 	*/
 	public Turtle(int xpos, int ypos, int s) {
 		turtle1 = new Image("file:src/main/java/view/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
@@ -27,10 +35,13 @@ public class Turtle extends Actor{
 	}
 	
 	/**
-	* This method configures actions and image of turtle.
+	* This method sets the position of turtle when is out of frame
+	* and starts the animation for the turtle.
+	* This method also randomizes the distance between each turtles.
     *
     * @param  now  current frame
-	* @see         movement of turtle
+	* @see         position of turtle
+	* @see         animation of turtle
 	*/
 	@Override
 	public void act(long now) {
@@ -43,10 +54,12 @@ public class Turtle extends Actor{
 		else if (now/900000000 %3 == 2) {
 			setImage(turtle3);
 		}
-		move(speed , 0);
-		if (getX() > 600 && speed>0)
-			setX(-200);
-		if (getX() < -75 && speed<0)
-			setX(600);
+		/* turtle out of frame */
+		double rng = (int)Math.random() * 3;
+		move(speed, 0);
+		if (getX() > LIMIT_RIGHT && speed > 0)
+			setX(LIMIT_LEFT - rng * 10);
+		if (getX() < LIMIT_LEFT && speed < 0)
+			setX(LIMIT_RIGHT + rng * 10);
 	}
 }
