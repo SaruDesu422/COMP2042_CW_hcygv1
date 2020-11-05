@@ -5,7 +5,6 @@ import java.lang.Math;
 import javafx.scene.image.Image;
 
 public class Turtle extends Actor{
-
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE = 130;

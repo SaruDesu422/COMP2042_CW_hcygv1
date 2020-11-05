@@ -5,9 +5,9 @@ import java.lang.Math;
 import javafx.scene.image.Image;
 
 public class Log extends Actor {
-
 	private final int LIMIT_LEFT = -180;
 	private final int LIMIT_RIGHT = 600;
+
 	private double speed;
 
 	/**
@@ -26,15 +26,6 @@ public class Log extends Actor {
 		setY(ypos);
 		speed = s;
 	}
-	
-	/**
-	* This method returns true of log is moving to the left.
-    *
-    * @return     returns boolean comparison of speed < 0
-	*/
-	public boolean getLeft() {
-		return speed < 0;
-	}
 
 	/**
 	* This method sets 
@@ -49,5 +40,14 @@ public class Log extends Actor {
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+	}
+	
+	/**
+	* This method returns true of log is moving to the left.
+    *
+    * @return     returns boolean comparison of speed < 0
+	*/
+	public boolean getLeft() {
+		return speed < 0;
 	}
 }

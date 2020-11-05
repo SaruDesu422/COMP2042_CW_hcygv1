@@ -5,11 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import view.Game;
+import view.Info;
 import view.MainMenu;
 
 public class MainController {
     
     private MainMenu mainMenu;
+    private Info info;
 
     /**
     * This method controls the start and info buttons in the
@@ -18,6 +20,7 @@ public class MainController {
 	*/
     public MainController(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
+        this.info = new Info(mainMenu.getApp());
     }
 
     /**
@@ -38,7 +41,7 @@ public class MainController {
     * @see     info scene is loaded
 	*/
     public void handleButtonInfo(ActionEvent event) {
-        // go to info page
+        mainMenu.getApp().changePage(info);
     }
 
     /**

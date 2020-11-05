@@ -22,7 +22,7 @@ public class Game {
 
     private String bgInfo;
     private final int END_Y = 96;
-    private final String COMMA_DELIMITER = ";";
+    private final String COMMA_DELIMITER = ",";
     private List<List<String>> logInfo;
     private List<List<String>> turtleInfo;
     private List<List<String>> wetTurtleInfo;
@@ -101,7 +101,8 @@ public class Game {
         stage.add(new End(398, END_Y));
         stage.add(new End(528, END_Y));
         
-        stage.add(new Animal("file:media/images/froggerUp.png"));
+        animal = new Animal("file:media/images/froggerUp.png");
+        stage.add(animal);
 
         for (int index = 0; index < obstacleInfo.size(); index++) {
             stage.add(new Obstacle(

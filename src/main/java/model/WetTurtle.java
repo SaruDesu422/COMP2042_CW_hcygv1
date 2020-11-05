@@ -37,15 +37,6 @@ public class WetTurtle extends Actor{
 	}
 
 	/**
-	* This method returns the value of sunk.
-    *
-	* @return      returns value of sunk
-	*/
-	public boolean isSunk() {
-		return sunk;
-	}
-
-	/**
 	* This method sets the position of wet turtle when is out of frame
 	* and starts the animation for the wet turtle.
 	* This method also randomizes the distance between each wet turtles.
@@ -79,5 +70,14 @@ public class WetTurtle extends Actor{
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+	}
+
+	/**
+	* This method returns the value of sunk.
+    *
+	* @return      returns value of sunk
+	*/
+	public boolean isSunk() {
+		return sunk;
 	}
 }
