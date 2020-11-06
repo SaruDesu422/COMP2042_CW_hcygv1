@@ -8,11 +8,15 @@ public class Turtle extends Actor{
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE = 130;
+	private final double MOVEMENT_Y = 26.666666;
+	
+	private int speed;
+	Animal animal;
+
+	boolean bool = true;
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
-	private int speed;
-	boolean bool = true;
 
 	/**
 	* This method initializes the image and starting position of turtles.
@@ -23,7 +27,8 @@ public class Turtle extends Actor{
 	* @see          image of turtle
 	* @see          position of turtle
 	*/
-	public Turtle(int xpos, int ypos, int s) {
+	public Turtle(int xpos, int ypos, int s, Animal animal) {
+		this.animal = animal;
 		turtle1 = new Image("file:media/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
 		turtle2 = new Image("file:media/images/TurtleAnimation2.png", SIZE, SIZE, true, true);
 		turtle3 = new Image("file:media/images/TurtleAnimation3.png", SIZE, SIZE, true, true);
@@ -55,6 +60,8 @@ public class Turtle extends Actor{
 		}
 		/* turtle out of frame */
 		double rng = (int)Math.random() * 3;
+		if (animal.getRestMove() > 0)
+			move(0, MOVEMENT_Y * 2);
 		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);

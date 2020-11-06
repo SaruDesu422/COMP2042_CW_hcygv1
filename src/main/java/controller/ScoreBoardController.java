@@ -28,8 +28,8 @@ public class ScoreBoardController {
     * @see     next level scene is loaded
 	*/
     public void handleButtonContinue(ActionEvent event) {
-        scoreBoard.getMainMenu().getApp().changePage(game.getStage());
         game.startNextLevel();
+        scoreBoard.getMainMenu().getApp().changePage(game.getStage());
     }
 
     /**

@@ -27,6 +27,9 @@ public class Game {
     private List<List<String>> turtleInfo;
     private List<List<String>> wetTurtleInfo;
     private List<List<String>> obstacleInfo;
+    private List<List<String>> restInfo;
+    private int restIndex;
+    int rest;
 
     public Game(MainMenu mainMenu) {
         this.level = 0;
@@ -39,6 +42,7 @@ public class Game {
         turtleInfo = new ArrayList<List<String>>();
         wetTurtleInfo = new ArrayList<List<String>>();
         obstacleInfo = new ArrayList<List<String>>();
+        restInfo = new ArrayList<List<String>>();
 
         // read file level.csv
         try (BufferedReader br = new BufferedReader(new FileReader("level_info/level" + level + ".csv"))) {
@@ -59,6 +63,9 @@ public class Game {
                 } else if (line.charAt(0) == '4') {
                     String[] values = line.split(COMMA_DELIMITER);
                     obstacleInfo.add(Arrays.asList(values));
+                } else if (line.charAt(0) == '5') {
+                    String[] values = line.split(COMMA_DELIMITER);
+                    restInfo.add(Arrays.asList(values));
                 }
             }
         } catch (Exception e) {
@@ -67,32 +74,49 @@ public class Game {
     }
 
     public void startNextLevel() {
+        this.restIndex = 0;
         level++;
+        System.out.println("Initializing level " + level);
         initializeLevelInfo();
         
         stage = new MyStage();
-        stage.add(new BackgroundImage(bgInfo));
+        animal = new Animal(this);
+        stage.add(new BackgroundImage(bgInfo, animal));
+        stage.add(new BackgroundImage("file:media/images/SBG.png"));
         for (int index = 0; index < logInfo.size(); index++) {
             stage.add(new Log(
                 logInfo.get(index).get(1),
                 Integer.parseInt(logInfo.get(index).get(2)), 
                 Integer.parseInt(logInfo.get(index).get(3)), 
                 Integer.parseInt(logInfo.get(index).get(4)), 
-                Double.parseDouble(logInfo.get(index).get(5))
+                Double.parseDouble(logInfo.get(index).get(5)),
+                animal
             ));
         }
         for (int index = 0; index < turtleInfo.size(); index++) {
             stage.add(new Turtle(
                 Integer.parseInt(turtleInfo.get(index).get(1)), 
                 Integer.parseInt(turtleInfo.get(index).get(2)), 
-                Integer.parseInt(turtleInfo.get(index).get(3))
+                Integer.parseInt(turtleInfo.get(index).get(3)),
+                animal
             ));
         }
         for (int index = 0; index < wetTurtleInfo.size(); index++) {
             stage.add(new WetTurtle(
                 Integer.parseInt(wetTurtleInfo.get(index).get(1)), 
                 Integer.parseInt(wetTurtleInfo.get(index).get(2)), 
-                Integer.parseInt(wetTurtleInfo.get(index).get(3))
+                Integer.parseInt(wetTurtleInfo.get(index).get(3)),
+                animal
+            ));
+        }
+        for (int index = 0; index < obstacleInfo.size(); index++) {
+            stage.add(new Obstacle(
+                obstacleInfo.get(index).get(1), 
+                Integer.parseInt(obstacleInfo.get(index).get(2)), 
+                Integer.parseInt(obstacleInfo.get(index).get(3)), 
+                Double.parseDouble(obstacleInfo.get(index).get(4)), 
+                Integer.parseInt(obstacleInfo.get(index).get(5)),
+                animal
             ));
         }
 		stage.add(new End(13, END_Y));
@@ -101,21 +125,26 @@ public class Game {
         stage.add(new End(398, END_Y));
         stage.add(new End(528, END_Y));
         
-        animal = new Animal("file:media/images/froggerUp.png");
         stage.add(animal);
 
-        for (int index = 0; index < obstacleInfo.size(); index++) {
-            stage.add(new Obstacle(
-                obstacleInfo.get(index).get(1), 
-                Integer.parseInt(obstacleInfo.get(index).get(2)), 
-                Integer.parseInt(obstacleInfo.get(index).get(3)), 
-                Integer.parseInt(obstacleInfo.get(index).get(4)), 
-                Integer.parseInt(obstacleInfo.get(index).get(5))
-            ));
-        }
         stage.add(new Digit(0, 550, 25));
 
         start();
+    }
+
+    public int getRest() {
+        return Integer.parseInt(restInfo.get(restIndex).get(1));
+    }
+
+    public void setRestIndex() {
+        restIndex++;
+    }
+
+    public boolean checkRestInfo() {
+        if (restIndex + 1 == restInfo.size() || restInfo == null) {
+            return false;
+        }
+        return true;
     }
 
     public MyStage getStage() {
@@ -138,8 +167,8 @@ public class Game {
             	if (animal.getStop()) {
             		stage.stopMusic();
                     stop();
-                    mainMenu.getApp().changePage(scoreBoard);
                     scoreBoard.show(level);
+                    mainMenu.getApp().showScoreBoard(scoreBoard);
             		// Alert alert = new Alert(AlertType.INFORMATION);
             		// alert.setTitle("You Have Won The Game!");
             		// alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");

@@ -11,12 +11,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.Scene;
 
 public class ScoreBoard extends BorderPane{
 
     private MainMenu mainMenu;
     private Game game;
     private ScoreBoardController controller;
+
+    private Scene scene;
     
     private Button btn_continue;
     private Button btn_menu;
@@ -25,6 +28,7 @@ public class ScoreBoard extends BorderPane{
     public ScoreBoard(MainMenu mainMenu, Game game) {
         this.mainMenu = mainMenu;
         this.game = game;
+        this.scene = new Scene(this, 600, 800);
     }
 
     public void show(int level) {
@@ -78,6 +82,8 @@ public class ScoreBoard extends BorderPane{
             btn_continue.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonContinueMouseIn);
             btn_continue.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonContinueMouseOut);
         } else {
+            setLeft(null);
+            setRight(null);
             setCenter(btn_menu);
             setMargin(btn_menu, new Insets(300, 0, 0, 0));
         }
@@ -88,6 +94,10 @@ public class ScoreBoard extends BorderPane{
 
 	public void add(Actor actor) {
         getChildren().add(actor);
+    }
+
+    public Scene getCurrentScene() {
+        return this.scene;
     }
 
     public Button getContinueButton() {

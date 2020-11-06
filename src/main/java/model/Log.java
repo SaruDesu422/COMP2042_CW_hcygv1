@@ -7,9 +7,10 @@ import javafx.scene.image.Image;
 public class Log extends Actor {
 	private final int LIMIT_LEFT = -180;
 	private final int LIMIT_RIGHT = 600;
+	private final double MOVEMENT_Y = 26.666666;
 
 	private double speed;
-
+	Animal animal;
 	/**
 	* This method configures .
     *
@@ -20,7 +21,8 @@ public class Log extends Actor {
 	* @param  s          speed
 	* @see               image of log
 	*/
-	public Log(String imageLink, int size, int xpos, int ypos, double s) {
+	public Log(String imageLink, int size, int xpos, int ypos, double s, Animal animal) {
+		this.animal = animal;
 		setImage(new Image(imageLink, size, size, true, true));
 		setX(xpos);
 		setY(ypos);
@@ -35,6 +37,8 @@ public class Log extends Actor {
 	@Override
 	public void act(long now) {
 		double rng = (int)Math.random() * 3;
+		if (animal.getRestMove() > 0)
+			move(0, MOVEMENT_Y * 2);
 		move(speed , 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);

@@ -30,8 +30,8 @@ public class App extends Application {
 		primaryStage.setScene(new Scene(new MainMenu(this), 600, 800));
 	}
 
-	public void changePage(BorderPane pane) {
-		primaryStage.setScene(new Scene(pane, 600, 800));
+	public void showScoreBoard(ScoreBoard scoreBoard) {
+		primaryStage.setScene(scoreBoard.getScene());
 	}
 
 	public void changePage(Pane pane) {

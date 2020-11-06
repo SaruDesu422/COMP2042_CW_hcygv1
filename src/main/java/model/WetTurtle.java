@@ -8,13 +8,17 @@ public class WetTurtle extends Actor{
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE = 130;
+	private final double MOVEMENT_Y = 26.666666;
+
+	private int speed;
+	Animal animal;
+
+	boolean bool = true;
+	boolean sunk = false;
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
 	Image turtle4;
-	private int speed;
-	boolean bool = true;
-	boolean sunk = false;
 
 	/**
 	* This method initializes the image and starting position of wet turtles.
@@ -25,7 +29,8 @@ public class WetTurtle extends Actor{
 	* @see          image of wet turtle
 	* @see          position of wet turtle
 	*/
-	public WetTurtle(int xpos, int ypos, int s) {
+	public WetTurtle(int xpos, int ypos, int s, Animal animal) {
+		this.animal = animal;
 		turtle1 = new Image("file:media/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
 		turtle2 = new Image("file:media/images/TurtleAnimation2Wet.png", SIZE, SIZE, true, true);
 		turtle3 = new Image("file:media/images/TurtleAnimation3Wet.png", SIZE, SIZE, true, true);
@@ -65,6 +70,8 @@ public class WetTurtle extends Actor{
 		}
 		/* wet turtle out of frame */
 		double rng = (int)Math.random() * 3;
+		if (animal.getRestMove() > 0)
+			move(0, MOVEMENT_Y * 2);
 		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
