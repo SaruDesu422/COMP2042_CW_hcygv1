@@ -11,12 +11,14 @@ public class Turtle extends Actor{
 	private final double MOVEMENT_Y = 26.666666;
 	
 	private int speed;
+	private int frame = 0;
 	Animal animal;
 
 	boolean bool = true;
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
+	Image turtle4;
 
 	/**
 	* This method initializes the image and starting position of turtles.
@@ -29,13 +31,21 @@ public class Turtle extends Actor{
 	*/
 	public Turtle(int xpos, int ypos, int s, Animal animal) {
 		this.animal = animal;
-		turtle1 = new Image("file:media/images/TurtleAnimation1.png", SIZE, SIZE, true, true);
-		turtle2 = new Image("file:media/images/TurtleAnimation2.png", SIZE, SIZE, true, true);
-		turtle3 = new Image("file:media/images/TurtleAnimation3.png", SIZE, SIZE, true, true);
+		if (s > 0) {
+			turtle1 = new Image("file:media/images/turtle/turtle1.png", SIZE, SIZE, true, true);
+			turtle2 = new Image("file:media/images/turtle/turtle2.png", SIZE, SIZE, true, true);
+			turtle3 = new Image("file:media/images/turtle/turtle3.png", SIZE, SIZE, true, true);
+			turtle4 = new Image("file:media/images/turtle/turtle4.png", SIZE, SIZE, true, true);
+		} else {
+			turtle1 = new Image("file:media/images/turtle/turtle1left.png", SIZE, SIZE, true, true);
+			turtle2 = new Image("file:media/images/turtle/turtle2left.png", SIZE, SIZE, true, true);
+			turtle3 = new Image("file:media/images/turtle/turtle3left.png", SIZE, SIZE, true, true);
+			turtle4 = new Image("file:media/images/turtle/turtle4left.png", SIZE, SIZE, true, true);
+		}
 		setX(xpos);
 		setY(ypos);
 		speed = s;
-		setImage(turtle2);
+		setImage(turtle1);
 	}
 	
 	/**
@@ -49,23 +59,25 @@ public class Turtle extends Actor{
 	*/
 	@Override
 	public void act(long now) {
-		if (now/900000000  % 3 ==0) {
+		if (frame == 0 || frame == 16) {
 			setImage(turtle2);
-		}
-		else if (now/900000000 % 3 == 1) {
-			setImage(turtle1);
-		}
-		else if (now/900000000 %3 == 2) {
+		} else if (frame == 4 || frame == 12) {
 			setImage(turtle3);
+		} else if (frame == 8) {
+			setImage(turtle4);
+		} else if (frame == 20) {
+			setImage(turtle1);
+			frame = 0;
 		}
+		frame++;
 		/* turtle out of frame */
 		double rng = (int)Math.random() * 3;
-		if (animal.getRestMove() > 0)
-			move(0, MOVEMENT_Y * 2);
 		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+		if (animal.getRestMove() > 0)
+			move(0, MOVEMENT_Y * 2);
 	}
 }

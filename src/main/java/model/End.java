@@ -19,7 +19,7 @@ public class End extends Actor{
 	public End(int x, int y) {
 		setX(x);
 		setY(y);
-		setImage(new Image("file:media/images/End.png", END_SIZE, END_SIZE, true, true));
+		setImage(new Image("file:media/images/end/End.png", END_SIZE, END_SIZE, true, true));
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class End extends Actor{
 	* @see       Image of end with frog
 	*/
 	public void setEnd() {
-		setImage(new Image("file:media/images/FrogEnd.png", END_SIZE, END_SIZE, true, true));
+		setImage(new Image("file:media/images/end/frogEnd.png", END_SIZE, END_SIZE, true, true));
 		activated = true;
 	}
 	

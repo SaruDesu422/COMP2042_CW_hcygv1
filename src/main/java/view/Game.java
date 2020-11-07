@@ -1,6 +1,7 @@
 package view;
 
 import model.*;
+import controller.GameController;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 
 public class Game {
 
@@ -16,6 +22,7 @@ public class Game {
     private ScoreBoard scoreBoard;
     private AnimationTimer timer;
     private Animal animal;
+    private GameController controller;
 
     private MyStage stage;
     private int level;
@@ -29,12 +36,14 @@ public class Game {
     private List<List<String>> obstacleInfo;
     private List<List<String>> restInfo;
     private int restIndex;
+    private Button btn_menu;
     int rest;
 
     public Game(MainMenu mainMenu) {
         this.level = 0;
         this.mainMenu = mainMenu;
         this.scoreBoard = new ScoreBoard(mainMenu, this);
+        this.controller = new GameController(this);
     }
 
     public void initializeLevelInfo() {
@@ -82,7 +91,7 @@ public class Game {
         stage = new MyStage();
         animal = new Animal(this);
         stage.add(new BackgroundImage(bgInfo, animal));
-        stage.add(new BackgroundImage("file:media/images/SBG.png"));
+        stage.add(new BackgroundImage("file:media/images/background/header.png"));
         for (int index = 0; index < logInfo.size(); index++) {
             stage.add(new Log(
                 logInfo.get(index).get(1),
@@ -119,15 +128,35 @@ public class Game {
                 animal
             ));
         }
+        stage.add(new BackgroundImage("file:media/images/background/endBackground.png", animal));
 		stage.add(new End(13, END_Y));
 		stage.add(new End(141, END_Y));
 		stage.add(new End(269, END_Y));
         stage.add(new End(398, END_Y));
         stage.add(new End(528, END_Y));
         
-        stage.add(animal);
+		Circle circle = new Circle();
+        circle.setRadius(15);
+        
+		ImageView homeBG = new ImageView(new Image("file:media/images/buttons/info.png"));
+		homeBG.setFitHeight(30);
+        homeBG.setFitWidth(25);
+        
+		btn_menu = new Button();
+		btn_menu.setGraphic(homeBG);
+		btn_menu.setShape(circle);
+        btn_menu.setPrefSize(30, 30);
+        btn_menu.setLayoutX(25);
+        btn_menu.setLayoutY(700);
 
-        stage.add(new Digit(0, 550, 25));
+		btn_menu.setOnAction(controller::handleButtonMenu);
+        btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
+        btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
+        stage.getChildren().add(btn_menu);
+
+        stage.add(new Digit(0, 540, 43));
+        
+        stage.add(animal);
 
         start();
     }
@@ -151,6 +180,10 @@ public class Game {
         return this.stage;
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
     public void createTimer() {
         timer = new AnimationTimer() {
             @Override
@@ -167,13 +200,8 @@ public class Game {
             	if (animal.getStop()) {
             		stage.stopMusic();
                     stop();
-                    scoreBoard.show(level);
+                    scoreBoard.show(level, animal.getPoints());
                     mainMenu.getApp().showScoreBoard(scoreBoard);
-            		// Alert alert = new Alert(AlertType.INFORMATION);
-            		// alert.setTitle("You Have Won The Game!");
-            		// alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
-            		// alert.setContentText("Highest Possible Score: 800");
-            		// alert.show();
             	}
             }
         };
@@ -195,8 +223,21 @@ public class Game {
             int d = n / 10;
             int k = n - d * 10;
             n = d;
-            stage.add(new Digit(k, 550 - shift, 25));
-            shift+=30;
+            stage.add(new Digit(k, 540 - shift, 43));
+            shift += 30;
     	}
+    }
+
+    /**
+	* This method returns configurations of start button.
+	*
+    * @return  Start button
+	*/
+    public Button getMenuButton() {
+		return this.btn_menu;
+    }
+    
+    public MainMenu getMainMenu() {
+        return this.mainMenu;
     }
 }

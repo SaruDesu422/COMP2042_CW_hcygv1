@@ -47,9 +47,10 @@ public class Info extends BorderPane{
 		btn_exit.setShape(circle);
 		btn_exit.setPrefSize(30, 30);
 
-		add(new BackgroundImage("file:media/images/.png"));
+		add(new BackgroundImage("file:media/images/background/infoBackground.png"));
+
 		setTop(btn_exit);
-		setAlignment(btn_exit, Pos.TOP_LEFT);
+		setAlignment(btn_exit, Pos.TOP_RIGHT);
 		setMargin(btn_exit, new Insets(25,25,25,25));
 
 		controller = new InfoController(this);

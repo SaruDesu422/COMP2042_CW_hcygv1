@@ -45,17 +45,17 @@ public class Animal extends Actor {
 	public Animal(Game game) {
 		// set image and starting position
 		this.game = game;
-		setImage(new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+		setImage(new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, 0, true, true));
 		setX(START_X);
 		setY(START_Y);
-		Image imgW1 = new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgA1 = new Image("file:media/images/froggerLeft.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgS1 = new Image("file:media/images/froggerDown.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgD1 = new Image("file:media/images/froggerRight.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgW2 = new Image("file:media/images/froggerUpJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgA2 = new Image("file:media/images/froggerLeftJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgS2 = new Image("file:media/images/froggerDownJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
-		Image imgD2 = new Image("file:media/images/froggerRightJump.png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		Image imgW1 = new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, 0, true, true);
+		Image imgA1 = new Image("file:media/images/frog/frogLeft.png", 0, IMAGE_SIZE, true, true);
+		Image imgS1 = new Image("file:media/images/frog/frogDown.png", IMAGE_SIZE, 0, true, true);
+		Image imgD1 = new Image("file:media/images/frog/frogRight.png", 0, IMAGE_SIZE, true, true);
+		Image imgW2 = new Image("file:media/images/frog/frogUpJump.png", IMAGE_SIZE, 0, true, true);
+		Image imgA2 = new Image("file:media/images/frog/frogLeftJump.png", 0, IMAGE_SIZE, true, true);
+		Image imgS2 = new Image("file:media/images/frog/frogDownJump.png", IMAGE_SIZE, 0, true, true);
+		Image imgD2 = new Image("file:media/images/frog/frogRightJump.png", 0, IMAGE_SIZE, true, true);
 
 		// configure position WHEN key is pressed
 		setOnKeyPressed(new EventHandler<KeyEvent>() {

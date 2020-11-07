@@ -18,7 +18,12 @@ public class BackgroundImage extends Actor{
 	*/
 	public BackgroundImage(String imageLink, Animal animal) {
 		this.animal = animal;
-		setImage(new Image(imageLink, MAX_X, MAX_Y, false, true));
+		if (imageLink == "file:media/images/background/endBackground.png") {
+			setY(96);
+			setImage(new Image(imageLink, MAX_X, 0, true, true));
+		} else {
+			setImage(new Image(imageLink, MAX_X, MAX_Y, false, true));
+		}
 	}
 	
 	/**
@@ -28,7 +33,7 @@ public class BackgroundImage extends Actor{
 	* @see               Image of background
 	*/
 	public BackgroundImage(String imageLink) {
-		setImage(new Image(imageLink, MAX_X, MAX_Y, true, true));
+		setImage(new Image(imageLink, MAX_X, 0, true, true));
 	}
 
 	@Override

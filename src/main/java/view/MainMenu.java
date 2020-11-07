@@ -49,7 +49,7 @@ public class MainMenu extends BorderPane{
 		start.setWidth(200);
 		start.setStrokeWidth(10);
 		/* configure start button background */
-		ImageView startBG = new ImageView(new Image("file:media/images/pngegg.png"));
+		ImageView startBG = new ImageView(new Image("file:media/images/buttons/start.png"));
 		startBG.setFitHeight(100);
 		startBG.setPreserveRatio(true);
 
@@ -61,18 +61,17 @@ public class MainMenu extends BorderPane{
 		/* configure info button shape */
 		Circle circle = new Circle();
 		circle.setRadius(15);
-		circle.setStrokeWidth(5);
 		/* configure info button background */
-		ImageView infoBG = new ImageView(new Image("file:media/images/info.png"));
+		ImageView infoBG = new ImageView(new Image("file:media/images/buttons/info.png"));
 		infoBG.setFitHeight(30);
-		infoBG.setFitWidth(30);
+		infoBG.setFitWidth(25);
 		
 		btn_info = new Button();
 		btn_info.setGraphic(infoBG);
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
 		/* configure position of buttons and background */
-		add(new BackgroundImage("file:media/images/iKogsKW.png"));
+		add(new BackgroundImage("file:media/images/background/menuBackground.png"));
 		
 		setCenter(btn_start);
 		setTop(btn_info);

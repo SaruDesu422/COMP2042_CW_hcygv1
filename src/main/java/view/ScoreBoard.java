@@ -1,8 +1,9 @@
 package view;
 
 import model.Actor;
-import controller.ScoreBoardController;
 import model.BackgroundImage;
+import model.Digit;
+import controller.ScoreBoardController;
 
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
@@ -23,6 +24,8 @@ public class ScoreBoard extends BorderPane{
     
     private Button btn_continue;
     private Button btn_menu;
+    int level;
+    int points;
    
 
     public ScoreBoard(MainMenu mainMenu, Game game) {
@@ -31,8 +34,10 @@ public class ScoreBoard extends BorderPane{
         this.scene = new Scene(this, 600, 800);
     }
 
-    public void show(int level) {
+    public void show(int level, int points) {
         this.setPrefSize(600, 800);
+        this.level = level;
+        this.points = points;
         if (level < 38) {
             // configure continue button shape
             Rectangle continueShape = new Rectangle();
@@ -69,8 +74,9 @@ public class ScoreBoard extends BorderPane{
         btn_menu.setShape(menuShape);
         btn_menu.setPrefSize(200, 100);
         
-        add(new BackgroundImage("file:media/images/.png"));
+		add(new BackgroundImage("file:media/images/background/scoreboardBackground.png"));
 
+        setNumbers();
         this.controller = new ScoreBoardController(this, game);
         if (level < 38) {
             setLeft(btn_continue);
@@ -90,6 +96,43 @@ public class ScoreBoard extends BorderPane{
         btn_menu.setOnAction(controller::handleButtonMenu);
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
         btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
+    }
+
+    private void setNumbers() {
+        int shift = 0;
+        int startPoints = 70;
+        int startLevel = 70;
+        int tempPoints = points;
+        int tempLevel = level;
+    	while (points > 0) {
+            int k = 1;
+            while (tempPoints > 0) {
+                int d = tempPoints / 10;
+                k = tempPoints - d * 10;
+                tempPoints = d;
+                startPoints += 30;
+            }
+            int d = points / 10;
+            k = points - d * 10;
+            points = d;
+            add(new Digit(k, startPoints - shift, 200));
+            shift += 30;
+        }
+        shift = 0;
+    	while (level > 0) {
+            int k = 1;
+            while (tempLevel > 0) {
+                int d = tempLevel / 10;
+                k = tempLevel - d * 10;
+                tempLevel = d;
+                startLevel += 30;
+            }
+            int d = level / 10;
+            k = level - d * 10;
+            level = d;
+            add(new Digit(k, startLevel - shift, 250));
+            shift += 30;
+    	}
     }
 
 	public void add(Actor actor) {

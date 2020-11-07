@@ -51,7 +51,7 @@ public class MainController {
     * @see     image of start button
 	*/
     public void handleButtonStartMouseIn(MouseEvent event) {
-        ImageView startMouseIn = new ImageView(new Image("file:media/images/download.png"));
+        ImageView startMouseIn = new ImageView(new Image("file:media/images/buttons/startMouseIn.png"));
 		startMouseIn.setFitHeight(100);
 		startMouseIn.setPreserveRatio(true);
         mainMenu.getStartButton().setGraphic(startMouseIn);
@@ -64,7 +64,7 @@ public class MainController {
     * @see     image of start button
 	*/
     public void handleButtonStartMouseOut(MouseEvent event) {
-        ImageView startMouseOut = new ImageView(new Image("file:media/images/download.png"));
+        ImageView startMouseOut = new ImageView(new Image("file:media/images/buttons/start.png"));
 		startMouseOut.setFitHeight(100);
 		startMouseOut.setPreserveRatio(true);
         mainMenu.getStartButton().setGraphic(startMouseOut);
@@ -77,9 +77,9 @@ public class MainController {
     * @see     image of info button
 	*/
     public void handleButtonInfoMouseIn(MouseEvent event) {
-        ImageView infoMouseIn = new ImageView(new Image("file:media/images/info.png"));
-        infoMouseIn.setFitHeight(30);
-		infoMouseIn.setFitWidth(30);
+        ImageView infoMouseIn = new ImageView(new Image("file:media/images/buttons/infoMouseIn.png"));
+		infoMouseIn.setFitHeight(30);
+		infoMouseIn.setFitWidth(25);
         mainMenu.getInfoButton().setGraphic(infoMouseIn);
     }
     
@@ -90,9 +90,9 @@ public class MainController {
     * @see     image of info button
 	*/
     public void handleButtonInfoMouseOut(MouseEvent event) {
-        ImageView infoMouseOut = new ImageView(new Image("file:media/images/info.png"));
+        ImageView infoMouseOut = new ImageView(new Image("file:media/images/buttons/info.png"));
         infoMouseOut.setFitHeight(30);
-		infoMouseOut.setFitWidth(30);
+		infoMouseOut.setFitWidth(25);
         mainMenu.getInfoButton().setGraphic(infoMouseOut);
     }
 }
