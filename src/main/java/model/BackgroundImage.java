@@ -5,8 +5,7 @@ import javafx.scene.image.Image;
 public class BackgroundImage extends Actor{
 
 	private final int MAX_X = 600;
-	private final int MAX_Y = 800;
-	private final double MOVEMENT_Y = 26.666666;
+	private final int STEP = 50;
 
 	Animal animal;
 
@@ -16,13 +15,14 @@ public class BackgroundImage extends Actor{
 	* @param  imageLink  link of image
 	* @see               Image of background
 	*/
-	public BackgroundImage(String imageLink, Animal animal) {
+	public BackgroundImage(String imageLink, int y, Animal animal) {
 		this.animal = animal;
+		setY(y);
+		setX(0);
 		if (imageLink == "file:media/images/background/endBackground.png") {
-			setY(96);
 			setImage(new Image(imageLink, MAX_X, 0, true, true));
 		} else {
-			setImage(new Image(imageLink, MAX_X, MAX_Y, false, true));
+			setImage(new Image(imageLink, MAX_X, STEP, false, true));
 		}
 	}
 	
@@ -40,6 +40,6 @@ public class BackgroundImage extends Actor{
 	public void act(long now) {
 		if (animal == null) return;
 		if (animal.getRestMove() > 0)
-			move(0, MOVEMENT_Y * 2);
+			move(0, STEP);
 	}
 }

@@ -7,10 +7,11 @@ import javafx.scene.image.Image;
 public class Turtle extends Actor{
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
-	private final int SIZE = 130;
-	private final double MOVEMENT_Y = 26.666666;
+	private final int SIZE_X = 130;
+	private final int SIZE_Y = 50;
+	private final int STEP = 50;
 	
-	private int speed;
+	private double speed;
 	private int frame = 0;
 	Animal animal;
 
@@ -29,18 +30,18 @@ public class Turtle extends Actor{
 	* @see          image of turtle
 	* @see          position of turtle
 	*/
-	public Turtle(int xpos, int ypos, int s, Animal animal) {
+	public Turtle(int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
 		if (s > 0) {
-			turtle1 = new Image("file:media/images/turtle/turtle1.png", SIZE, SIZE, true, true);
-			turtle2 = new Image("file:media/images/turtle/turtle2.png", SIZE, SIZE, true, true);
-			turtle3 = new Image("file:media/images/turtle/turtle3.png", SIZE, SIZE, true, true);
-			turtle4 = new Image("file:media/images/turtle/turtle4.png", SIZE, SIZE, true, true);
+			turtle1 = new Image("file:media/images/turtle/turtle1.png", SIZE_X, SIZE_Y, false, true);
+			turtle2 = new Image("file:media/images/turtle/turtle2.png", SIZE_X, SIZE_Y, false, true);
+			turtle3 = new Image("file:media/images/turtle/turtle3.png", SIZE_X, SIZE_Y, false, true);
+			turtle4 = new Image("file:media/images/turtle/turtle4.png", SIZE_X, SIZE_Y, false, true);
 		} else {
-			turtle1 = new Image("file:media/images/turtle/turtle1left.png", SIZE, SIZE, true, true);
-			turtle2 = new Image("file:media/images/turtle/turtle2left.png", SIZE, SIZE, true, true);
-			turtle3 = new Image("file:media/images/turtle/turtle3left.png", SIZE, SIZE, true, true);
-			turtle4 = new Image("file:media/images/turtle/turtle4left.png", SIZE, SIZE, true, true);
+			turtle1 = new Image("file:media/images/turtle/turtle1left.png", SIZE_X, SIZE_Y, false, true);
+			turtle2 = new Image("file:media/images/turtle/turtle2left.png", SIZE_X, SIZE_Y, false, true);
+			turtle3 = new Image("file:media/images/turtle/turtle3left.png", SIZE_X, SIZE_Y, false, true);
+			turtle4 = new Image("file:media/images/turtle/turtle4left.png", SIZE_X, SIZE_Y, false, true);
 		}
 		setX(xpos);
 		setY(ypos);
@@ -78,6 +79,6 @@ public class Turtle extends Actor{
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
 		if (animal.getRestMove() > 0)
-			move(0, MOVEMENT_Y * 2);
+			move(0, STEP);
 	}
 }

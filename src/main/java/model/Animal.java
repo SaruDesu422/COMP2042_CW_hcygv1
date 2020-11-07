@@ -13,10 +13,10 @@ public class Animal extends Actor {
 
 	private final int CHANGE_SCORE = 50;
 	private final int START_X = 300;
-	private final double START_Y = 706.466666;
+	private final double START_Y = 705;
 	private final int IMAGE_SIZE = 40;
 	private final int MAX_Y = 800;
-	private final double MOVEMENT_Y = 26.666666;
+	private final double MOVEMENT_Y = 25;
 	private final double MOVEMENT_X = 21.333333;
 
 	Game game;
@@ -68,42 +68,35 @@ public class Animal extends Actor {
 							changeScore = false;
 							setImage(imgW1);
 							second = false;
-						}
-						else if (event.getCode() == KeyCode.A) {	            	
+						} else if (event.getCode() == KeyCode.A) {	            	
 							move(-MOVEMENT_X, 0);
 							setImage(imgA1);
 							second = false;
-						}
-						else if (event.getCode() == KeyCode.S) {	            	
+						} else if (event.getCode() == KeyCode.S) {	            	
 							move(0, MOVEMENT_Y);
 							upMovement--;
 							setImage(imgS1);
 							second = false;
-						}
-						else if (event.getCode() == KeyCode.D) {	            	
+						} else if (event.getCode() == KeyCode.D) {	            	
 							move(MOVEMENT_X, 0);
 							setImage(imgD1);
 							second = false;
 						}
-					}
-					else if (event.getCode() == KeyCode.W) {	            	
+					} else if (event.getCode() == KeyCode.W) {	            	
 						move(0, -MOVEMENT_Y);
 						upMovement++;
 						setImage(imgW2);
 						second = true;
-					}
-					else if (event.getCode() == KeyCode.A) {	            	
+					} else if (event.getCode() == KeyCode.A) {	            	
 						move(-MOVEMENT_X, 0);
 						setImage(imgA2);
 						second = true;
-					}
-					else if (event.getCode() == KeyCode.S) {	            	
+					} else if (event.getCode() == KeyCode.S) {	            	
 						move(0, MOVEMENT_Y);
 						upMovement--;
 						setImage(imgS2);
 						second = true;
-					}
-					else if (event.getCode() == KeyCode.D) {	            	
+					} else if (event.getCode() == KeyCode.D) {	            	
 						move(MOVEMENT_X, 0);
 						setImage(imgD2);
 						second = true;
@@ -127,19 +120,16 @@ public class Animal extends Actor {
 						upMovement++;
 						setImage(imgW1);
 						second = false;
-					}
-					else if (event.getCode() == KeyCode.A) {	            	
+					} else if (event.getCode() == KeyCode.A) {	            	
 						move(-MOVEMENT_X, 0);
 						setImage(imgA1);
 						second = false;
-					}
-					else if (event.getCode() == KeyCode.S) {	            	
+					} else if (event.getCode() == KeyCode.S) {	            	
 						move(0, MOVEMENT_Y);
 						upMovement--;
 						setImage(imgS1);
 						second = false;
-					}
-					else if (event.getCode() == KeyCode.D) {	            	
+					} else if (event.getCode() == KeyCode.D) {	            	
 						move(MOVEMENT_X, 0);
 						setImage(imgD1);
 						second = false;
@@ -220,8 +210,7 @@ public class Animal extends Actor {
 					points -= CHANGE_SCORE;
 					changeScore = true;
 				}
-			}
-			else {
+			} else {
 				setImage(new Image("file:media/images/cardeath" + carD + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 			}
 		}
@@ -243,8 +232,7 @@ public class Animal extends Actor {
 					points -= CHANGE_SCORE;
 					changeScore = true;
 				}
-			}
-			else {
+			} else {
 				setImage(new Image("file:media/images/waterdeath" + waterD + ".png", IMAGE_SIZE,IMAGE_SIZE , true, true));
 			}
 		}
@@ -258,22 +246,15 @@ public class Animal extends Actor {
 				move(-1, 0);
 			else
 				move (.375, 0);
-		}
-		// stand on turtle
-		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
+		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) { 	//turtle
 			move(-.5, 0);
-		}
-		// death by wet turtle
-		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) { 			// wet turtle
 			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-				// if at water
 				waterDeath = true;
 			} else {
 				move(-.5, 0);
 			}
-		}
-		// reach end
-		else if (getIntersectingObjects(End.class).size() >= 1) {
+		} else if (getIntersectingObjects(End.class).size() >= 1) {					// end
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			// if end already activated
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
@@ -288,9 +269,7 @@ public class Animal extends Actor {
 			end++;
 			setX(START_X);
 			setY(START_Y);
-		}
-		// if at water area and not standing on anything
-		else if (getY() < 413){
+		} else if (getY() < 413){
 			waterDeath = true;
 		}
 	}
@@ -330,5 +309,4 @@ public class Animal extends Actor {
 		}
 		return false;
 	}
-	
 }

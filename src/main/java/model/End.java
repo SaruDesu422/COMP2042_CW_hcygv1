@@ -5,9 +5,10 @@ import javafx.scene.image.Image;
 public class End extends Actor{
 	
 	private final int END_SIZE = 60;
+	private final int STEP = 50;
+
+	Animal animal;
 	boolean activated = false;
-	@Override
-	public void act(long now) {}
 
 	/**
 	* This method sets image of end.
@@ -16,7 +17,8 @@ public class End extends Actor{
 	* @param  y  y coordinate
 	* @see       image of end
 	*/
-	public End(int x, int y) {
+	public End(int x, int y, Animal animal) {
+		this.animal = animal;
 		setX(x);
 		setY(y);
 		setImage(new Image("file:media/images/end/End.png", END_SIZE, END_SIZE, true, true));
@@ -31,6 +33,12 @@ public class End extends Actor{
 	public void setEnd() {
 		setImage(new Image("file:media/images/end/frogEnd.png", END_SIZE, END_SIZE, true, true));
 		activated = true;
+	}
+
+	@Override
+	public void act(long now) {
+		if (animal.getRestMove() > 0)
+			move(0, STEP);
 	}
 	
 	/**

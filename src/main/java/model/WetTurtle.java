@@ -7,10 +7,11 @@ import javafx.scene.image.Image;
 public class WetTurtle extends Actor{
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
-	private final int SIZE = 130;
-	private final double MOVEMENT_Y = 26.666666;
+	private final int SIZE_X = 130;
+	private final int SIZE_Y = 50;
+	private final int STEP = 50;
 
-	private int speed;
+	private double speed;
 	private int frame = 0;
 	Animal animal;
 
@@ -35,28 +36,28 @@ public class WetTurtle extends Actor{
 	* @see          image of wet turtle
 	* @see          position of wet turtle
 	*/
-	public WetTurtle(int xpos, int ypos, int s, Animal animal) {
+	public WetTurtle(int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
 		if (s > 0) {
-			turtle1 = new Image("file:media/images/turtle/turtle1.png", SIZE, SIZE, true, true);
-			turtle2 = new Image("file:media/images/turtle/turtle2.png", SIZE, SIZE, true, true);
-			turtle3 = new Image("file:media/images/turtle/turtle3.png", SIZE, SIZE, true, true);
-			turtle4 = new Image("file:media/images/turtle/turtle4.png", SIZE, SIZE, true, true);
-			turtle5 = new Image("file:media/images/turtle/wetturtle1.png", SIZE, SIZE, true, true);
-			turtle6 = new Image("file:media/images/turtle/wetturtle2.png", SIZE, SIZE, true, true);
-			turtle7 = new Image("file:media/images/turtle/wetturtle3.png", SIZE, SIZE, true, true);
-			turtle8 = new Image("file:media/images/turtle/wetturtle4.png", SIZE, SIZE, true, true);
+			turtle1 = new Image("file:media/images/turtle/turtle1.png", SIZE_X, SIZE_Y, false, true);
+			turtle2 = new Image("file:media/images/turtle/turtle2.png", SIZE_X, SIZE_Y, false, true);
+			turtle3 = new Image("file:media/images/turtle/turtle3.png", SIZE_X, SIZE_Y, false, true);
+			turtle4 = new Image("file:media/images/turtle/turtle4.png", SIZE_X, SIZE_Y, false, true);
+			turtle5 = new Image("file:media/images/turtle/wetturtle1.png", SIZE_X, SIZE_Y, false, true);
+			turtle6 = new Image("file:media/images/turtle/wetturtle2.png", SIZE_X, SIZE_Y, false, true);
+			turtle7 = new Image("file:media/images/turtle/wetturtle3.png", SIZE_X, SIZE_Y, false, true);
+			turtle8 = new Image("file:media/images/turtle/wetturtle4.png", SIZE_X, SIZE_Y, false, true);
 		} else {
-			turtle1 = new Image("file:media/images/turtle/turtle1left.png", SIZE, SIZE, true, true);
-			turtle2 = new Image("file:media/images/turtle/turtle2left.png", SIZE, SIZE, true, true);
-			turtle3 = new Image("file:media/images/turtle/turtle3left.png", SIZE, SIZE, true, true);
-			turtle4 = new Image("file:media/images/turtle/turtle4left.png", SIZE, SIZE, true, true);
-			turtle5 = new Image("file:media/images/turtle/wetturtle1left.png", SIZE, SIZE, true, true);
-			turtle6 = new Image("file:media/images/turtle/wetturtle2left.png", SIZE, SIZE, true, true);
-			turtle7 = new Image("file:media/images/turtle/wetturtle3left.png", SIZE, SIZE, true, true);
-			turtle8 = new Image("file:media/images/turtle/wetturtle4left.png", SIZE, SIZE, true, true);
+			turtle1 = new Image("file:media/images/turtle/turtle1left.png", SIZE_X, SIZE_Y, false, true);
+			turtle2 = new Image("file:media/images/turtle/turtle2left.png", SIZE_X, SIZE_Y, false, true);
+			turtle3 = new Image("file:media/images/turtle/turtle3left.png", SIZE_X, SIZE_Y, false, true);
+			turtle4 = new Image("file:media/images/turtle/turtle4left.png", SIZE_X, SIZE_Y, false, true);
+			turtle5 = new Image("file:media/images/turtle/wetturtle1left.png", SIZE_X, SIZE_Y, false, true);
+			turtle6 = new Image("file:media/images/turtle/wetturtle2left.png", SIZE_X, SIZE_Y, false, true);
+			turtle7 = new Image("file:media/images/turtle/wetturtle3left.png", SIZE_X, SIZE_Y, false, true);
+			turtle8 = new Image("file:media/images/turtle/wetturtle4left.png", SIZE_X, SIZE_Y, false, true);
 		}
-		turtle9 = new Image("file:media/images/turtle/turtlesunk.png", SIZE, SIZE, true, true);
+		turtle9 = new Image("file:media/images/turtle/turtlesunk.png", SIZE_X, SIZE_Y, false, true);
 		setX(xpos);
 		setY(ypos);
 		speed = s;
@@ -86,22 +87,22 @@ public class WetTurtle extends Actor{
 			} else if (frame%20 == 20) {
 				setImage(turtle1);
 			}
-		} else if (frame == wait || frame == wait * 2 + 28) {
+		} else if (frame == wait || frame == wait * 2 + 8) {
 			setImage(turtle5);
 			sunk = false;
-		} else if (frame == wait + 4 || frame == wait * 2 + 24) {
+		} else if (frame == wait + 4 || frame == wait * 2 + 4) {
 			setImage(turtle6);
 			sunk = false;
-		} else if (frame == wait + 8 || frame == wait * 2 + 20) {
+		} else if (frame == wait + 8 || frame == wait * 2) {
 			setImage(turtle7);
 			sunk = false;
-		} else if (frame == wait + 12 || frame == wait * 2 + 16) {
+		} else if (frame == wait + 12 || frame == wait * 2 - 4) {
 			setImage(turtle8);
 			sunk = false;
 		} else if (frame == wait + 16) {
 			setImage(turtle9);
 			sunk = true;
-		} else if (frame == wait * 2 + 32) {
+		} else if (frame == wait * 2 + 12) {
 			setImage(turtle1);
 			sunk = false;
 			frame = 0;
@@ -115,7 +116,7 @@ public class WetTurtle extends Actor{
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
 		if (animal.getRestMove() > 0)
-			move(0, MOVEMENT_Y * 2);
+			move(0, STEP);
 	}
 
 	/**

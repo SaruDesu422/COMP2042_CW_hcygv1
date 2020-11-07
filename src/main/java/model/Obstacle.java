@@ -8,7 +8,8 @@ public class Obstacle extends Actor {
 
 	private final int LIMIT_LEFT = -200;
 	private final int LIMIT_RIGHT = 600;
-	private final double MOVEMENT_Y = 26.666666;
+	private final int SIZE_Y = 50;
+	private final int STEP = 50;
 
 	private double speed;
 	Animal animal;
@@ -27,7 +28,7 @@ public class Obstacle extends Actor {
 	*/
 	public Obstacle(String imageLink, int xpos, int ypos, double s, int size, Animal animal) {
 		this.animal = animal;
-		setImage(new Image(imageLink, size, size, true, true));
+		setImage(new Image(imageLink, size, SIZE_Y, true, true));
 		setX(xpos);
 		setY(ypos);
 		speed = s;
@@ -43,12 +44,12 @@ public class Obstacle extends Actor {
 	@Override
 	public void act(long now) {
 		double rng = (int)Math.random() * 3;
-		if (animal.getRestMove() > 0)
-			move(0, MOVEMENT_Y * 2);
 		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+		if (animal.getRestMove() > 0)
+			move(0, STEP);
 	}
 }
