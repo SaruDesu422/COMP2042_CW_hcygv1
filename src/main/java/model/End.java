@@ -37,7 +37,7 @@ public class End extends Actor{
 
 	@Override
 	public void act(long now) {
-		if (animal.getRestMove() > 0)
+		if (animal.getMoveDown())
 			move(0, STEP);
 	}
 	

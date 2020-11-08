@@ -22,9 +22,9 @@ public class Log extends Actor {
 	* @param  s          speed
 	* @see               image of log
 	*/
-	public Log(String imageLink, int size, int xpos, int ypos, double s, Animal animal) {
+	public Log(String imageLink, int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
-		setImage(new Image(imageLink, size, SIZE_Y, false, true));
+		setImage(new Image("file:media/images/logs/" + imageLink + ".png", 0, SIZE_Y, true, true));
 		setX(xpos);
 		setY(ypos);
 		speed = s;
@@ -43,7 +43,7 @@ public class Log extends Actor {
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
-		if (animal.getRestMove() > 0)
+		if (animal.getMoveDown())
 			move(0, STEP);
 	}
 	

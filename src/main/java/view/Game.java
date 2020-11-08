@@ -90,7 +90,7 @@ public class Game {
                     logInfo.add(Arrays.asList(values));
                     List<Integer> list = new ArrayList<Integer>();
                     list.add(WATER);
-                    list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(4)));
+                    list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(3)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '5') {
                     String[] values = line.split(COMMA_DELIMITER);
@@ -124,13 +124,12 @@ public class Game {
         stage.add(new BackgroundImage("file:media/images/background/header.png"));
 
         for (int index = 0; index < logInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(4));
+            int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(3));
             stage.add(new Log(
                 logInfo.get(index).get(1),
                 Integer.parseInt(logInfo.get(index).get(2)), 
-                Integer.parseInt(logInfo.get(index).get(3)), 
                 y, 
-                Double.parseDouble(logInfo.get(index).get(5)),
+                Double.parseDouble(logInfo.get(index).get(4)),
                 animal
             ));
         }
@@ -199,6 +198,7 @@ public class Game {
                 stage.add(new BackgroundImage("file:media/images/background/restBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
             }
         }
+        stage.add(new BackgroundImage("file:media/images/background/startBackground.png", 695, animal));
         endBG = new BackgroundImage("file:media/images/background/endBackground.png", 683 - (endInfo * STEP), animal);
         stage.add(endBG);
         stage.add(new End(13, 685 - (endInfo * STEP), animal));

@@ -63,7 +63,7 @@ public class Obstacle extends Actor {
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
-		if (animal.getRestMove() > 0)
+		if (animal.getMoveDown())
 			move(0, STEP);
 	}
 }

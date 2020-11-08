@@ -22,22 +22,21 @@ public class Animal extends Actor {
 
 	Game game;
 
+	private boolean second = false;
+	private boolean noMove = false;
+	private boolean carDeath = false;
+	private boolean waterDeath = false;
+	private boolean changeScore = false;
+	private boolean moveDown = false;
 	int points = 0;
 	int end = 0;
-	int endPos;
-	private boolean second = false;
-	boolean noMove = false;
-	boolean carDeath = false;
-	boolean waterDeath = false;
-	boolean changeScore = false;
-	boolean moveDown = false;
-	List<Integer> water = new ArrayList<Integer>();
 	int carD = 0;
 	int waterD = 0;
-	int restMove = 0;
 	int upMovement = 0;
+	int frame = 0;
 	double y = MAX_Y;
-	ArrayList<End> inter = new ArrayList<End>();
+	ArrayList<End> intersecting = new ArrayList<End>();
+	List<Integer> water = new ArrayList<Integer>();
 
 	/**
 	* This method initializes the image of the player and
@@ -181,9 +180,10 @@ public class Animal extends Actor {
 
 		// configure car death image
 		if (carDeath) {
+			frame++;
 			// set move to not allowed
 			noMove = true;
-			if ((now) % 11 == 0) {
+			if (frame % 12 == 0) {
 				carD++;
 			}
 			if (carD == 4) {
@@ -192,20 +192,22 @@ public class Animal extends Actor {
 				upMovement = 0;
 				carDeath = false;
 				carD = 0;
-				setImage(new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+				setImage(new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 				noMove = false;
 				if (points > CHANGE_SCORE) {
 					points -= CHANGE_SCORE;
 					changeScore = true;
 				}
+				frame = 0;
 			} else {
-				setImage(new Image("file:media/images/cardeath" + carD + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+				setImage(new Image("file:media/images/death/carDeath" + carD + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 			}
 		}
 		// configure water death image
 		if (waterDeath) {
+			frame++;
 			noMove = true;
-			if ((now) % 11 == 0) {
+			if (frame % 9 == 0) {
 				waterD++;
 			}
 			if (waterD == 5) {
@@ -214,14 +216,15 @@ public class Animal extends Actor {
 				upMovement = 0;
 				waterDeath = false;
 				waterD = 0;
-				setImage(new Image("file:media/images/froggerUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
+				setImage(new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
 				noMove = false;
 				if (points > CHANGE_SCORE) {
 					points -= CHANGE_SCORE;
 					changeScore = true;
 				}
+				frame = 0;
 			} else {
-				setImage(new Image("file:media/images/waterdeath" + waterD + ".png", IMAGE_SIZE,IMAGE_SIZE , true, true));
+				setImage(new Image("file:media/images/death/waterDeath" + waterD + ".png", IMAGE_SIZE,IMAGE_SIZE , true, true));
 			}
 		}
 		// car death
@@ -243,7 +246,7 @@ public class Animal extends Actor {
 				move(-.5, 0);
 			}
 		} else if (getIntersectingObjects(End.class).size() >= 1) {					// end
-			inter = (ArrayList<End>) getIntersectingObjects(End.class);
+			intersecting = (ArrayList<End>) getIntersectingObjects(End.class);
 			// if end already activated
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
 				end--;
@@ -263,8 +266,8 @@ public class Animal extends Actor {
 		}
 	}
 
-	public int getRestMove() {
-		return restMove;
+	public boolean getMoveDown() {
+		return moveDown;
 	}
 
 	/**

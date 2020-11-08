@@ -7,7 +7,7 @@ public class BackgroundImage extends Actor{
 
 	private final int MAX_X = 600;
 	private final int STEP = 50;
-	private ImageView endImgView;
+	private ImageView ImgView;
 
 	Animal animal;
 
@@ -21,10 +21,10 @@ public class BackgroundImage extends Actor{
 		this.animal = animal;
 		setY(y);
 		setX(0);
-		if (imageLink.equals("file:media/images/background/endBackground.png")) {
-			Image endImg = new Image(imageLink, MAX_X, 0, true, true);
-			endImgView = new ImageView(endImg);
-			setImage(endImg);
+		if (imageLink.equals("file:media/images/background/endBackground.png") || imageLink.equals("file:media/images/background/startBackground.png")) {
+			Image Img = new Image(imageLink, MAX_X, 0, true, true);
+			ImgView = new ImageView(Img);
+			setImage(Img);
 		} else {
 			setImage(new Image(imageLink, MAX_X, STEP, false, true));
 		}
@@ -41,13 +41,13 @@ public class BackgroundImage extends Actor{
 	}
 	
 	public int getEnd() {
-		return (int)endImgView.getY();
+		return (int)ImgView.getY();
 	}
 
 	@Override
 	public void act(long now) {
 		if (animal == null) return;
-		if (animal.getRestMove() > 0)
+		if (animal.getMoveDown())
 			move(0, STEP);
 	}
 }
