@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.control.Button;
@@ -29,16 +31,19 @@ public class Game {
 
     private final String COMMA_DELIMITER = ",";
     private final int STEP = 50;
-    
+    private final int LAND = 0;
+    private final int WATER = 1;
+    private final int REST = 2;
+    private final int END = 3;
+
     private List<List<String>> logInfo;
     private List<List<String>> turtleInfo;
     private List<List<String>> wetTurtleInfo;
     private List<List<String>> obstacleInfo;
-    private List<List<String>> restInfo;
-    private List<List<String>> backgroundInfo;
+    private List<List<Integer>> backgroundInfo;
     private int endInfo;
-    private int restIndex;
     private Button btn_menu;
+    private BackgroundImage endBG;
     int rest;
 
     public Game(MainMenu mainMenu) {
@@ -53,8 +58,7 @@ public class Game {
         turtleInfo = new ArrayList<List<String>>();
         wetTurtleInfo = new ArrayList<List<String>>();
         obstacleInfo = new ArrayList<List<String>>();
-        restInfo = new ArrayList<List<String>>();
-        backgroundInfo = new ArrayList<List<String>>();
+        backgroundInfo = new ArrayList<List<Integer>>();
 
         // read file level.csv
         try (BufferedReader br = new BufferedReader(new FileReader("level_info/level" + level + ".csv"))) {
@@ -63,52 +67,54 @@ public class Game {
                 if (line.charAt(0) == '1') {
                     String[] values = line.split(COMMA_DELIMITER);
                     obstacleInfo.add(Arrays.asList(values));
-                    List<String> list = new ArrayList<String>();
-                    list.add("land");
-                    list.add(obstacleInfo.get(obstacleInfo.size() - 1).get(3));
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(LAND);
+                    list.add(Integer.valueOf(obstacleInfo.get(obstacleInfo.size() - 1).get(3)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '2') {
                     String[] values = line.split(COMMA_DELIMITER);
                     turtleInfo.add(Arrays.asList(values));
-                    List<String> list = new ArrayList<String>();
-                    list.add("water");
-                    list.add(turtleInfo.get(turtleInfo.size() - 1).get(2));
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(WATER);
+                    list.add(Integer.valueOf(turtleInfo.get(turtleInfo.size() - 1).get(2)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '3') {
                     String[] values = line.split(COMMA_DELIMITER);
                     wetTurtleInfo.add(Arrays.asList(values));
-                    List<String> list = new ArrayList<String>();
-                    list.add("water");
-                    list.add(wetTurtleInfo.get(wetTurtleInfo.size() - 1).get(2));
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(WATER);
+                    list.add(Integer.valueOf(wetTurtleInfo.get(wetTurtleInfo.size() - 1).get(2)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '4') {
                     String[] values = line.split(COMMA_DELIMITER);
                     logInfo.add(Arrays.asList(values));
-                    List<String> list = new ArrayList<String>();
-                    list.add("water");
-                    list.add(logInfo.get(logInfo.size() - 1).get(4));
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(WATER);
+                    list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(4)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '5') {
                     String[] values = line.split(COMMA_DELIMITER);
-                    restInfo.add(Arrays.asList(values));
-                    List<String> list = new ArrayList<String>();
-                    list.add("rest");
-                    list.add(restInfo.get(restInfo.size() - 1).get(1));
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(REST);
+                    list.add(Integer.valueOf(values[1]));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '6') {
                     String[] values = line.split(COMMA_DELIMITER);
                     endInfo = Integer.parseInt(values[1]);
+                    List<Integer> list = new ArrayList<Integer>();
+                    list.add(END);
+                    list.add(Integer.valueOf(values[1]));
+                    backgroundInfo.add(list);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        sort();
     }
 
     public void startNextLevel() {
-        this.restIndex = 0;
         level++;
-        System.out.println("Initializing level " + level);
         initializeLevelInfo();
         
         stage = new MyStage();
@@ -118,7 +124,7 @@ public class Game {
         stage.add(new BackgroundImage("file:media/images/background/header.png"));
 
         for (int index = 0; index < logInfo.size(); index++) {
-            int y = 700 - STEP * Integer.parseInt(logInfo.get(index).get(4));
+            int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(4));
             stage.add(new Log(
                 logInfo.get(index).get(1),
                 Integer.parseInt(logInfo.get(index).get(2)), 
@@ -129,7 +135,7 @@ public class Game {
             ));
         }
         for (int index = 0; index < turtleInfo.size(); index++) {
-            int y = 700 - STEP * Integer.parseInt(turtleInfo.get(index).get(2));
+            int y = 695 - STEP * Integer.parseInt(turtleInfo.get(index).get(2));
             stage.add(new Turtle(
                 Integer.parseInt(turtleInfo.get(index).get(1)), 
                 y, 
@@ -138,7 +144,7 @@ public class Game {
             ));
         }
         for (int index = 0; index < wetTurtleInfo.size(); index++) {
-            int y = 700 - STEP * Integer.parseInt(wetTurtleInfo.get(index).get(2));
+            int y = 695 - STEP * Integer.parseInt(wetTurtleInfo.get(index).get(2));
             stage.add(new WetTurtle(
                 Integer.parseInt(wetTurtleInfo.get(index).get(1)), 
                 y, 
@@ -147,13 +153,12 @@ public class Game {
             ));
         }
         for (int index = 0; index < obstacleInfo.size(); index++) {
-            int y = 700 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
+            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
             stage.add(new Obstacle(
                 obstacleInfo.get(index).get(1), 
                 Integer.parseInt(obstacleInfo.get(index).get(2)), 
                 y, 
-                Double.parseDouble(obstacleInfo.get(index).get(4)), 
-                Integer.parseInt(obstacleInfo.get(index).get(5)),
+                Double.parseDouble(obstacleInfo.get(index).get(4)),
                 animal
             ));
         }
@@ -186,16 +191,16 @@ public class Game {
 
     public void generateBackground() {
         for (int index = 0; index < backgroundInfo.size(); index++) {
-            System.out.printf("%s, %s\n", backgroundInfo.get(index).get(0), backgroundInfo.get(index).get(1));
-            if(backgroundInfo.get(index).get(0) == "water") {
-                stage.add(new BackgroundImage("file:media/images/background/waterBackground.png", 695 - (Integer.parseInt(backgroundInfo.get(index).get(1)) * STEP), animal));
-            } else if (backgroundInfo.get(index).get(0) == "land") {
-                stage.add(new BackgroundImage("file:media/images/background/landBackground.png", 695 - (Integer.parseInt(backgroundInfo.get(index).get(1)) * STEP), animal));
-            } else if (backgroundInfo.get(index).get(0) == "rest") {
-                stage.add(new BackgroundImage("file:media/images/background/restBackground.png", 695 - (Integer.parseInt(backgroundInfo.get(index).get(1)) * STEP), animal));
+            if(backgroundInfo.get(index).get(0).equals(WATER)) {
+                stage.add(new BackgroundImage("file:media/images/background/waterBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
+            } else if (backgroundInfo.get(index).get(0).equals(LAND)) {
+                stage.add(new BackgroundImage("file:media/images/background/landBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
+            } else if (backgroundInfo.get(index).get(0).equals(REST)) {
+                stage.add(new BackgroundImage("file:media/images/background/restBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
             }
         }
-        stage.add(new BackgroundImage("file:media/images/background/endBackground.png", 683 - (endInfo * STEP), animal));
+        endBG = new BackgroundImage("file:media/images/background/endBackground.png", 683 - (endInfo * STEP), animal);
+        stage.add(endBG);
         stage.add(new End(13, 685 - (endInfo * STEP), animal));
         stage.add(new End(141, 685 - (endInfo * STEP), animal));
         stage.add(new End(269, 685 - (endInfo * STEP), animal));
@@ -203,19 +208,28 @@ public class Game {
         stage.add(new End(528, 685 - (endInfo * STEP), animal));
     }
 
-    public int getRest() {
-        return Integer.parseInt(restInfo.get(restIndex).get(1));
-    }
-
-    public void setRestIndex() {
-        restIndex++;
-    }
-
-    public boolean checkRestInfo() {
-        if (restIndex + 1 == restInfo.size() || restInfo == null) {
-            return false;
+    public List<Integer> getWater() {
+        List<Integer> water = new ArrayList<Integer>();
+        water.add(0); // start
+        if (backgroundInfo.get(0).get(0).equals(WATER)) {
+            water.add(1);
+        } else {
+            water.add(0);
         }
-        return true;
+        for (int index = 1; index < backgroundInfo.size(); index++) {
+            if (!backgroundInfo.get(index).get(1).equals(backgroundInfo.get(index - 1).get(1))) {
+                if (backgroundInfo.get(index).get(0).equals(WATER) || backgroundInfo.get(index).get(0).equals(END)) {
+                    water.add(1);
+                } else {
+                    water.add(0);
+                }
+            }
+        }
+        return water;
+    }
+
+    public int getEnd() {
+        return endBG.getEnd();
     }
 
     public MyStage getStage() {
@@ -224,6 +238,19 @@ public class Game {
 
     public int getLevel() {
         return this.level;
+    }
+
+    /**
+	* This method returns configurations of start button.
+	*
+    * @return  Start button
+	*/
+    public Button getMenuButton() {
+		return this.btn_menu;
+    }
+    
+    public MainMenu getMainMenu() {
+        return this.mainMenu;
     }
 
     public void createTimer() {
@@ -270,16 +297,12 @@ public class Game {
     	}
     }
 
-    /**
-	* This method returns configurations of start button.
-	*
-    * @return  Start button
-	*/
-    public Button getMenuButton() {
-		return this.btn_menu;
-    }
-    
-    public MainMenu getMainMenu() {
-        return this.mainMenu;
+    private void sort() {
+        Collections.sort(this.backgroundInfo, new Comparator<List<Integer>>() {
+            @Override
+            public int compare(List<Integer> list1, List<Integer> list2) {
+                return Integer.valueOf(list1.get(1)).compareTo(Integer.valueOf(list2.get(1)));
+            }
+        });
     }
 }

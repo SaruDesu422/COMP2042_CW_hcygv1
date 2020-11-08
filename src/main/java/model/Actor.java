@@ -13,7 +13,7 @@ public abstract class Actor extends ImageView{
     * @param  dx  change in x coordinate
     * @param  dy  change in y coordinate
 	*/
-    public void move(double dx, double dy) {
+    public void move(double dx, int dy) {
         setX(getX() + dx);
         setY(getY() + dy);
     }

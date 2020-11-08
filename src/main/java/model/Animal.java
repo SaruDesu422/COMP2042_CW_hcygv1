@@ -3,6 +3,7 @@ package model;
 import view.Game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -13,22 +14,24 @@ public class Animal extends Actor {
 
 	private final int CHANGE_SCORE = 50;
 	private final int START_X = 300;
-	private final double START_Y = 705;
+	private final double START_Y = 700;
 	private final int IMAGE_SIZE = 40;
 	private final int MAX_Y = 800;
-	private final double MOVEMENT_Y = 25;
-	private final double MOVEMENT_X = 21.333333;
+	private final int MOVEMENT_Y = 25;
+	private final int MOVEMENT_X = 22;
 
 	Game game;
 
 	int points = 0;
 	int end = 0;
+	int endPos;
 	private boolean second = false;
 	boolean noMove = false;
 	boolean carDeath = false;
 	boolean waterDeath = false;
 	boolean changeScore = false;
-	boolean moved = false;
+	boolean moveDown = false;
+	List<Integer> water = new ArrayList<Integer>();
 	int carD = 0;
 	int waterD = 0;
 	int restMove = 0;
@@ -45,6 +48,7 @@ public class Animal extends Actor {
 	public Animal(Game game) {
 		// set image and starting position
 		this.game = game;
+		this.water = game.getWater();
 		setImage(new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, 0, true, true));
 		setX(START_X);
 		setY(START_Y);
@@ -117,7 +121,6 @@ public class Animal extends Actor {
 							points+=10;
 						}
 						move(0, -MOVEMENT_Y);
-						upMovement++;
 						setImage(imgW1);
 						second = false;
 					} else if (event.getCode() == KeyCode.A) {	            	
@@ -126,7 +129,6 @@ public class Animal extends Actor {
 						second = false;
 					} else if (event.getCode() == KeyCode.S) {	            	
 						move(0, MOVEMENT_Y);
-						upMovement--;
 						setImage(imgS1);
 						second = false;
 					} else if (event.getCode() == KeyCode.D) {	            	
@@ -165,30 +167,16 @@ public class Animal extends Actor {
 			move(-MOVEMENT_X * 2, 0);
 		}
 
-		// reach rest
-		if (game.checkRestInfo()) {
-			System.out.printf("%d, %d \n", upMovement, game.getRest() * 2);
-			if (upMovement == game.getRest() * 2 && restMove == 0) {
-				System.out.println(restMove);
-				game.setRestIndex();
-				restMove = game.getRest() * 2;
+		if (getY() == MOVEMENT_Y * 10) {
+			if (game.getEnd() > 95) {
+				moveDown = true;
 			}
 		}
 
-		// move according to rest
-		if (restMove > 0) {
-			move(0, MOVEMENT_Y);
-			restMove--;
-			if (restMove == 0) {
-				moved = true;
-			}
-		}
-		
-		// reset restMove to MAX_Y
-		if (moved) {
-			y = MAX_Y;
-			upMovement = 0;
-			moved = false;
+		if (moveDown) {
+			move(0, MOVEMENT_Y * 2);
+			y -= MOVEMENT_Y * 2;
+			moveDown = false;
 		}
 
 		// configure car death image
@@ -269,7 +257,8 @@ public class Animal extends Actor {
 			end++;
 			setX(START_X);
 			setY(START_Y);
-		} else if (getY() < 413){
+			upMovement = 0;
+		} else if (water.get(upMovement) == 1){
 			waterDeath = true;
 		}
 	}

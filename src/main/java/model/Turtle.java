@@ -9,7 +9,7 @@ public class Turtle extends Actor{
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE_X = 130;
 	private final int SIZE_Y = 50;
-	private final int STEP = 50;
+	private final int STEP = 45;
 	
 	private double speed;
 	private int frame = 0;

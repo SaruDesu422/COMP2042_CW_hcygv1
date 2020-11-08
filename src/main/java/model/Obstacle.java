@@ -26,9 +26,23 @@ public class Obstacle extends Actor {
 	* @see               image of obstacle
 	* @see               position of obstacle
 	*/
-	public Obstacle(String imageLink, int xpos, int ypos, double s, int size, Animal animal) {
+	public Obstacle(String image, int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
-		setImage(new Image(imageLink, size, SIZE_Y, true, true));
+		if (s > 0) {
+			if (image.equals("car")) {
+				int rng = (int)(Math.random() * 3 + 1);
+				setImage(new Image("file:media/images/obstacles/" + image + rng + ".png", 0, SIZE_Y, true, true));
+			} else {
+				setImage(new Image("file:media/images/obstacles/" + image + ".png", 0, SIZE_Y, true, true));
+			}
+		} else {
+			if (image.equals("car")) {
+				int rng = (int)(Math.random() * 3 + 1);
+				setImage(new Image("file:media/images/obstacles/" + image + rng + "left.png", 0, SIZE_Y, true, true));
+			} else {
+				setImage(new Image("file:media/images/obstacles/" + image + "left.png", 0, SIZE_Y, true, true));
+			}
+		}
 		setX(xpos);
 		setY(ypos);
 		speed = s;
@@ -43,7 +57,7 @@ public class Obstacle extends Actor {
 	*/
 	@Override
 	public void act(long now) {
-		double rng = (int)Math.random() * 3;
+		int rng = (int)(Math.random() * 3);
 		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);

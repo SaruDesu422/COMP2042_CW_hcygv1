@@ -57,7 +57,6 @@ public class WetTurtle extends Actor{
 			turtle7 = new Image("file:media/images/turtle/wetturtle3left.png", SIZE_X, SIZE_Y, false, true);
 			turtle8 = new Image("file:media/images/turtle/wetturtle4left.png", SIZE_X, SIZE_Y, false, true);
 		}
-		turtle9 = new Image("file:media/images/turtle/turtlesunk.png", SIZE_X, SIZE_Y, false, true);
 		setX(xpos);
 		setY(ypos);
 		speed = s;
@@ -87,22 +86,19 @@ public class WetTurtle extends Actor{
 			} else if (frame%20 == 20) {
 				setImage(turtle1);
 			}
-		} else if (frame == wait || frame == wait * 2 + 8) {
+		} else if (frame == wait || frame == wait * 2 + 4) {
 			setImage(turtle5);
 			sunk = false;
-		} else if (frame == wait + 4 || frame == wait * 2 + 4) {
+		} else if (frame == wait + 4 || frame == wait * 2) {
 			setImage(turtle6);
 			sunk = false;
-		} else if (frame == wait + 8 || frame == wait * 2) {
+		} else if (frame == wait + 8 || frame == wait * 2 - 4) {
 			setImage(turtle7);
 			sunk = false;
-		} else if (frame == wait + 12 || frame == wait * 2 - 4) {
+		} else if (frame == wait + 12) {
 			setImage(turtle8);
-			sunk = false;
-		} else if (frame == wait + 16) {
-			setImage(turtle9);
 			sunk = true;
-		} else if (frame == wait * 2 + 12) {
+		} else if (frame == wait * 2 + 8) {
 			setImage(turtle1);
 			sunk = false;
 			frame = 0;
