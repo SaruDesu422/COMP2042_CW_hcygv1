@@ -29,6 +29,15 @@ public class Log extends Actor {
 		setY(ypos);
 		speed = s;
 	}
+	
+	/**
+	* This method returns true of log is moving to the left.
+    *
+    * @return     returns boolean comparison of speed < 0
+	*/
+	public double getSpeed() {
+		return speed;
+	}
 
 	/**
 	* This method sets 
@@ -45,14 +54,7 @@ public class Log extends Actor {
 			setX(LIMIT_RIGHT + rng * 10);
 		if (animal.getMoveDown())
 			move(0, STEP);
-	}
-	
-	/**
-	* This method returns true of log is moving to the left.
-    *
-    * @return     returns boolean comparison of speed < 0
-	*/
-	public boolean getLeft() {
-		return speed < 0;
+		if (animal.getMoveBG())
+			move(0, -STEP * animal.getDownMovement());
 	}
 }

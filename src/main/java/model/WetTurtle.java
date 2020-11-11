@@ -62,6 +62,10 @@ public class WetTurtle extends Actor{
 		speed = s;
 		setImage(turtle1);
 	}
+	
+	public double getSpeed() {
+		return speed;
+	}
 
 	/**
 	* This method sets the position of wet turtle when is out of frame
@@ -113,6 +117,8 @@ public class WetTurtle extends Actor{
 			setX(LIMIT_RIGHT + rng * 10);
 		if (animal.getMoveDown())
 			move(0, STEP);
+		if (animal.getMoveBG())
+			move(0, -STEP * animal.getDownMovement());
 	}
 
 	/**

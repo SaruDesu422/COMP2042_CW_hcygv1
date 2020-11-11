@@ -39,6 +39,8 @@ public class End extends Actor{
 	public void act(long now) {
 		if (animal.getMoveDown())
 			move(0, STEP);
+		if (animal.getMoveBG())
+			move(0, -STEP * animal.getDownMovement());
 	}
 	
 	/**

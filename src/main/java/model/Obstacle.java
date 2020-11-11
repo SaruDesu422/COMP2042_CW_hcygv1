@@ -48,6 +48,10 @@ public class Obstacle extends Actor {
 		speed = s;
 	}
 
+	public double getSpeed() {
+		return speed;
+	}
+
 	/**
 	* This method sets the position of obstacle when is out of frame
 	* and randomizes distance between each obstacle.
@@ -65,5 +69,7 @@ public class Obstacle extends Actor {
 			setX(LIMIT_RIGHT + rng * 10);
 		if (animal.getMoveDown())
 			move(0, STEP);
+		if (animal.getMoveBG())
+			move(0, -STEP * animal.getDownMovement());
 	}
 }

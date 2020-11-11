@@ -49,6 +49,10 @@ public class Turtle extends Actor{
 		setImage(turtle1);
 	}
 	
+	public double getSpeed() {
+		return speed;
+	}
+	
 	/**
 	* This method sets the position of turtle when is out of frame
 	* and starts the animation for the turtle.
@@ -80,5 +84,7 @@ public class Turtle extends Actor{
 			setX(LIMIT_RIGHT + rng * 10);
 		if (animal.getMoveDown())
 			move(0, STEP);
+		if (animal.getMoveBG())
+			move(0, -STEP * animal.getDownMovement());
 	}
 }

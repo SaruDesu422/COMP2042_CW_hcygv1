@@ -47,7 +47,7 @@ public class Game {
     int rest;
 
     public Game(MainMenu mainMenu) {
-        this.level = 0;
+        this.level = 1;
         this.mainMenu = mainMenu;
         this.scoreBoard = new ScoreBoard(mainMenu, this);
         this.controller = new GameController(this);
@@ -151,16 +151,16 @@ public class Game {
                 animal
             ));
         }
-        for (int index = 0; index < obstacleInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
-            stage.add(new Obstacle(
-                obstacleInfo.get(index).get(1), 
-                Integer.parseInt(obstacleInfo.get(index).get(2)), 
-                y, 
-                Double.parseDouble(obstacleInfo.get(index).get(4)),
-                animal
-            ));
-        }
+        // for (int index = 0; index < obstacleInfo.size(); index++) {
+        //     int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
+        //     stage.add(new Obstacle(
+        //         obstacleInfo.get(index).get(1), 
+        //         Integer.parseInt(obstacleInfo.get(index).get(2)), 
+        //         y, 
+        //         Double.parseDouble(obstacleInfo.get(index).get(4)),
+        //         animal
+        //     ));
+        // }
         
 		Circle circle = new Circle();
         circle.setRadius(15);
@@ -229,7 +229,7 @@ public class Game {
     }
 
     public int getEnd() {
-        return endBG.getEnd();
+        return endInfo;
     }
 
     public MyStage getStage() {
