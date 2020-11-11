@@ -1,47 +1,51 @@
 package model;
 
 import view.Game;
+import controller.AnimalController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 public class Animal extends Actor {
 
-	private final int CHANGE_SCORE = 50;
-	private final int START_X = 300;
-	private final double START_Y = 701;
-	private final int IMAGE_SIZE = 35;
-	private final int MAX_Y = 800;
-	private final int MOVEMENT_Y = 25;
-	private final int MOVEMENT_X = 22;
+	public final int CHANGE_SCORE = 50;
+	public final int START_X = 300;
+	public final double START_Y = 701;
+	public final int IMAGE_SIZE = 35;
+	public final int MAX_Y = 800;
+	public final int MOVEMENT_Y = 25;
+	public final int MOVEMENT_X = 22;
+	public final String IMG_FROGUP = "frogUp";
+	public final String IMG_FROGRIGHT = "frogRight";
+	public final String IMG_FROGDOWN = "frogDown";
+	public final String IMG_FROGLEFT = "frogLeft";
+	public final String IMG_FROGUPJUMP = "frogUpJump";
+	public final String IMG_FROGRIGHTJUMP = "frogRightJump";
+	public final String IMG_FROGDOWNJUMP = "frogDownJump";
+	public final String IMG_FROGLEFTJUMP = "frogLeftJump";
+	
 
-	Game game;
+	private AnimalController controller;
 
-	private boolean noMove = false;
-	private boolean carDeath = false;
-	private boolean waterDeath = false;
-	private boolean changeScore = false;
-	private boolean moveDown = false;
-	private boolean moveBG = false;
-	private boolean secondFrame = false;
-	private boolean moving = false;
-	int points = 0;
-	int end = 0;
-	int carD = 0;
-	int waterD = 0;
-	int upMovement = 1;
-	int downMovement = 0;
-	int frame = 0;
-	int frogFrame = 0;
-	int endInfo = 0;
-	double y = MAX_Y;
-	ArrayList<End> intersecting = new ArrayList<End>();
-	List<Integer> water = new ArrayList<Integer>();
+	private boolean move;
+	private boolean carDeath;
+	private boolean waterDeath;
+	private boolean changeScore;
+	private boolean moveDown;
+	private boolean moveBG;
+	private boolean secondFrame;
+	private boolean frameMove;
+	private int points;
+	private int end;
+	private int deathFrame;
+	private int upMovement;
+	private int downMovement;
+	private int frame;
+	private int endInfo;
+	private double highest_y;
+	private List<Integer> water;
 
 	/**
 	* This method initializes the image of the player and
@@ -51,78 +55,34 @@ public class Animal extends Actor {
 	*/
 	public Animal(Game game) {
 		// set image and starting position
-		this.game = game;
+		water = new ArrayList<Integer>();
+
+		this.move = true;
+		this.carDeath = false;
+		this.waterDeath = false;
+		this.changeScore = false;
+		this.moveDown = false;
+		this.moveBG = false;
+		this.secondFrame = false;
+		this.frameMove = false;
+		this.points = 0;
+		this.end = 0;
+		this.deathFrame = 0;
+		this.upMovement = 1;
+		this.downMovement = 0;
+		this.frame = 0;
+		this.endInfo = 0;
+		this.highest_y = MAX_Y;
+
 		this.water = game.getWater();
 		this.endInfo = game.getEnd();
 		setX(START_X);
 		setY(START_Y);
-		// Image imgW1 = new Image("file:media/images/frog/hitbox.png", IMAGE_SIZE, 0, true, true);
-		// Image imgA1 = new Image("file:media/images/frog/hitbox.png", 0, IMAGE_SIZE, true, true);
-		// Image imgS1 = new Image("file:media/images/frog/hitbox.png", IMAGE_SIZE, 0, true, true);
-		// Image imgD1 = new Image("file:media/images/frog/hitbox.png", 0, IMAGE_SIZE, true, true);
-		// Image imgW2 = new Image("file:media/images/frog/hitbox.png", IMAGE_SIZE, 0, true, true);
-		// Image imgA2 = new Image("file:media/images/frog/hitbox.png", 0, IMAGE_SIZE, true, true);
-		// Image imgS2 = new Image("file:media/images/frog/hitbox.png", IMAGE_SIZE, 0, true, true);
-		// Image imgD2 = new Image("file:media/images/frog/hitbox.png", 0, IMAGE_SIZE, true, true);
-		Image imgW1 = new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, 0, true, true);
-		Image imgA1 = new Image("file:media/images/frog/frogLeft.png", 0, IMAGE_SIZE, true, true);
-		Image imgS1 = new Image("file:media/images/frog/frogDown.png", IMAGE_SIZE, 0, true, true);
-		Image imgD1 = new Image("file:media/images/frog/frogRight.png", 0, IMAGE_SIZE, true, true);
-		Image imgW2 = new Image("file:media/images/frog/frogUpJump.png", IMAGE_SIZE, 0, true, true);
-		Image imgA2 = new Image("file:media/images/frog/frogLeftJump.png", 0, IMAGE_SIZE, true, true);
-		Image imgS2 = new Image("file:media/images/frog/frogDownJump.png", IMAGE_SIZE, 0, true, true);
-		Image imgD2 = new Image("file:media/images/frog/frogRightJump.png", 0, IMAGE_SIZE, true, true);
-		setImage(imgW1);
+		setImage(getImage(IMG_FROGUP));
 
-		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (!noMove) {
-					moving = true;
-					changeScore = false;
-					if (event.getCode() == KeyCode.W) {
-						move(0, -MOVEMENT_Y);
-						upMovement++;
-						setImage(imgW2);
-					} else if (event.getCode() == KeyCode.A) {
-						move(-MOVEMENT_X, 0);
-						setImage(imgA2);
-					} else if (event.getCode() == KeyCode.S) {
-						move(0, MOVEMENT_Y);
-						upMovement--;
-						setImage(imgS2);
-					} else if (event.getCode() == KeyCode.D) {
-						move(MOVEMENT_X, 0);
-						setImage(imgD2);
-					}
-				}
-			}
-		});
-
-		setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (moving) {
-					if (event.getCode() == KeyCode.W) {
-						if (getY() < y) {
-							changeScore = true;
-							y = getY();
-							points += 10;
-						}
-							move(0, -MOVEMENT_Y);
-						setImage(imgW1);
-					} else if (event.getCode() == KeyCode.A) {
-						move(-MOVEMENT_X, 0);
-						setImage(imgA1);
-					} else if (event.getCode() == KeyCode.S) {
-						move(0, MOVEMENT_Y);
-						setImage(imgS1);
-					} else if (event.getCode() == KeyCode.D) {
-						move(MOVEMENT_X, 0);
-						setImage(imgD1);
-					}
-					moving = false;
-				}
-			}
-		});
+		controller = new AnimalController(this);
+		setOnKeyPressed(controller::OnKeyPressed);
+		setOnKeyReleased(controller::OnKeyReleased);
 	}
 
 	/**
@@ -139,90 +99,56 @@ public class Animal extends Actor {
 
 		if (moveDown) {
 			move(0, MOVEMENT_Y * 2);
-			y += MOVEMENT_Y * 2;
+			highest_y += MOVEMENT_Y * 2;
 			moveDown = false;
 			downMovement++;
 			endInfo--;
 		}
 
-		if (upMovement == 6) {
-			if (endInfo > 12) {
-				moveDown = true;
-			}
-		}
+		if (upMovement == 6 && endInfo > 12) moveDown = true;
 
-		if (carDeath) {
+		if (carDeath || waterDeath) {
 			frame++;
-			noMove = true;
-			if (frame % 12 == 0) {
-				carD++;
-			}
-			if (frame == 47)
-				moveBG = true;
-			if (carD == 4) {
-				moveBG = false;
-				endInfo += downMovement;
-				setX(START_X);
-				setY(START_Y);
-				upMovement = 1;
-				downMovement = 0;
-				carDeath = false;
-				carD = 0;
-				setImage(new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
-				noMove = false;
-				if (points > CHANGE_SCORE) {
-					points -= CHANGE_SCORE;
-					changeScore = true;
-				}
-				frame = 0;
-			} else {
-				setImage(new Image("file:media/images/death/carDeath" + carD + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true));
-			}
+			move = false;
 		}
-
-		if (waterDeath) {
-			frame++;
-			noMove = true;
-			if (frame % 9 == 0) {
-				waterD++;
+		if ((waterDeath && frame % 9 == 0) || (carDeath && frame % 12 == 0))
+			deathFrame++;
+		if ((waterDeath && frame == 44) || (carDeath && frame == 47))
+			moveBG = true;
+		if ((waterDeath && deathFrame == 5) || (carDeath && deathFrame == 4)) {
+			setStart();
+			deathFrame = 0;
+			setImage(getImage(IMG_FROGUP));
+			move = true;
+			if (points > CHANGE_SCORE) {
+				points -= CHANGE_SCORE;
+				changeScore = true;
 			}
-			if (frame == 44)
-				moveBG = true;
-			if (waterD == 5) {
-				moveBG = false;
-				endInfo += downMovement;
-				setX(START_X);
-				setY(START_Y);
-				upMovement = 1;
-				downMovement = 0;
-				waterDeath = false;
-				waterD = 0;
-				setImage(new Image("file:media/images/frog/frogUp.png", IMAGE_SIZE, IMAGE_SIZE, true, true));
-				noMove = false;
-				if (points > CHANGE_SCORE) {
-					points -= CHANGE_SCORE;
-					changeScore = true;
-				}
-				frame = 0;
-			} else {
-				setImage(new Image("file:media/images/death/waterDeath" + waterD + ".png", IMAGE_SIZE,IMAGE_SIZE , true, true));
-			}
-		}
+			if (waterDeath) waterDeath = false;
+			else if (carDeath) carDeath = false;
+			frame = 0;
+		} else if (carDeath) setImage(getImage("carDeath"));
+		else if (waterDeath) setImage(getImage("waterDeath"));
 		checkIntersect();
+	}
+
+	@Override
+	public Image getImage(String address) {
+		if (address.matches(IMG_FROGUP + "||" + IMG_FROGDOWN + "||" + IMG_FROGUPJUMP + "||" + IMG_FROGDOWNJUMP))
+			return new Image("file:media/images/frog/" + address + ".png", IMAGE_SIZE, 0, true, true);
+		else if (address.contains("Death"))
+			return new Image("file:media/images/death/" + address + deathFrame + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true);
+		else return new Image("file:media/images/frog/" + address + ".png", 0, IMAGE_SIZE, true, true);
 	}
 
 	private void checkIntersect() {
 		if (getIntersectingObjects(End.class).size() >= 1 || secondFrame) {
 			secondFrame = !secondFrame;
-			noMove = true;
+			move = false;
 			if (secondFrame == false) {
-				moveBG = false;
-				setX(START_X);
-				setY(START_Y);
+				setStart();
 				move(0, MOVEMENT_Y);
-				upMovement = 1;
-				downMovement = 0;
-				noMove = false;
+				move = true;
 			} else {
 				if (getIntersectingObjects(End.class).get(0).isActivated()) {
 					end--;
@@ -230,27 +156,21 @@ public class Animal extends Actor {
 				}
 				getIntersectingObjects(End.class).get(0).setEnd();
 				end++;
-				endInfo += downMovement;
 				points += CHANGE_SCORE;
 				changeScore = true;
-				y = MAX_Y;
+				highest_y = MAX_Y;
 				moveBG = true;
 			}
-		} else if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			carDeath = true;
-		} else if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
+		} else if (getIntersectingObjects(Obstacle.class).size() >= 1) carDeath = true;
+		else if (getIntersectingObjects(Log.class).size() >= 1 && move) {
 			move(getIntersectingObjects(Log.class).get(0).getSpeed() / 2, 0);
-		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
+		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && move) {
 			move(getIntersectingObjects(Turtle.class).get(0).getSpeed() / 2, 0);
 		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-				waterDeath = true;
-			} else {
-				move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed() / 2, 0);
-			}
+			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) waterDeath = true;
+			else move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed() / 2, 0);
 		} else if (upMovement - 1 >= 0) {
-			if (water.get(upMovement - 1) == 1)
-				waterDeath = true;
+			if (water.get(upMovement - 1) == 1) waterDeath = true;
 		}
 	}
 
@@ -261,55 +181,91 @@ public class Animal extends Actor {
 			upMovement++;
 			System.out.println(upMovement);
 		}
-		if (getX() < 0) {
-			move(MOVEMENT_X * 2, 0);
-		}
-		if (getX() > 600) {
-			move(-MOVEMENT_X * 2, 0);
-		}
+		if (getX() < 0) move(MOVEMENT_X * 2, 0);
+		if (getX() > 600) move(-MOVEMENT_X * 2, 0);
+	}
+	
+	private void setStart() {
+		moveBG = false;
+		endInfo += downMovement;
+		setX(START_X);
+		setY(START_Y);
+		upMovement = 1;
+		downMovement = 0;
+		deathFrame = 0;
 	}
 
-	public boolean getMoveBG() {
-		return moveBG;
-	}
-
-	public int getDownMovement() {
-		return downMovement;
-	}
-
-	public boolean getMoveDown() {
-		return moveDown;
-	}
-
-	/**
-	* This method returns true if all ends are activated.
-	*
-	* @return      Returns true if all ends are activated
-	*/
-	public boolean getStop() {
-		return end == 5;
-	}
-
-	/**
-	* This method returns points.
-	*
-	* @return      Returns points
-	*/
-	public int getPoints() {
-		return points;
-	}
-
-	/**
-	* This method only resets score when the score can be changed.
-	* This method returns true if score is reset and false otherwise.
-	*
-	* @return      Returns true if score is reset
-	*/
 	public boolean resetScore() {
-		if (changeScore) {
-			changeScore = false;
+		if (this.changeScore) {
+			this.changeScore = false;
 			return true;
 		}
 		return false;
+	}
+	
+	/** Accessors & Mutators **/
+
+	public boolean isChangeScore() {
+		return this.changeScore;
+	}
+
+	public void setChangeScore(boolean changeScore) {
+		this.changeScore = changeScore;
+	}
+
+	public boolean isFrameMove() {
+		return this.frameMove;
+	}
+
+	public void setFrameMove(boolean frameMove) {
+		this.frameMove = frameMove;
+	}
+
+	public boolean isMove() {
+		return this.move;
+	}
+
+	public void setMove(boolean move) {
+		this.move = move;
+	}
+	
+	public boolean isMoveBG() {
+		return this.moveBG;
+	}
+
+	public boolean isMoveDown() {
+		return this.moveDown;
+	}
+
+	public boolean isStop() {
+		return this.end == 5;
+	}
+
+	public int getPoints() {
+		return this.points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public int getUpMovement() {
+		return this.upMovement;
+	}
+
+	public void setUpMovement(int upMovement) {
+		this.upMovement = upMovement;
+	}
+
+	public double getHighestY() {
+		return this.highest_y;
+	}
+
+	public void setHighestY(double highscore_y) {
+		this.highest_y = highscore_y;
+	}
+
+	public int getDownMovement() {
+		return this.downMovement;
 	}
 }

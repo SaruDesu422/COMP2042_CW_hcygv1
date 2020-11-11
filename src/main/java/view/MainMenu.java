@@ -71,7 +71,7 @@ public class MainMenu extends BorderPane{
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
 		/* configure position of buttons and background */
-		add(new BackgroundImage("file:media/images/background/menuBackground.png"));
+		add(new BackgroundImage("menuBackground"));
 		
 		setCenter(btn_start);
 		setTop(btn_info);

@@ -13,13 +13,9 @@ public class Turtle extends Actor{
 	
 	private double speed;
 	private int frame = 0;
-	Animal animal;
+	private Animal animal;
 
 	boolean bool = true;
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
-	Image turtle4;
 
 	/**
 	* This method initializes the image and starting position of turtles.
@@ -32,21 +28,17 @@ public class Turtle extends Actor{
 	*/
 	public Turtle(int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
-		if (s > 0) {
-			turtle1 = new Image("file:media/images/turtle/turtle1.png", SIZE_X, SIZE_Y, false, true);
-			turtle2 = new Image("file:media/images/turtle/turtle2.png", SIZE_X, SIZE_Y, false, true);
-			turtle3 = new Image("file:media/images/turtle/turtle3.png", SIZE_X, SIZE_Y, false, true);
-			turtle4 = new Image("file:media/images/turtle/turtle4.png", SIZE_X, SIZE_Y, false, true);
-		} else {
-			turtle1 = new Image("file:media/images/turtle/turtle1left.png", SIZE_X, SIZE_Y, false, true);
-			turtle2 = new Image("file:media/images/turtle/turtle2left.png", SIZE_X, SIZE_Y, false, true);
-			turtle3 = new Image("file:media/images/turtle/turtle3left.png", SIZE_X, SIZE_Y, false, true);
-			turtle4 = new Image("file:media/images/turtle/turtle4left.png", SIZE_X, SIZE_Y, false, true);
-		}
+		this.speed = s;
 		setX(xpos);
 		setY(ypos);
-		speed = s;
-		setImage(turtle1);
+		setImage(getImage("turtle1"));
+	}
+
+	@Override
+	public Image getImage(String address) {
+		if (speed > 0)
+			return new Image("file:media/images/turtle/" + address + ".png", SIZE_X, SIZE_Y, false, true);
+		return new Image("file:media/images/turtle/" + address + "left.png", SIZE_X, SIZE_Y, false, true);
 	}
 	
 	public double getSpeed() {
@@ -65,13 +57,13 @@ public class Turtle extends Actor{
 	@Override
 	public void act(long now) {
 		if (frame == 0 || frame == 16) {
-			setImage(turtle2);
+			setImage(getImage("turtle2"));
 		} else if (frame == 4 || frame == 12) {
-			setImage(turtle3);
+			setImage(getImage("turtle3"));
 		} else if (frame == 8) {
-			setImage(turtle4);
+			setImage(getImage("turtle4"));
 		} else if (frame == 20) {
-			setImage(turtle1);
+			setImage(getImage("turtle1"));
 			frame = 0;
 		}
 		frame++;
@@ -82,9 +74,9 @@ public class Turtle extends Actor{
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
-		if (animal.getMoveDown())
+		if (animal.isMoveDown())
 			move(0, STEP);
-		if (animal.getMoveBG())
+		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
 	}
 }

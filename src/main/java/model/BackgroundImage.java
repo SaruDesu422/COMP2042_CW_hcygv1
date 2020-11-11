@@ -7,7 +7,9 @@ public class BackgroundImage extends Actor{
 	private final int MAX_X = 600;
 	private final int STEP = 50;
 
-	Animal animal;
+	private Animal animal;
+	private final String IMG_ENDBACKGROUND = "endBackground";
+	private final String IMG_STARTBACKGROUND = "startBackground";
 
 	/**
 	* This method sets background image.
@@ -19,29 +21,26 @@ public class BackgroundImage extends Actor{
 		this.animal = animal;
 		setY(y);
 		setX(0);
-		if (imageLink.equals("file:media/images/background/endBackground.png") || imageLink.equals("file:media/images/background/startBackground.png")) {
-			setImage(new Image(imageLink, MAX_X, 0, true, true));
-		} else {
-			setImage(new Image(imageLink, MAX_X, STEP, false, true));
-		}
+		setImage(getImage(imageLink));
 	}
 
-	/**
-	* This method sets stationary background image.
-	*
-	* @param  imageLink  link of image
-	* @see               Image of background
-	*/
+	@Override
+	public Image getImage(String address) {
+		if (address.matches(IMG_ENDBACKGROUND + "||" + IMG_STARTBACKGROUND))
+			return new Image("file:media/images/background/" + address + ".png", MAX_X, 0, true, true);
+		else return new Image("file:media/images/background/" + address + ".png", MAX_X, STEP, false, true);
+	}
+
 	public BackgroundImage(String imageLink) {
-		setImage(new Image(imageLink, MAX_X, 0, true, true));
+		setImage(new Image("file:media/images/background/" + imageLink + ".png", MAX_X, 0, true, true));
 	}
 
 	@Override
 	public void act(long now) {
 		if (animal == null) return;
-		if (animal.getMoveDown())
+		if (animal.isMoveDown())
 			move(0, STEP);
-		if (animal.getMoveBG())
+		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
 	}
 }

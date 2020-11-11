@@ -37,7 +37,7 @@ public class GameController {
     public void handleButtonMenuMouseIn(MouseEvent event) {
         ImageView menuMouseIn = new ImageView(new Image("file:media/images/info.png"));
         menuMouseIn.setFitHeight(30);
-		menuMouseIn.setFitWidth(30);
+		menuMouseIn.setFitWidth(25);
         game.getMenuButton().setGraphic(menuMouseIn);
     }
 

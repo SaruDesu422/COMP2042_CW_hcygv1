@@ -40,14 +40,14 @@ public class Info extends BorderPane{
 		/* configure info button background */
 		ImageView exitBG = new ImageView(new Image("file:media/images/info.png"));
 		exitBG.setFitHeight(30);
-		exitBG.setFitWidth(30);
+		exitBG.setFitWidth(25);
 
 		btn_exit = new Button();
 		btn_exit.setGraphic(exitBG);
 		btn_exit.setShape(circle);
 		btn_exit.setPrefSize(30, 30);
 
-		add(new BackgroundImage("file:media/images/background/infoBackground.png"));
+		add(new BackgroundImage("infoBackground"));
 
 		setTop(btn_exit);
 		setAlignment(btn_exit, Pos.TOP_RIGHT);

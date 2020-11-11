@@ -2,6 +2,7 @@ package model;
 import view.*;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
@@ -71,4 +72,6 @@ public abstract class Actor extends ImageView{
     * @param  now  current frame
 	*/
     public abstract void act(long now);
+    
+    public abstract Image getImage(String address);
 }

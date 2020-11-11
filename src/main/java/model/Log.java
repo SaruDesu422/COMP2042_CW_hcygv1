@@ -11,7 +11,7 @@ public class Log extends Actor {
 	private final int STEP = 50;
 
 	private double speed;
-	Animal animal;
+	private Animal animal;
 	/**
 	* This method configures .
     *
@@ -24,17 +24,17 @@ public class Log extends Actor {
 	*/
 	public Log(String imageLink, int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
-		setImage(new Image("file:media/images/logs/" + imageLink + ".png", 0, SIZE_Y, true, true));
+		setImage(getImage(imageLink));
 		setX(xpos);
 		setY(ypos);
 		speed = s;
 	}
 	
-	/**
-	* This method returns true of log is moving to the left.
-    *
-    * @return     returns boolean comparison of speed < 0
-	*/
+	@Override
+	public Image getImage(String address) {
+		return new Image("file:media/images/logs/" + address + ".png", 0, SIZE_Y, true, true);
+	}
+
 	public double getSpeed() {
 		return speed;
 	}
@@ -52,9 +52,9 @@ public class Log extends Actor {
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
-		if (animal.getMoveDown())
+		if (animal.isMoveDown())
 			move(0, STEP);
-		if (animal.getMoveBG())
+		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
 	}
 }

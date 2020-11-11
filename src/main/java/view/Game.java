@@ -121,7 +121,7 @@ public class Game {
         animal = new Animal(this);
 
         generateBackground();
-        stage.add(new BackgroundImage("file:media/images/background/header.png"));
+        stage.add(new BackgroundImage("header"));
 
         for (int index = 0; index < logInfo.size(); index++) {
             int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(3));
@@ -151,16 +151,16 @@ public class Game {
                 animal
             ));
         }
-        // for (int index = 0; index < obstacleInfo.size(); index++) {
-        //     int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
-        //     stage.add(new Obstacle(
-        //         obstacleInfo.get(index).get(1), 
-        //         Integer.parseInt(obstacleInfo.get(index).get(2)), 
-        //         y, 
-        //         Double.parseDouble(obstacleInfo.get(index).get(4)),
-        //         animal
-        //     ));
-        // }
+        for (int index = 0; index < obstacleInfo.size(); index++) {
+            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
+            stage.add(new Obstacle(
+                obstacleInfo.get(index).get(1), 
+                Integer.parseInt(obstacleInfo.get(index).get(2)), 
+                y, 
+                Double.parseDouble(obstacleInfo.get(index).get(4)),
+                animal
+            ));
+        }
         
 		Circle circle = new Circle();
         circle.setRadius(15);
@@ -191,15 +191,15 @@ public class Game {
     public void generateBackground() {
         for (int index = 0; index < backgroundInfo.size(); index++) {
             if(backgroundInfo.get(index).get(0).equals(WATER)) {
-                stage.add(new BackgroundImage("file:media/images/background/waterBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
+                stage.add(new BackgroundImage("waterBackground", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
             } else if (backgroundInfo.get(index).get(0).equals(LAND)) {
-                stage.add(new BackgroundImage("file:media/images/background/landBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
+                stage.add(new BackgroundImage("landBackground", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
             } else if (backgroundInfo.get(index).get(0).equals(REST)) {
-                stage.add(new BackgroundImage("file:media/images/background/restBackground.png", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
+                stage.add(new BackgroundImage("restBackground", 695 - backgroundInfo.get(index).get(1) * STEP, animal));
             }
         }
-        stage.add(new BackgroundImage("file:media/images/background/startBackground.png", 695, animal));
-        endBG = new BackgroundImage("file:media/images/background/endBackground.png", 683 - (endInfo * STEP), animal);
+        stage.add(new BackgroundImage("startBackground", 695, animal));
+        endBG = new BackgroundImage("endBackground", 683 - (endInfo * STEP), animal);
         stage.add(endBG);
         stage.add(new End(13, 685 - (endInfo * STEP), animal));
         stage.add(new End(141, 685 - (endInfo * STEP), animal));
@@ -266,7 +266,7 @@ public class Game {
             		setNumber(animal.getPoints());
                 }
                 // if all ends are activated
-            	if (animal.getStop()) {
+            	if (animal.isStop()) {
             		stage.stopMusic();
                     stop();
                     scoreBoard.show(level, animal.getPoints());

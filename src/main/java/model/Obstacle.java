@@ -12,7 +12,7 @@ public class Obstacle extends Actor {
 	private final int STEP = 50;
 
 	private double speed;
-	Animal animal;
+	private Animal animal;
 
 	/**
 	* This method configures initial image and position of obstacles.
@@ -28,24 +28,20 @@ public class Obstacle extends Actor {
 	*/
 	public Obstacle(String image, int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
-		if (s > 0) {
-			if (image.equals("car")) {
-				int rng = (int)(Math.random() * 3 + 1);
-				setImage(new Image("file:media/images/obstacles/" + image + rng + ".png", 0, SIZE_Y, true, true));
-			} else {
-				setImage(new Image("file:media/images/obstacles/" + image + ".png", 0, SIZE_Y, true, true));
-			}
-		} else {
-			if (image.equals("car")) {
-				int rng = (int)(Math.random() * 3 + 1);
-				setImage(new Image("file:media/images/obstacles/" + image + rng + "left.png", 0, SIZE_Y, true, true));
-			} else {
-				setImage(new Image("file:media/images/obstacles/" + image + "left.png", 0, SIZE_Y, true, true));
-			}
-		}
+		this.speed = s;
+		setImage(getImage(image));
 		setX(xpos);
 		setY(ypos);
-		speed = s;
+	}
+
+	@Override
+	public Image getImage(String address) {
+		String random = "";
+		if (address.equals("car"))
+			random = Integer.toString((int)Math.random() * 3 + 1);
+		if (speed > 0) 
+			return new Image("file:media/images/obstacles/" + address + random + ".png", 0, SIZE_Y, true, true);
+		else return new Image("file:media/images/obstacles/" + address + random + "left.png", 0, SIZE_Y, true, true);
 	}
 
 	public double getSpeed() {
@@ -67,9 +63,9 @@ public class Obstacle extends Actor {
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
-		if (animal.getMoveDown())
+		if (animal.isMoveDown())
 			move(0, STEP);
-		if (animal.getMoveBG())
+		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
 	}
 }

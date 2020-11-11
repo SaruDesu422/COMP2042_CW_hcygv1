@@ -74,7 +74,7 @@ public class ScoreBoard extends BorderPane{
         btn_menu.setShape(menuShape);
         btn_menu.setPrefSize(200, 100);
         
-		add(new BackgroundImage("file:media/images/background/scoreboardBackground.png"));
+		add(new BackgroundImage("scoreboardBackground"));
 
         setNumbers();
         this.controller = new ScoreBoardController(this, game);
