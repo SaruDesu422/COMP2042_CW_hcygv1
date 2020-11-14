@@ -25,7 +25,6 @@ public class Animal extends Actor {
 	public final String IMG_FROGRIGHTJUMP = "frogRightJump";
 	public final String IMG_FROGDOWNJUMP = "frogDownJump";
 	public final String IMG_FROGLEFTJUMP = "frogLeftJump";
-	
 
 	private AnimalController controller;
 

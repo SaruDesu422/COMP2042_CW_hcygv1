@@ -25,6 +25,7 @@ public class Game {
     private AnimationTimer timer;
     private Animal animal;
     private GameController controller;
+    private HighScore highscore;
 
     private MyStage stage;
     private int level;
@@ -51,6 +52,7 @@ public class Game {
         this.mainMenu = mainMenu;
         this.scoreBoard = new ScoreBoard(mainMenu, this);
         this.controller = new GameController(this);
+        this.highscore = new HighScore();
     }
 
     public void initializeLevelInfo() {
@@ -61,47 +63,49 @@ public class Game {
         backgroundInfo = new ArrayList<List<Integer>>();
 
         // read file level.csv
-        try (BufferedReader br = new BufferedReader(new FileReader("level_info/level" + level + ".csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("data/level" + level + ".csv"))) {
             String line;
+            List<Integer> list;
+            String[] values;
             while ((line = br.readLine()) != null) {
                 if (line.charAt(0) == '1') {
-                    String[] values = line.split(COMMA_DELIMITER);
+                    values = line.split(COMMA_DELIMITER);
                     obstacleInfo.add(Arrays.asList(values));
-                    List<Integer> list = new ArrayList<Integer>();
+                    list = new ArrayList<Integer>();
                     list.add(LAND);
                     list.add(Integer.valueOf(obstacleInfo.get(obstacleInfo.size() - 1).get(3)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '2') {
-                    String[] values = line.split(COMMA_DELIMITER);
+                    values = line.split(COMMA_DELIMITER);
                     turtleInfo.add(Arrays.asList(values));
-                    List<Integer> list = new ArrayList<Integer>();
+                    list = new ArrayList<Integer>();
                     list.add(WATER);
                     list.add(Integer.valueOf(turtleInfo.get(turtleInfo.size() - 1).get(2)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '3') {
-                    String[] values = line.split(COMMA_DELIMITER);
+                    values = line.split(COMMA_DELIMITER);
                     wetTurtleInfo.add(Arrays.asList(values));
-                    List<Integer> list = new ArrayList<Integer>();
+                    list = new ArrayList<Integer>();
                     list.add(WATER);
                     list.add(Integer.valueOf(wetTurtleInfo.get(wetTurtleInfo.size() - 1).get(2)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '4') {
-                    String[] values = line.split(COMMA_DELIMITER);
+                    values = line.split(COMMA_DELIMITER);
                     logInfo.add(Arrays.asList(values));
-                    List<Integer> list = new ArrayList<Integer>();
+                    list = new ArrayList<Integer>();
                     list.add(WATER);
                     list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(3)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '5') {
-                    String[] values = line.split(COMMA_DELIMITER);
-                    List<Integer> list = new ArrayList<Integer>();
+                    values = line.split(COMMA_DELIMITER);
+                    list = new ArrayList<Integer>();
                     list.add(REST);
                     list.add(Integer.valueOf(values[1]));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '6') {
-                    String[] values = line.split(COMMA_DELIMITER);
+                    values = line.split(COMMA_DELIMITER);
                     endInfo = Integer.parseInt(values[1]);
-                    List<Integer> list = new ArrayList<Integer>();
+                    list = new ArrayList<Integer>();
                     list.add(END);
                     list.add(Integer.valueOf(values[1]));
                     backgroundInfo.add(list);
