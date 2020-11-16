@@ -25,7 +25,6 @@ public class Game {
     private AnimationTimer timer;
     private Animal animal;
     private GameController controller;
-    private HighScore highscore;
 
     private MyStage stage;
     private int level;
@@ -48,11 +47,10 @@ public class Game {
     int rest;
 
     public Game(MainMenu mainMenu) {
-        this.level = 1;
+        this.level = 0;
         this.mainMenu = mainMenu;
         this.scoreBoard = new ScoreBoard(mainMenu, this);
         this.controller = new GameController(this);
-        this.highscore = new HighScore();
     }
 
     public void initializeLevelInfo() {

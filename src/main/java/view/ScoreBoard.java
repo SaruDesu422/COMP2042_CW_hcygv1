@@ -14,19 +14,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Scene;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 public class ScoreBoard extends BorderPane{
 
-    private MainMenu mainMenu;
+	private MainMenu mainMenu;
     private Game game;
     private ScoreBoardController controller;
 
     private Scene scene;
     
+    private final String COMMA_DELIMITER = ",";
     private Button btn_continue;
     private Button btn_menu;
-    int level;
-    int points;
-   
+    
+    
 
     public ScoreBoard(MainMenu mainMenu, Game game) {
         this.mainMenu = mainMenu;
@@ -36,8 +42,7 @@ public class ScoreBoard extends BorderPane{
 
     public void show(int level, int points) {
         this.setPrefSize(600, 800);
-        this.level = level;
-        this.points = points;
+        int highscore = Integer.valueOf(updateScoreSheet(level, points)[level - 1]);
         if (level < 38) {
             // configure continue button shape
             Rectangle continueShape = new Rectangle();
@@ -76,7 +81,9 @@ public class ScoreBoard extends BorderPane{
         
 		add(new BackgroundImage("scoreboardBackground"));
 
-        setNumbers();
+        setNumbers(highscore, highscore, 150);
+        setNumbers(points, points, 200);
+        setNumbers(level, level, 250);
         this.controller = new ScoreBoardController(this, game);
         if (level < 38) {
             setLeft(btn_continue);
@@ -98,41 +105,58 @@ public class ScoreBoard extends BorderPane{
         btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
     }
 
-    private void setNumbers() {
+    private void setNumbers(int temp, int val, int y) {
         int shift = 0;
-        int startPoints = 70;
-        int startLevel = 70;
-        int tempPoints = points;
-        int tempLevel = level;
-    	while (points > 0) {
+        int start = 200;
+        while (val > 0) {
             int k = 1;
-            while (tempPoints > 0) {
-                int d = tempPoints / 10;
-                k = tempPoints - d * 10;
-                tempPoints = d;
-                startPoints += 30;
+            while (temp > 0) {
+                int d = temp / 10;
+                k = temp - d * 10;
+                temp = d;
+                start += 30;
             }
-            int d = points / 10;
-            k = points - d * 10;
-            points = d;
-            add(new Digit(k, startPoints - shift, 200));
+            int d = val / 10;
+            k = val - d * 10;
+            val = d;
+            add(new Digit(k, start - shift, y));
             shift += 30;
         }
-        shift = 0;
-    	while (level > 0) {
-            int k = 1;
-            while (tempLevel > 0) {
-                int d = tempLevel / 10;
-                k = tempLevel - d * 10;
-                tempLevel = d;
-                startLevel += 30;
+    }
+
+    private String[] updateScoreSheet(int level, int points) {
+        String[] highscoreInfo = null;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("data/highscore.csv"));
+            String line;
+
+            if ((line = br.readLine()) != null) {
+                highscoreInfo = line.split(COMMA_DELIMITER);
+                if (Integer.valueOf(highscoreInfo[level - 1]) < points)
+                    highscoreInfo[level - 1] = Integer.toString(points);
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
+                PrintWriter pw = new PrintWriter(bw);
+                for (int i = 0; i < highscoreInfo.length; i++) {
+                    pw.print(highscoreInfo[i] + COMMA_DELIMITER);
+                }
+                bw.close();
+                pw.close();
+            } else {
+                BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
+                PrintWriter pw = new PrintWriter(bw);
+                for (int i = 0; i < 38; i++) {
+                    pw.print("0" + COMMA_DELIMITER);
+                }
+                bw.close();
+                pw.close();
             }
-            int d = level / 10;
-            k = level - d * 10;
-            level = d;
-            add(new Digit(k, startLevel - shift, 250));
-            shift += 30;
-    	}
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return highscoreInfo;
     }
 
 	public void add(Actor actor) {
