@@ -71,28 +71,28 @@ public class Game {
                     obstacleInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(LAND);
-                    list.add(Integer.valueOf(obstacleInfo.get(obstacleInfo.size() - 1).get(3)));
+                    list.add(Integer.valueOf(obstacleInfo.get(obstacleInfo.size() - 1).get(1)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '2') {
                     values = line.split(COMMA_DELIMITER);
                     turtleInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(WATER);
-                    list.add(Integer.valueOf(turtleInfo.get(turtleInfo.size() - 1).get(2)));
+                    list.add(Integer.valueOf(turtleInfo.get(turtleInfo.size() - 1).get(1)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '3') {
                     values = line.split(COMMA_DELIMITER);
                     wetTurtleInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(WATER);
-                    list.add(Integer.valueOf(wetTurtleInfo.get(wetTurtleInfo.size() - 1).get(2)));
+                    list.add(Integer.valueOf(wetTurtleInfo.get(wetTurtleInfo.size() - 1).get(1)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '4') {
                     values = line.split(COMMA_DELIMITER);
                     logInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(WATER);
-                    list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(3)));
+                    list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(1)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == '5') {
                     values = line.split(COMMA_DELIMITER);
@@ -125,41 +125,41 @@ public class Game {
         generateBackground();
         stage.add(new BackgroundImage("header"));
 
+        for (int index = 0; index < obstacleInfo.size(); index++) {
+            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(1));
+            stage.add(new Obstacle(
+                obstacleInfo.get(index).get(4), 
+                Integer.parseInt(obstacleInfo.get(index).get(2)), 
+                y, 
+                Double.parseDouble(obstacleInfo.get(index).get(3)),
+                animal
+            ));
+        }
         for (int index = 0; index < logInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(3));
+            int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(1));
             stage.add(new Log(
-                logInfo.get(index).get(1),
+                logInfo.get(index).get(4),
                 Integer.parseInt(logInfo.get(index).get(2)), 
                 y, 
-                Double.parseDouble(logInfo.get(index).get(4)),
+                Double.parseDouble(logInfo.get(index).get(3)),
                 animal
             ));
         }
         for (int index = 0; index < turtleInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(turtleInfo.get(index).get(2));
+            int y = 695 - STEP * Integer.parseInt(turtleInfo.get(index).get(1));
             stage.add(new Turtle(
-                Integer.parseInt(turtleInfo.get(index).get(1)), 
+                Integer.parseInt(turtleInfo.get(index).get(2)), 
                 y, 
                 Double.parseDouble(turtleInfo.get(index).get(3)),
                 animal
             ));
         }
         for (int index = 0; index < wetTurtleInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(wetTurtleInfo.get(index).get(2));
+            int y = 695 - STEP * Integer.parseInt(wetTurtleInfo.get(index).get(1));
             stage.add(new WetTurtle(
-                Integer.parseInt(wetTurtleInfo.get(index).get(1)), 
+                Integer.parseInt(wetTurtleInfo.get(index).get(2)), 
                 y, 
                 Double.parseDouble(wetTurtleInfo.get(index).get(3)),
-                animal
-            ));
-        }
-        for (int index = 0; index < obstacleInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(3));
-            stage.add(new Obstacle(
-                obstacleInfo.get(index).get(1), 
-                Integer.parseInt(obstacleInfo.get(index).get(2)), 
-                y, 
-                Double.parseDouble(obstacleInfo.get(index).get(4)),
                 animal
             ));
         }
@@ -167,7 +167,7 @@ public class Game {
 		Circle circle = new Circle();
         circle.setRadius(15);
         
-		ImageView homeBG = new ImageView(new Image("file:media/images/buttons/info.png"));
+		ImageView homeBG = new ImageView(new Image("file:media/images/buttons/home.png"));
 		homeBG.setFitHeight(30);
         homeBG.setFitWidth(25);
         
@@ -176,7 +176,7 @@ public class Game {
 		btn_menu.setShape(circle);
         btn_menu.setPrefSize(30, 30);
         btn_menu.setLayoutX(25);
-        btn_menu.setLayoutY(700);
+        btn_menu.setLayoutY(710);
 
 		btn_menu.setOnAction(controller::handleButtonMenu);
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);

@@ -38,7 +38,7 @@ public class Info extends BorderPane{
 		circle.setRadius(15);
 		circle.setStrokeWidth(5);
 		/* configure info button background */
-		ImageView exitBG = new ImageView(new Image("file:media/images/info.png"));
+		ImageView exitBG = new ImageView(new Image("file:media/images/buttons/back.png"));
 		exitBG.setFitHeight(30);
 		exitBG.setFitWidth(25);
 

@@ -35,7 +35,7 @@ public class InfoController {
     * @see     image of info button
 	*/
     public void handleButtonExitMouseIn(MouseEvent event) {
-        ImageView exitMouseIn = new ImageView(new Image("file:media/images/info.png"));
+        ImageView exitMouseIn = new ImageView(new Image("file:media/images/buttons/backMouseIn.png"));
         exitMouseIn.setFitHeight(30);
 		exitMouseIn.setFitWidth(25);
         info.getExitButton().setGraphic(exitMouseIn);
@@ -48,7 +48,7 @@ public class InfoController {
     * @see     image of info button
 	*/
     public void handleButtonExitMouseOut(MouseEvent event) {
-        ImageView exitMouseOut = new ImageView(new Image("file:media/images/info.png"));
+        ImageView exitMouseOut = new ImageView(new Image("file:media/images/buttons/back.png"));
         exitMouseOut.setFitHeight(30);
 		exitMouseOut.setFitWidth(25);
         info.getExitButton().setGraphic(exitMouseOut);

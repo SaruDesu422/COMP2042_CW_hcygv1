@@ -48,7 +48,7 @@ public class ScoreBoardController {
     * @see     image of continue button
 	*/
     public void handleButtonContinueMouseIn(MouseEvent event) {
-        ImageView continueMouseIn = new ImageView(new Image("file:media/images/info.png"));
+        ImageView continueMouseIn = new ImageView(new Image("file:media/images/buttons/continueMouseIn.png"));
         continueMouseIn.setFitHeight(100);
 		continueMouseIn.setPreserveRatio(true);
         scoreBoard.getContinueButton().setGraphic(continueMouseIn);
@@ -61,7 +61,7 @@ public class ScoreBoardController {
     * @see     image of continue button
 	*/
     public void handleButtonContinueMouseOut(MouseEvent event) {
-        ImageView continueMouseOut = new ImageView(new Image("file:media/images/info.png"));
+        ImageView continueMouseOut = new ImageView(new Image("file:media/images/buttons/continue.png"));
         continueMouseOut.setFitHeight(100);
 		continueMouseOut.setPreserveRatio(true);
         scoreBoard.getContinueButton().setGraphic(continueMouseOut);
@@ -74,9 +74,9 @@ public class ScoreBoardController {
     * @see     image of main menu button
 	*/
     public void handleButtonMenuMouseIn(MouseEvent event) {
-        ImageView menuMouseIn = new ImageView(new Image("file:media/images/info.png"));
-        menuMouseIn.setFitHeight(30);
-		menuMouseIn.setFitWidth(30);
+        ImageView menuMouseIn = new ImageView(new Image("file:media/images/buttons/mainmenuMouseIn.png"));
+        menuMouseIn.setFitHeight(100);
+		menuMouseIn.setPreserveRatio(true);
         scoreBoard.getMenuButton().setGraphic(menuMouseIn);
     }
 
@@ -87,9 +87,9 @@ public class ScoreBoardController {
     * @see     image of main menu button
 	*/
     public void handleButtonMenuMouseOut(MouseEvent event) {
-        ImageView menuMouseOut = new ImageView(new Image("file:media/images/info.png"));
-        menuMouseOut.setFitHeight(30);
-		menuMouseOut.setFitWidth(30);
+        ImageView menuMouseOut = new ImageView(new Image("file:media/images/buttons/mainmenu.png"));
+        menuMouseOut.setFitHeight(100);
+		menuMouseOut.setPreserveRatio(true);
         scoreBoard.getMenuButton().setGraphic(menuMouseOut);
     }
 }

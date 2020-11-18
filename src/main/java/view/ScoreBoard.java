@@ -28,6 +28,7 @@ public class ScoreBoard extends BorderPane{
 
     private Scene scene;
     
+    private final int MAXLEVEL = 10;
     private final String COMMA_DELIMITER = ",";
     private Button btn_continue;
     private Button btn_menu;
@@ -43,16 +44,15 @@ public class ScoreBoard extends BorderPane{
     public void show(int level, int points) {
         this.setPrefSize(600, 800);
         int highscore = Integer.valueOf(updateScoreSheet(level, points)[level - 1]);
-        if (level < 38) {
-            // configure continue button shape
+        if (level < MAXLEVEL) {
             Rectangle continueShape = new Rectangle();
             continueShape.setArcHeight(50);
             continueShape.setArcWidth(50);
             continueShape.setHeight(100);
             continueShape.setWidth(200);
             continueShape.setStrokeWidth(10);
-            // configure continue button background
-            ImageView continueBG = new ImageView(new Image("file:media/images/pngegg.png"));
+            
+            ImageView continueBG = new ImageView(new Image("file:media/images/buttons/continue.png"));
             continueBG.setFitHeight(100);
             continueBG.setPreserveRatio(true);
 
@@ -62,15 +62,14 @@ public class ScoreBoard extends BorderPane{
             btn_continue.setPrefSize(200, 100);
         }
         
-        // configure menu button shape
         Rectangle menuShape = new Rectangle();
         menuShape.setArcHeight(50);
 		menuShape.setArcWidth(50);
 		menuShape.setHeight(100);
 		menuShape.setWidth(200);
-		menuShape.setStrokeWidth(10);
-        // configure menu button background
-        ImageView menuBG = new ImageView(new Image("file:media/images/pngegg.png"));
+        menuShape.setStrokeWidth(10);
+        
+        ImageView menuBG = new ImageView(new Image("file:media/images/buttons/mainmenu.png"));
         menuBG.setFitHeight(100);
         menuBG.setPreserveRatio(true);
 
@@ -81,15 +80,15 @@ public class ScoreBoard extends BorderPane{
         
 		add(new BackgroundImage("scoreboardBackground"));
 
-        setNumbers(highscore, highscore, 150);
-        setNumbers(points, points, 200);
-        setNumbers(level, level, 250);
+        setNumbers(highscore, highscore, 168);
+        setNumbers(points, points, 227);
+        setNumbers(level, level, 286);
         this.controller = new ScoreBoardController(this, game);
-        if (level < 38) {
+        if (level < MAXLEVEL) {
             setLeft(btn_continue);
             setRight(btn_menu);
-            setMargin(btn_continue, new Insets(500, 0, 0, 50));
-            setMargin(btn_menu, new Insets(500, 50, 0, 0));
+            setMargin(btn_continue, new Insets(550, 0, 0, 25));
+            setMargin(btn_menu, new Insets(550, 25, 0, 0));
 
             btn_continue.setOnAction(controller::handleButtonContinue);
             btn_continue.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonContinueMouseIn);
@@ -98,7 +97,7 @@ public class ScoreBoard extends BorderPane{
             setLeft(null);
             setRight(null);
             setCenter(btn_menu);
-            setMargin(btn_menu, new Insets(300, 0, 0, 0));
+            setMargin(btn_menu, new Insets(450, 0, 0, 0));
         }
         btn_menu.setOnAction(controller::handleButtonMenu);
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
@@ -107,7 +106,7 @@ public class ScoreBoard extends BorderPane{
 
     private void setNumbers(int temp, int val, int y) {
         int shift = 0;
-        int start = 200;
+        int start = 265;
         while (val > 0) {
             int k = 1;
             while (temp > 0) {
@@ -145,7 +144,7 @@ public class ScoreBoard extends BorderPane{
             } else {
                 BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
                 PrintWriter pw = new PrintWriter(bw);
-                for (int i = 0; i < 38; i++) {
+                for (int i = 0; i < MAXLEVEL; i++) {
                     pw.print("0" + COMMA_DELIMITER);
                 }
                 bw.close();

@@ -35,7 +35,7 @@ public class GameController {
     * @see     image of main menu button
 	*/
     public void handleButtonMenuMouseIn(MouseEvent event) {
-        ImageView menuMouseIn = new ImageView(new Image("file:media/images/info.png"));
+        ImageView menuMouseIn = new ImageView(new Image("file:media/images/buttons/homeMouseIn.png"));
         menuMouseIn.setFitHeight(30);
 		menuMouseIn.setFitWidth(25);
         game.getMenuButton().setGraphic(menuMouseIn);
@@ -48,9 +48,9 @@ public class GameController {
     * @see     image of main menu button
 	*/
     public void handleButtonMenuMouseOut(MouseEvent event) {
-        ImageView menuMouseOut = new ImageView(new Image("file:media/images/info.png"));
+        ImageView menuMouseOut = new ImageView(new Image("file:media/images/buttons/home.png"));
         menuMouseOut.setFitHeight(30);
-		menuMouseOut.setFitWidth(30);
+		menuMouseOut.setFitWidth(25);
         game.getMenuButton().setGraphic(menuMouseOut);
     }
 }
