@@ -18,13 +18,16 @@ public class WetTurtle extends Actor{
 	private boolean sunk = false;
 
 	/**
-	* This method initializes the image and starting position of wet turtles.
+	* Sets a wet turtle as an actor, allows movements.
+	* <pre>
+	* Methods:<br>act(long now)<br>getImage(String address)
+	* </pre>
     *
-	* @param  xpos  x coordinate
-	* @param  ypos  y coordinate
-	* @param  s     speed
-	* @see          image of wet turtle
-	* @see          position of wet turtle
+	* @param  	x
+	* @param  	y
+	* @param  	speed
+	* @param	animal
+	* @see		Animal
 	*/
 	public WetTurtle(int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
@@ -41,33 +44,30 @@ public class WetTurtle extends Actor{
 		return new Image("file:media/images/turtle/" + address + "left.png", SIZE_X, SIZE_Y, false, true);
 	}
 	
-	public double getSpeed() {
-		return speed;
-	}
-
 	/**
-	* This method sets the position of wet turtle when is out of frame
-	* and starts the animation for the wet turtle.
-	* This method also randomizes the distance between each wet turtles.
+	* Every frame, this method:<p>
+	* - Sets image as part of animation<p>
+	* - Checks out of bounds<p>
+	* - Checks for vertical movements
     *
     * @param  now  current frame
-	* @see         position of wet turtle
-	* @see         animation of wet turtle
 	*/
 	@Override
 	public void act(long now) {
+		move(speed, 0);
+
+		/** Animation */
 		int wait = 150;
 		if (frame < wait) {
 			sunk = false;
-			if (frame%20 == 0 || frame%20 == 16) {
+			if (frame%20 == 0 || frame%20 == 16)
 				setImage(getImage("turtle2"));
-			} else if (frame%20 == 4 || frame%20 == 12) {
+			else if (frame%20 == 4 || frame%20 == 12)
 				setImage(getImage("turtle3"));
-			} else if (frame%20 == 8) {
+			else if (frame%20 == 8)
 				setImage(getImage("turtle4"));
-			} else if (frame%20 == 20) {
+			else if (frame%20 == 20)
 				setImage(getImage("turtle1"));
-			}
 		} else if (frame == wait || frame == wait * 2 + 4) {
 			setImage(getImage("wetturtle1"));
 			sunk = false;
@@ -86,13 +86,15 @@ public class WetTurtle extends Actor{
 			frame = 0;
 		}
 		frame++;
-		/* wet turtle out of frame */
+
+		/** Checks out of bounds */
 		double rng = (int)Math.random() * 3;
-		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+		
+		/** Checks for vertical movements and move accordingly */
 		if (animal.isMoveDown())
 			move(0, STEP);
 		if (animal.isMoveBG())
@@ -100,11 +102,20 @@ public class WetTurtle extends Actor{
 	}
 
 	/**
-	* This method returns the value of sunk.
+	* Accessor: boolean sunk
     *
-	* @return      returns value of sunk
+	* @return	sunk
 	*/
 	public boolean isSunk() {
 		return sunk;
+	}
+	
+	/**
+	* Accessor: double speed
+    *
+	* @return	speed
+	*/
+	public double getSpeed() {
+		return speed;
 	}
 }

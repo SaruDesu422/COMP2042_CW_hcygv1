@@ -15,21 +15,22 @@ public class Obstacle extends Actor {
 	private Animal animal;
 
 	/**
-	* This method configures initial image and position of obstacles.
+	* Sets an obstacle as an actor, allows movements.
+	* <pre>
+	* Methods:<br>act(long now)<br>getImage(String address)
+	* </pre>
     *
-	* @param  imageLink  link of image
-	* @param  xpos	     x coordinate
-	* @param  ypos       y coordinate
-	* @param  s          speed
-	* @param  w          width
-	* @param  h          height
-	* @see               image of obstacle
-	* @see               position of obstacle
+    * @param  	imageLink
+	* @param  	xpos
+	* @param  	ypos
+	* @param  	s
+	* @param	animal
+	* @see		Animal
 	*/
-	public Obstacle(String image, int xpos, int ypos, double s, Animal animal) {
+	public Obstacle(String imageLink, int xpos, int ypos, double s, Animal animal) {
 		this.animal = animal;
 		this.speed = s;
-		setImage(getImage(image));
+		setImage(getImage(imageLink));
 		setX(xpos);
 		setY(ypos);
 	}
@@ -44,25 +45,25 @@ public class Obstacle extends Actor {
 		else return new Image("file:media/images/obstacles/" + address + random + "left.png", 0, SIZE_Y, true, true);
 	}
 
-	public double getSpeed() {
-		return speed;
-	}
-
 	/**
-	* This method sets the position of obstacle when is out of frame
-	* and randomizes distance between each obstacle.
+	* Every frame, this method:<p>
+	* - Checks out of bounds<p>
+	* - Checks for vertical movements
     *
-	* @param  now  current frame
-	* @see         position of obstacle
+	* @param  now current frame
 	*/
 	@Override
 	public void act(long now) {
-		int rng = (int)(Math.random() * 3);
 		move(speed, 0);
+
+		/** Checks out of bounds */
+		int rng = (int)(Math.random() * 3);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+		
+		/** Checks for vertical movements and move accordingly */
 		if (animal.isMoveDown())
 			move(0, STEP);
 		if (animal.isMoveBG())

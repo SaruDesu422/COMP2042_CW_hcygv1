@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.Scene;
 
 public class MainMenu extends BorderPane{
 
@@ -20,67 +21,73 @@ public class MainMenu extends BorderPane{
 	private Button btn_info;
 	private App app;
 
+	protected Scene scene;
+
 	private MainController controller;
 
-	/**
-	* This method calls the initialize method and main controller
-	* for actions on the buttons.
+    /**
+    * Sets up the pane for the main menu pane to be shown on.
+    * <pre>
+    * Methods:<br>initialize()
+    * </pre>
     *
-    * @param  app  application
-	*/
+	* @param    app
+	* @see		App
+    */
     public MainMenu(App app) {
 		this.app = app;
+		this.scene = new Scene(this, 600, 800);
 		initialize();
 	}
 
 	/**
-	* This method initializes the positions of the buttons
-	* and the background of the main menu pane.
+	* Adds the buttons and backgrounds to the pane.
     *
-    * @see     Main menu pane
 	*/
 	public void initialize() {
 		this.setPrefSize(600, 800);
-		/* configure start button shape */
+		add(new BackgroundImage("menuBackground"));
+
+		/* Create a start button */
+		btn_start = new Button();
+
+		ImageView startBG = new ImageView(new Image("file:media/images/buttons/start.png"));
+		startBG.setFitHeight(100);
+		startBG.setPreserveRatio(true);
+		btn_start.setGraphic(startBG);
+
 		Rectangle start = new Rectangle();
 		start.setArcHeight(50);
 		start.setArcWidth(50);
 		start.setHeight(100);
 		start.setWidth(200);
 		start.setStrokeWidth(10);
-		/* configure start button background */
-		ImageView startBG = new ImageView(new Image("file:media/images/buttons/start.png"));
-		startBG.setFitHeight(100);
-		startBG.setPreserveRatio(true);
-
-		btn_start = new Button();
-		btn_start.setGraphic(startBG);
 		btn_start.setShape(start);
 		btn_start.setPrefSize(200, 100);
 
-		/* configure info button shape */
-		Circle circle = new Circle();
-		circle.setRadius(15);
-		/* configure info button background */
+
+		/* Create an info button */
+		btn_info = new Button();
+
 		ImageView infoBG = new ImageView(new Image("file:media/images/buttons/info.png"));
 		infoBG.setFitHeight(30);
 		infoBG.setFitWidth(25);
-		
-		btn_info = new Button();
 		btn_info.setGraphic(infoBG);
+
+		Circle circle = new Circle();
+		circle.setRadius(15);
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
-		/* configure position of buttons and background */
-		add(new BackgroundImage("menuBackground"));
-		
+
+		/** Configure start and info button position */
 		setCenter(btn_start);
 		setTop(btn_info);
 		setAlignment(btn_info, Pos.TOP_RIGHT);
 		setMargin(btn_info, new Insets(25,25,25,25));
 		setMargin(btn_start, new Insets(300,0,0,0));
 
+		/** Start and info button controls */
 		controller = new MainController(this);
-		
 		btn_start.setOnAction(controller::handleButtonStart);
         btn_start.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonStartMouseIn);
         btn_start.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonStartMouseOut);
@@ -90,36 +97,37 @@ public class MainMenu extends BorderPane{
 	}
 	
 	/**
-	* This method adds actor to pane.
+	* Adds actor to current pane.
 	*
-    * @see     Actor
+	* @param	actor
+    * @see		Actor
 	*/
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
 
 	/**
-	* This method returns configurations of start button.
+	* Accessor: Button btn_start
 	*
-    * @return  Start button
+    * @return	btn_start
 	*/
     public Button getStartButton() {
 		return this.btn_start;
 	}
 
 	/**
-	* This method returns configurations of info button.
+	* Accessor: Button btn_info
 	*
-    * @return  Info button
+    * @return	btn_info
 	*/
 	public Button getInfoButton() {
 		return this.btn_info;
 	}
 
 	/**
-	* This method returns current application config.
+	* Accessor: App app
 	*
-    * @return  Application
+    * @return	app
 	*/
 	public App getApp() {
 		return this.app;

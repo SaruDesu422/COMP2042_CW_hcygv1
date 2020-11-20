@@ -9,8 +9,19 @@ public class MyStage extends World{
 
 	MediaPlayer mediaPlayer;
 	
+	/**
+	* A pane used for each levels.
+	* <pre>
+	* Method:<br>playMusic()<br>stopMusic()
+	* </pre>
+    *
+	*/
 	public MyStage() {}
 	
+	/**
+	* Plays the preselected audio file.
+    *
+	*/
 	public void playMusic() {
 		String musicFile = "media/audio/Frogger Main Song Theme (loop).mp3";
 		Media sound = new Media(new File(musicFile).toURI().toString());
@@ -19,6 +30,10 @@ public class MyStage extends World{
 	    mediaPlayer.play();
 	}
 	
+	/**
+	* Stops the currently playing audio file.
+    *
+	*/
 	public void stopMusic() {
 		mediaPlayer.stop();
 	}

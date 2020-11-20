@@ -13,12 +13,17 @@ public class End extends Actor{
 	private final String IMG_FROGEND = "frogEnd";
 	private final String IMG_END = "End";
 
+	
 	/**
-	* This method sets image of end.
-	*
-	* @param  x  x coordinate
-	* @param  y  y coordinate
-	* @see       image of end
+	* Sets an end as an actor, allows movement.
+	* <pre>
+	* Methods:<br>act(long now)<br>getImage(String address)
+	* </pre>
+    *
+	* @param  	x
+	* @param  	y
+	* @param	animal
+	* @see		Animal
 	*/
 	public End(int x, int y, Animal animal) {
 		this.animal = animal;
@@ -28,22 +33,16 @@ public class End extends Actor{
 		setImage(getImage(IMG_END));
 	}
 
-	/**
-	* This method sets image of end when player reaches it
-	* and sets it to activated.
-	*
-	* @see       Image of end with frog
-	*/
-	public void setEnd() {
-		setImage(getImage(IMG_FROGEND));
-		activated = true;
-	}
-
 	@Override
 	public Image getImage(String address) {
 		return new Image("file:media/images/end/" + address + ".png", END_SIZE, END_SIZE, true, true);
 	}
 
+	/**
+	* Every frame, checks for vertical movements and move accordingly.
+    *
+    * @param  now current frame
+	*/
 	@Override
 	public void act(long now) {
 		if (animal.isMoveDown())
@@ -51,11 +50,20 @@ public class End extends Actor{
 		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
 	}
+
+	/**
+	* Set end to activated and change image.
+	*
+	*/
+	public void setEnd() {
+		setImage(getImage(IMG_FROGEND));
+		activated = true;
+	}
 	
 	/**
-	* This method returns the value of activated.
+	* Accessor: boolean activated
 	*
-	* @return    value of activated
+	* @return	activated
 	*/
 	public boolean isActivated() {
 		return activated;

@@ -13,10 +13,19 @@ public class MainController {
     private MainMenu mainMenu;
     private Info info;
 
-    /**
-    * This method controls the start and info buttons in the
-    * main menu pane.
-	*
+	/**
+	* Controls the actions for key events on main menu page.
+	* <pre>
+    * Methods:<br>handleButtonStart(ActionEvent event)
+    * handleButtonStartMouseIn(MouseEvent event)
+    * handleButtonStartMouseOut(MouseEvent event)
+    * <br>handleButtonInfo(ActionEvent event)
+    * handleButtonInfoMouseIn(MouseEvent event)
+    * handleButtonInfoMouseOut(MouseEvent event)
+	* </pre>
+    *
+    * @param    game
+    * @see      Game
 	*/
     public MainController(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
@@ -24,11 +33,10 @@ public class MainController {
     }
 
     /**
-    * When Start Button is clicked, start game by changing 
-    * page to first level.
-    *
-    * @see      ActionEvent
-	*/
+    * Starts level when the start button is clicked.
+    * 
+    * @param    event
+    */
     public void handleButtonStart(ActionEvent event) {
         Game game = new Game(mainMenu);
         game.startNextLevel();
@@ -36,20 +44,19 @@ public class MainController {
     }
     
     /**
-    * This method redirects current stage to info pane.
-    *
-    * @see     info scene is loaded
-	*/
+    * Change page to info page when the info button is clicked.
+    * 
+    * @param    event
+    */
     public void handleButtonInfo(ActionEvent event) {
         mainMenu.getApp().changePage(info);
     }
 
     /**
-    * This method sets the image of the start button when the cursor is 
-    * hovering over it.
-    *
-    * @see     image of start button
-	*/
+    * Configures image when the mouse is hovering on the start button.
+    * 
+    * @param    event
+    */
     public void handleButtonStartMouseIn(MouseEvent event) {
         ImageView startMouseIn = new ImageView(new Image("file:media/images/buttons/startMouseIn.png"));
 		startMouseIn.setFitHeight(100);
@@ -58,11 +65,10 @@ public class MainController {
     }
 
     /**
-    * This method sets the image of the start button when the cursor is not
-    * hovering over it anymore.
-    *
-    * @see     image of start button
-	*/
+    * Configures image when the mouse is moved away from the start button.
+    * 
+    * @param    event
+    */
     public void handleButtonStartMouseOut(MouseEvent event) {
         ImageView startMouseOut = new ImageView(new Image("file:media/images/buttons/start.png"));
 		startMouseOut.setFitHeight(100);
@@ -71,11 +77,10 @@ public class MainController {
     }
 
     /**
-    * This method sets the image of the info button when the cursor is 
-    * hovering over it.
-    *
-    * @see     image of info button
-	*/
+    * Configures image when the mouse is hovering on the info button.
+    * 
+    * @param    event
+    */
     public void handleButtonInfoMouseIn(MouseEvent event) {
         ImageView infoMouseIn = new ImageView(new Image("file:media/images/buttons/infoMouseIn.png"));
 		infoMouseIn.setFitHeight(30);
@@ -84,11 +89,10 @@ public class MainController {
     }
     
     /**
-    * This method sets the image of the info button when the cursor is not
-    * hovering over it anymore.
-    *
-    * @see     image of info button
-	*/
+    * Configures image when the mouse is moved away from the info button.
+    * 
+    * @param    event
+    */
     public void handleButtonInfoMouseOut(MouseEvent event) {
         ImageView infoMouseOut = new ImageView(new Image("file:media/images/buttons/info.png"));
         infoMouseOut.setFitHeight(30);

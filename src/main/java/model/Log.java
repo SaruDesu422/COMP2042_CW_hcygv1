@@ -12,22 +12,27 @@ public class Log extends Actor {
 
 	private double speed;
 	private Animal animal;
+
 	/**
-	* This method configures .
+	* Sets a log as an actor, allows movements.
+	* <pre>
+	* Methods:<br>act(long now)<br>getImage(String address)
+	* </pre>
     *
-    * @param  imageLink  link for image
-	* @param  size       size of log
-	* @param  xpos       x coordinate
-	* @param  ypos       y coordinate
-	* @param  s          speed
-	* @see               image of log
+    * @param  	imageLink
+	* @param  	size
+	* @param  	x
+	* @param  	y
+	* @param  	speed
+	* @param	animal
+	* @see		Animal
 	*/
-	public Log(String imageLink, int xpos, int ypos, double s, Animal animal) {
+	public Log(String imageLink, int x, int y, double speed, Animal animal) {
 		this.animal = animal;
+		this.speed = speed;
 		setImage(getImage(imageLink));
-		setX(xpos);
-		setY(ypos);
-		speed = s;
+		setX(x);
+		setY(y);
 	}
 	
 	@Override
@@ -35,26 +40,37 @@ public class Log extends Actor {
 		return new Image("file:media/images/logs/" + address + ".png", 0, SIZE_Y, true, true);
 	}
 
-	public double getSpeed() {
-		return speed;
-	}
-
 	/**
-	* This method sets 
+	* Every frame, this method:<p>
+	* - Checks out of bounds<p>
+	* - Checks for vertical movements
     *
     * @param  now  current frame
 	*/
 	@Override
 	public void act(long now) {
+		move(speed, 0);
+
+		/** Checks out of bounds */
 		double rng = (int)Math.random() * 3;
-		move(speed , 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+
+		/** Checks for vertical movements and move accordingly */
 		if (animal.isMoveDown())
 			move(0, STEP);
 		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
+	}
+
+	/**
+	* Accessor: double speed
+	* 
+	* @return	speed
+	*/
+	public double getSpeed() {
+		return speed;
 	}
 }

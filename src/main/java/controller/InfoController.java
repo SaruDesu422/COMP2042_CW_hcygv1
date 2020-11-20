@@ -10,30 +10,35 @@ public class InfoController {
     
     private Info info;
 
-    /**
-    * This method controls the start and info buttons in the
-    * main menu pane.
-	*
+	/**
+	* Controls the actions for key events on info page.
+	* <pre>
+    * Methods:<br>handleButtonExit(ActionEvent event)
+    * handleButtonExitMouseIn(MouseEvent event)
+    * handleButtonExitMouseOut(MouseEvent event)
+	* </pre>
+    *
+    * @param    info
+    * @see      Info
 	*/
     public InfoController(Info info) {
         this.info = info;
     }
 
     /**
-    * This method redirects current stage to info pane.
-    *
-    * @see     info scene is loaded
-	*/
+    * Change page to main menu page when the exit button is clicked.
+    * 
+    * @param    event
+    */
     public void handleButtonExit(ActionEvent event) {
         info.getApp().showMainMenu();
     }
 
     /**
-    * This method sets the image of the info button when the cursor is 
-    * hovering over it.
-    *
-    * @see     image of info button
-	*/
+    * Configures image when the mouse is hovering on the exit button.
+    * 
+    * @param    event
+    */
     public void handleButtonExitMouseIn(MouseEvent event) {
         ImageView exitMouseIn = new ImageView(new Image("file:media/images/buttons/backMouseIn.png"));
         exitMouseIn.setFitHeight(30);
@@ -42,11 +47,10 @@ public class InfoController {
     }
     
     /**
-    * This method sets the image of the info button when the cursor is not
-    * hovering over it anymore.
-    *
-    * @see     image of info button
-	*/
+    * Configures image when the mouse is moved away from the exit button.
+    * 
+    * @param    event
+    */
     public void handleButtonExitMouseOut(MouseEvent event) {
         ImageView exitMouseOut = new ImageView(new Image("file:media/images/buttons/back.png"));
         exitMouseOut.setFitHeight(30);

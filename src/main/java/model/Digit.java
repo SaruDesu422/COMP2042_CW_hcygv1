@@ -5,8 +5,18 @@ import javafx.scene.image.Image;
 public class Digit extends Actor{
 	private final int DIM = 30;
 	
-	public Digit(int n, int x, int y) {
-		setImage(getImage(Integer.toString(n)));
+	/**
+	* Sets a digit as an actor.
+	* <pre>
+	* Methods:<br>getImage(String address)
+	* </pre>
+    *
+	* @param  	number
+	* @param  	x
+	* @param  	y
+	*/
+	public Digit(int number, int x, int y) {
+		setImage(getImage(Integer.toString(number)));
 		setX(x);
 		setY(y);
 	}

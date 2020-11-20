@@ -20,11 +20,12 @@ public abstract class World extends Pane {
     ScoreBoard scoreBoard;
     App app;
     
-    /**
-    * This method sets the image of the start button when the cursor is not
-    * hovering over it anymore.
+	/**
+	* Configures events for objects in each panes.
+	* <pre>
+	* Method:<br>playMusic()<br>stopMusic()
+	* </pre>
     *
-    * @see     image of start button
 	*/
     public World() {
     	sceneProperty().addListener(new ChangeListener<Scene>() {
@@ -38,9 +39,8 @@ public abstract class World extends Pane {
 								getOnKeyReleased().handle(event);
 							List<Actor> myActors = getObjects(Actor.class);
 							for (Actor anActor: myActors) {
-								if (anActor.getOnKeyReleased() != null) {
+								if (anActor.getOnKeyReleased() != null)
 									anActor.getOnKeyReleased().handle(event);
-								}
 							}
 						}
 					});
@@ -51,9 +51,8 @@ public abstract class World extends Pane {
 								getOnKeyPressed().handle(event);
 							List<Actor> myActors = getObjects(Actor.class);
 							for (Actor anActor: myActors) {
-								if (anActor.getOnKeyPressed() != null) {
+								if (anActor.getOnKeyPressed() != null)
 									anActor.getOnKeyPressed().handle(event);
-								}
 							}
 						}
 					});
@@ -62,14 +61,33 @@ public abstract class World extends Pane {
 		});
     }
 
+	/**
+	* Adds actor to current pane.
+	*
+	* @param	actor
+    * @see		Actor
+	*/
     public void add(Actor actor) {
         getChildren().add(actor);
     }
 
+	/**
+	* Removes actor from current pane.
+	*
+	* @param	actor
+    * @see		Actor
+	*/
     public void remove(Actor actor) {
         getChildren().remove(actor);
     }
 
+	/**
+	* Puts objects into an array.
+	*
+    * @param    <A> Actor
+    * @param    cls object array
+    * @return   someArray
+	*/
     @SuppressWarnings("unchecked")
     public <A extends Actor> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();

@@ -10,6 +10,8 @@ public class App extends Application {
 	
 	AnimationTimer timer;
 	private Stage primaryStage;
+
+	private MainMenu mainMenu;
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -23,17 +25,33 @@ public class App extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 
+		mainMenu = new MainMenu(this);
 		showMainMenu();
 	}
 
+	/**
+	* Change Scene of primary stage to MainMenu.
+	*
+	*/
 	public void showMainMenu() {
-		primaryStage.setScene(new Scene(new MainMenu(this), 600, 800));
+		primaryStage.setScene(mainMenu.getScene());
 	}
 
+	/**
+	* Change Scene of primary stage to Scoreboard.
+	* 
+	* @param	scoreBoard
+	* @see		ScoreBoard
+	*/
 	public void showScoreBoard(ScoreBoard scoreBoard) {
 		primaryStage.setScene(scoreBoard.getScene());
 	}
 
+	/**
+	* Change Scene of primary stage to a specific pane.
+    *
+	* @param	pane
+	*/
 	public void changePage(Pane pane) {
 		primaryStage.setScene(new Scene(pane, 600, 800));
 	}

@@ -20,68 +20,77 @@ public class Info extends BorderPane{
 
 	private InfoController controller;
 
-	/**
-	* This method calls the initialize method and main controller
-	* for actions on the buttons.
+    /**
+    * Sets up the pane for the info pane to be shown on.
+    * <pre>
+    * Methods:<br>initialize()
+    * </pre>
     *
-    * @param  app  application
-	*/
+	* @param    app
+	* @see		App
+    */
     public Info(App app) {
         this.app = app;
         initialize();
-        controller = new InfoController(this);
 	}
 
+	/**
+	* Adds the buttons and backgrounds to the pane.
+    *
+	*/
 	public void initialize() {
 		this.setPrefSize(600, 800);
-		Circle circle = new Circle();
-		circle.setRadius(15);
-		circle.setStrokeWidth(5);
-		/* configure info button background */
+		add(new BackgroundImage("infoBackground"));
+
+		/** Creates the exit button */
+		btn_exit = new Button();
+		
 		ImageView exitBG = new ImageView(new Image("file:media/images/buttons/back.png"));
 		exitBG.setFitHeight(30);
 		exitBG.setFitWidth(25);
-
-		btn_exit = new Button();
 		btn_exit.setGraphic(exitBG);
+
+		Circle circle = new Circle();
+		circle.setRadius(15);
+		circle.setStrokeWidth(5);
 		btn_exit.setShape(circle);
 		btn_exit.setPrefSize(30, 30);
 
-		add(new BackgroundImage("infoBackground"));
-
+        /** Configure exit button position */
 		setTop(btn_exit);
 		setAlignment(btn_exit, Pos.TOP_RIGHT);
 		setMargin(btn_exit, new Insets(25,25,25,25));
 
+		/** Exit button controls */
 		controller = new InfoController(this);
-
 		btn_exit.setOnAction(controller::handleButtonExit);
         btn_exit.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonExitMouseIn);
         btn_exit.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonExitMouseOut);
 	}
 	
 	/**
-	* This method adds actor to pane.
+	* Adds actor to current pane.
 	*
-    * @see     Actor
+	* @param	actor
+    * @see		Actor
 	*/
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
 
 	/**
-	* This method returns configurations of info button.
+	* Accessor: Button btn_exit
 	*
-    * @return  Info button
+    * @return  btn_exit
 	*/
 	public Button getExitButton() {
 		return this.btn_exit;
 	}
 
 	/**
-	* This method returns current application config.
+	* Accessor: App app
 	*
-    * @return  Application
+    * @return  app
 	*/
 	public App getApp() {
 		return this.app;

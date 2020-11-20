@@ -18,19 +18,22 @@ public class Turtle extends Actor{
 	boolean bool = true;
 
 	/**
-	* This method initializes the image and starting position of turtles.
+	* Sets a turtle as an actor, allows movements.
+	* <pre>
+	* Methods:<br>act(long now)<br>getImage(String address)
+	* </pre>
     *
-	* @param  xpos  x coordinate
-	* @param  ypos  y coordinate
-	* @param  s     speed
-	* @see          image of turtle
-	* @see          position of turtle
+	* @param  	x
+	* @param  	y
+	* @param  	speed
+	* @param	animal
+	* @see		Animal
 	*/
-	public Turtle(int xpos, int ypos, double s, Animal animal) {
+	public Turtle(int x, int y, double speed, Animal animal) {
 		this.animal = animal;
-		this.speed = s;
-		setX(xpos);
-		setY(ypos);
+		this.speed = speed;
+		setX(x);
+		setY(y);
 		setImage(getImage("turtle1"));
 	}
 
@@ -41,42 +44,51 @@ public class Turtle extends Actor{
 		return new Image("file:media/images/turtle/" + address + "left.png", SIZE_X, SIZE_Y, false, true);
 	}
 	
-	public double getSpeed() {
-		return speed;
-	}
-	
 	/**
-	* This method sets the position of turtle when is out of frame
-	* and starts the animation for the turtle.
-	* This method also randomizes the distance between each turtles.
+	* Every frame, this method:<p>
+	* - Sets image as part of animation<p>
+	* - Checks out of bounds<p>
+	* - Checks for vertical movements
     *
     * @param  now  current frame
-	* @see         position of turtle
-	* @see         animation of turtle
 	*/
 	@Override
 	public void act(long now) {
-		if (frame == 0 || frame == 16) {
+		move(speed, 0);
+
+		/** Animation */
+		if (frame == 0 || frame == 16)
 			setImage(getImage("turtle2"));
-		} else if (frame == 4 || frame == 12) {
+		else if (frame == 4 || frame == 12)
 			setImage(getImage("turtle3"));
-		} else if (frame == 8) {
+		else if (frame == 8)
 			setImage(getImage("turtle4"));
-		} else if (frame == 20) {
+		else if (frame == 20) {
 			setImage(getImage("turtle1"));
 			frame = 0;
 		}
 		frame++;
-		/* turtle out of frame */
+
+		/** Checks out of bounds */
 		double rng = (int)Math.random() * 3;
-		move(speed, 0);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
+		
+		/** Checks for vertical movements and move accordingly */
 		if (animal.isMoveDown())
 			move(0, STEP);
 		if (animal.isMoveBG())
 			move(0, -STEP * animal.getDownMovement());
+	}
+	
+	/**
+	* Accessor: double speed
+	*
+	* @return	speed
+	*/
+	public double getSpeed() {
+		return speed;
 	}
 }

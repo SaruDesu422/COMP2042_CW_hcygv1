@@ -8,15 +8,28 @@ import javafx.scene.input.KeyEvent;
 public class AnimalController {
 
     private Animal animal;
-
+    
+	/**
+	* Controls the actions for key events.
+	* <pre>
+	* Methods:<br>OnKeyPressed(KeyEvent event)<br>OnKeyReleased(KeyEvent event)
+	* </pre>
+    *
+    * @param    animal
+    * @see      Animal
+	*/
     public AnimalController(Animal animal) {
         this.animal = animal;
     }
 
+    /**
+    * Configures actions when a key is pressed.
+    * 
+    * @param    event
+    */
     public void OnKeyPressed(KeyEvent event) {
         if (animal.isMove()) {
             animal.setFrameMove(true);
-            animal.setChangeScore(false);
             if (event.getCode() == KeyCode.W) {
                 animal.move(0, -animal.MOVEMENT_Y);
                 animal.setUpMovement(animal.getUpMovement() + 1);
@@ -35,11 +48,15 @@ public class AnimalController {
         }
     }
 
+    /**
+    * Configures actions when a key is released.
+    * 
+    * @param    event
+    */
     public void OnKeyReleased(KeyEvent event) {
         if (animal.isFrameMove()) {
             if (event.getCode() == KeyCode.W) {
                 if (animal.getY() < animal.getHighestY()) {
-                    animal.setChangeScore(true);
                     animal.setHighestY(animal.getY());
                     animal.setPoints(animal.getPoints() + 10);
                 }
