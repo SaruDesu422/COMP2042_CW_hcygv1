@@ -123,24 +123,22 @@ public class Animal extends Actor {
 				move(0, MOVEMENT_Y);
 				move = true;
 			} else {
-				if (getIntersectingObjects(End.class).get(0).isActivated()) {
-					endActivated--;
-					points -= CHANGE_SCORE;
+				if (!getIntersectingObjects(End.class).get(0).isActivated()) {
+					getIntersectingObjects(End.class).get(0).setEnd();
+					endActivated++;
+					points += CHANGE_SCORE;
 				}
-				getIntersectingObjects(End.class).get(0).setEnd();
-				endActivated++;
-				points += CHANGE_SCORE;
 				highest_y = MAX_Y;
 				moveBG = true;
 			}
 		} else if (getIntersectingObjects(Obstacle.class).size() >= 1) carDeath = true;
 		else if (getIntersectingObjects(Log.class).size() >= 1 && move) {
-			move(getIntersectingObjects(Log.class).get(0).getSpeed() / 2, 0);
+			move(getIntersectingObjects(Log.class).get(0).getSpeed(), 0);
 		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && move) {
-			move(getIntersectingObjects(Turtle.class).get(0).getSpeed() / 2, 0);
+			move(getIntersectingObjects(Turtle.class).get(0).getSpeed(), 0);
 		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) waterDeath = true;
-			else move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed() / 2, 0);
+			else move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed(), 0);
 		} else if (upMovement - 1 >= 0) {
 			if (water.get(upMovement - 1) == 1) waterDeath = true;
 		}

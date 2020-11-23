@@ -178,16 +178,16 @@ public class Game {
         stage.add(new End(528, 685 - (endInfo * STEP), animal));
 
         /** Adds obstacles */
-        for (int index = 0; index < obstacleInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(YPOS));
-            stage.add(new Obstacle(
-                obstacleInfo.get(index).get(IMG), 
-                Integer.valueOf(obstacleInfo.get(index).get(XPOS)), 
-                y, 
-                Double.parseDouble(obstacleInfo.get(index).get(SPEED)),
-                animal
-            ));
-        }
+        // for (int index = 0; index < obstacleInfo.size(); index++) {
+        //     int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(YPOS));
+        //     stage.add(new Obstacle(
+        //         obstacleInfo.get(index).get(IMG), 
+        //         Integer.valueOf(obstacleInfo.get(index).get(XPOS)), 
+        //         y, 
+        //         Double.parseDouble(obstacleInfo.get(index).get(SPEED)),
+        //         animal
+        //     ));
+        // }
         
         /** Adds turtles */
         for (int index = 0; index < turtleInfo.size(); index++) {
@@ -302,7 +302,6 @@ public class Game {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                animal.act(now);
                 List<Actor> actors = stage.getObjects(Actor.class);
                 for (Actor anActor: actors) anActor.act(now);
                 setNumber(animal.getPoints());
