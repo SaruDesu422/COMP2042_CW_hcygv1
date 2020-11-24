@@ -3,6 +3,7 @@ package model;
 import javafx.scene.image.Image;
 
 public class Digit extends Actor{
+	
 	private final int DIM = 30;
 	
 	/**

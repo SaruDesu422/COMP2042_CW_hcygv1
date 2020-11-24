@@ -5,6 +5,7 @@ import java.lang.Math;
 import javafx.scene.image.Image;
 
 public class WetTurtle extends Actor{
+	
 	private final int LIMIT_LEFT = -130;
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE_X = 130;

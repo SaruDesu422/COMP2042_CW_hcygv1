@@ -53,6 +53,7 @@ public class Animal extends Actor {
 	*
 	*/
 	public Animal(Game game) {
+		
 		water = new ArrayList<Integer>();
 
 		this.move = true;

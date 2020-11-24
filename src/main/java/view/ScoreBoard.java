@@ -28,7 +28,7 @@ public class ScoreBoard extends BorderPane{
 
     protected Scene scene;
     
-    private final int MAXLEVEL = 7;
+    private final int MAXLEVEL = 10;
     private final String COMMA_DELIMITER = ",";
     private Button btn_continue;
     private Button btn_menu;

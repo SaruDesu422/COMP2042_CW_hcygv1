@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 
 public class Obstacle extends Actor {
 
-	private final int LIMIT_LEFT = -200;
+	private final int LIMIT_LEFT = -250;
 	private final int LIMIT_RIGHT = 600;
 	private final int SIZE_Y = 50;
 	private final int STEP = 50;
