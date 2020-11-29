@@ -69,7 +69,7 @@ public class Game {
     * @see      MainMenu
     */
     public Game(MainMenu mainMenu) {
-        this.level = 7;
+        this.level = 0;
         this.mainMenu = mainMenu;
         this.scoreBoard = new ScoreBoard(mainMenu, this);
     }
