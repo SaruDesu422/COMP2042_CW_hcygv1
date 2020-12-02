@@ -17,6 +17,9 @@ public class Animal extends Actor {
 	public final int MAX_Y = 800;
 	public final int MOVEMENT_Y = 25;
 	public final int MOVEMENT_X = 22;
+    private final int LAND = 0;
+    private final int WATER = 1;
+    private final int END = 3;
 	public final Image IMG_FROGUP = getImage("frogUp");
 	public final Image IMG_FROGRIGHT = getImage("frogRight");
 	public final Image IMG_FROGDOWN = getImage("frogDown");
@@ -33,7 +36,7 @@ public class Animal extends Actor {
 	private boolean waterDeath;
 	private boolean moveDown;
 	private boolean moveBG;
-	private boolean secondFrame;
+	private boolean secondEndFrame;
 	private boolean frameMove;
 	private int points;
 	private int endActivated;
@@ -44,6 +47,8 @@ public class Animal extends Actor {
 	private int endInfo;
 	private double highest_y;
 	private List<Integer> water;
+	private List<List<Integer>> backgroundInfo;
+	int temp = 0;
 
 	/**
 	* Frog that can be controlled by the player to play the game.
@@ -61,7 +66,7 @@ public class Animal extends Actor {
 		this.waterDeath = false;
 		this.moveDown = false;
 		this.moveBG = false;
-		this.secondFrame = false;
+		this.secondEndFrame = false;
 		this.frameMove = false;
 		this.points = 0;
 		this.endActivated = 0;
@@ -74,6 +79,7 @@ public class Animal extends Actor {
 
 		this.water = game.getWater();
 		this.endInfo = game.getEnd();
+		this.backgroundInfo = game.getBackgroundInfo();
 		setX(START_X);
 		setY(START_Y);
 		setImage(IMG_FROGUP);
@@ -81,6 +87,15 @@ public class Animal extends Actor {
 		controller = new AnimalController(this);
 		setOnKeyPressed(controller::OnKeyPressed);
 		setOnKeyReleased(controller::OnKeyReleased);
+		for (List<Integer> list : backgroundInfo) {
+			for (Integer info : list) {
+				System.out.print(info + " | ");
+			}
+			System.out.println("");
+		}
+		// for (int i = 0; i < backgroundInfo.size(); i++) {
+		// 	System.out.println(backgroundInfo.get(i).get(0));
+		// }
 	}
 
 	/**
@@ -116,32 +131,44 @@ public class Animal extends Actor {
 			moveDown = true;
 		
 		/* Check Intersect Objects */
-		if (getIntersectingObjects(End.class).size() >= 1 || secondFrame) {
-			secondFrame = !secondFrame;
-			move = false;
-			if (secondFrame == false) {
-				setStart();
-				move(0, MOVEMENT_Y);
-				move = true;
-			} else {
-				if (!getIntersectingObjects(End.class).get(0).isActivated()) {
-					getIntersectingObjects(End.class).get(0).setEnd();
-					endActivated++;
-					points += CHANGE_SCORE;
+		// List<Integer> intersectLog = getIntersectingObjects(Log.class);
+
+		if (upMovement - 2 >= 0) {
+			if (backgroundInfo.get(upMovement - 2).get(0) == WATER) {
+				if (getIntersectingObjects(Log.class).size() >= 1 && move) {
+					move(getIntersectingObjects(Log.class).get(0).getSpeed(), 0);
+				} else if (getIntersectingObjects(Turtle.class).size() >= 1 && move) {
+					move(getIntersectingObjects(Turtle.class).get(0).getSpeed(), 0);
+				} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+					if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) 
+						waterDeath = true;
+					else move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed(), 0);
+				} else if (upMovement - 1 >= 0) {
+					if (water.get(upMovement - 1) == 1) 
+						waterDeath = true;
 				}
-				highest_y = MAX_Y;
-				moveBG = true;
+			} else if (backgroundInfo.get(upMovement - 2).get(0) == LAND) {
+				if (getIntersectingObjects(Obstacle.class).size() >= 1) 
+					carDeath = true;
+			} else if (backgroundInfo.get(upMovement - 2).get(0) == END) {
+				if (getIntersectingObjects(End.class).size() >= 1 || secondEndFrame) {
+					secondEndFrame = !secondEndFrame;
+					move = false;
+					if (!secondEndFrame) {
+						setStart();
+						move(0, MOVEMENT_Y);
+						move = true;
+					} else {
+						if (!getIntersectingObjects(End.class).get(0).isActivated()) {
+							getIntersectingObjects(End.class).get(0).setEnd();
+							endActivated++;
+							points += CHANGE_SCORE;
+						}
+						highest_y = MAX_Y;
+						moveBG = true;
+					}
+				}
 			}
-		} else if (getIntersectingObjects(Obstacle.class).size() >= 1) carDeath = true;
-		else if (getIntersectingObjects(Log.class).size() >= 1 && move) {
-			move(getIntersectingObjects(Log.class).get(0).getSpeed(), 0);
-		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && move) {
-			move(getIntersectingObjects(Turtle.class).get(0).getSpeed(), 0);
-		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) waterDeath = true;
-			else move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed(), 0);
-		} else if (upMovement - 1 >= 0) {
-			if (water.get(upMovement - 1) == 1) waterDeath = true;
 		}
 
 		/* Death Animation */
@@ -149,18 +176,17 @@ public class Animal extends Actor {
 			frame++;
 			move = false;
 		}
-		if ((waterDeath && frame % 9 == 0) || (carDeath && frame % 12 == 0))
+		if ((waterDeath && frame % 5 == 0) || (carDeath && frame % 6 == 0))
 			deathFrame++;
-		if ((waterDeath && frame == 44) || (carDeath && frame == 47))
+		if ((waterDeath && frame == 24) || (carDeath && frame == 23))
 			moveBG = true;
 		if ((waterDeath && deathFrame == 5) || (carDeath && deathFrame == 4)) {
 			setStart();
 			deathFrame = 0;
 			setImage(IMG_FROGUP);
 			move = true;
-			if (points > CHANGE_SCORE) {
+			if (points > CHANGE_SCORE)
 				points -= CHANGE_SCORE;
-			}
 			if (waterDeath) waterDeath = false;
 			else if (carDeath) carDeath = false;
 			frame = 0;

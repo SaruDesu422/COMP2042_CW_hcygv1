@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -134,6 +136,10 @@ public class Game {
                     backgroundInfo.add(list);
                 }
             }
+            Set<List<Integer>> set = new LinkedHashSet<List<Integer>>();
+            set.addAll(backgroundInfo);
+            backgroundInfo.clear();
+            backgroundInfo.addAll(set);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -178,16 +184,16 @@ public class Game {
         stage.add(new End(528, 685 - (endInfo * STEP), animal));
 
         /** Adds obstacles */
-        for (int index = 0; index < obstacleInfo.size(); index++) {
-            int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(YPOS));
-            stage.add(new Obstacle(
-                obstacleInfo.get(index).get(IMG), 
-                Integer.valueOf(obstacleInfo.get(index).get(XPOS)), 
-                y, 
-                Double.parseDouble(obstacleInfo.get(index).get(SPEED)),
-                animal
-            ));
-        }
+        // for (int index = 0; index < obstacleInfo.size(); index++) {
+        //     int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(YPOS));
+        //     stage.add(new Obstacle(
+        //         obstacleInfo.get(index).get(IMG), 
+        //         Integer.valueOf(obstacleInfo.get(index).get(XPOS)), 
+        //         y, 
+        //         Double.parseDouble(obstacleInfo.get(index).get(SPEED)),
+        //         animal
+        //     ));
+        // }
         
         /** Adds turtles */
         for (int index = 0; index < turtleInfo.size(); index++) {
@@ -337,6 +343,15 @@ public class Game {
     }
 
     /** Accessors **/
+
+	/**
+	* Accessor: List<List<Integer>> backgroundInfo
+    *
+    * @return	backgroundInfo
+	*/
+    public List<List<Integer>> getBackgroundInfo() {
+        return this.backgroundInfo;
+    }
 
 	/**
 	* Accessor: int endInfo
