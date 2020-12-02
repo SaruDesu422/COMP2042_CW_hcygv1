@@ -299,16 +299,16 @@ public class Game {
     *
     */
     public void createTimer() {
-        int currentPoints = 0;
+        // int currentPoints = 0;
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 List<Actor> actors = stage.getObjects(Actor.class);
                 for (Actor anActor:actors) anActor.act(now);
-                if (animal.getPoints() != currentPoints) {
-                    currentPoints = animal.getPoints();
-                    setNumber(currentPoints);
-                }
+                // if (animal.getPoints() != currentPoints) {
+                //     currentPoints = animal.getPoints();
+                    setNumber(animal.getPoints());
+                // }
             	if (animal.getEndActivated() == 5) {
                     for (Actor anActor:actors) stage.remove(anActor);
             		stage.stopMusic();

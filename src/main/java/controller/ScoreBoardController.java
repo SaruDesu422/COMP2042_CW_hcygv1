@@ -86,7 +86,7 @@ public class ScoreBoardController {
     * @param    event
     */
     public void handleButtonMenuMouseIn(MouseEvent event) {
-        ImageView menuMouseIn = new ImageView(MANMENU_MOUSE_IN);
+        ImageView menuMouseIn = new ImageView(MAINMENU_MOUSE_IN);
         menuMouseIn.setFitHeight(100);
 		menuMouseIn.setPreserveRatio(true);
         scoreBoard.getMenuButton().setGraphic(menuMouseIn);
