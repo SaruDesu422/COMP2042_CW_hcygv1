@@ -12,6 +12,10 @@ public class MainController {
     
     private MainMenu mainMenu;
     private Info info;
+    private final Image START_MOUSE_IN = new Image("file:media/images/buttons/startMouseIn.png");
+    private final Image START = new Image("file:media/images/buttons/start.png");
+    private final Image INFO_MOUSE_IN = new Image("file:media/images/buttons/infoMouseIn.png");
+    private final Image INFO = new Image("file:media/images/buttons/info.png");
 
 	/**
 	* Controls the actions for key events on main menu page.
@@ -58,7 +62,7 @@ public class MainController {
     * @param    event
     */
     public void handleButtonStartMouseIn(MouseEvent event) {
-        ImageView startMouseIn = new ImageView(new Image("file:media/images/buttons/startMouseIn.png"));
+        ImageView startMouseIn = new ImageView(START_MOUSE_IN);
 		startMouseIn.setFitHeight(100);
 		startMouseIn.setPreserveRatio(true);
         mainMenu.getStartButton().setGraphic(startMouseIn);
@@ -70,7 +74,7 @@ public class MainController {
     * @param    event
     */
     public void handleButtonStartMouseOut(MouseEvent event) {
-        ImageView startMouseOut = new ImageView(new Image("file:media/images/buttons/start.png"));
+        ImageView startMouseOut = new ImageView(START);
 		startMouseOut.setFitHeight(100);
 		startMouseOut.setPreserveRatio(true);
         mainMenu.getStartButton().setGraphic(startMouseOut);
@@ -82,7 +86,7 @@ public class MainController {
     * @param    event
     */
     public void handleButtonInfoMouseIn(MouseEvent event) {
-        ImageView infoMouseIn = new ImageView(new Image("file:media/images/buttons/infoMouseIn.png"));
+        ImageView infoMouseIn = new ImageView(INFO_MOUSE_IN);
 		infoMouseIn.setFitHeight(30);
 		infoMouseIn.setFitWidth(25);
         mainMenu.getInfoButton().setGraphic(infoMouseIn);
@@ -94,7 +98,7 @@ public class MainController {
     * @param    event
     */
     public void handleButtonInfoMouseOut(MouseEvent event) {
-        ImageView infoMouseOut = new ImageView(new Image("file:media/images/buttons/info.png"));
+        ImageView infoMouseOut = new ImageView(INFO);
         infoMouseOut.setFitHeight(30);
 		infoMouseOut.setFitWidth(25);
         mainMenu.getInfoButton().setGraphic(infoMouseOut);

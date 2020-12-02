@@ -11,6 +11,14 @@ public class WetTurtle extends Actor{
 	private final int SIZE_X = 130;
 	private final int SIZE_Y = 50;
 	private final int STEP = 50;
+	private final Image IMG_TURTLE1 = getImage("turtle1");
+	private final Image IMG_TURTLE2 = getImage("turtle2");
+	private final Image IMG_TURTLE3 = getImage("turtle3");
+	private final Image IMG_TURTLE4 = getImage("turtle4");
+	private final Image IMG_WETTURTLE1 = getImage("wetturtle1");
+	private final Image IMG_WETTURTLE2 = getImage("wetturtle2");
+	private final Image IMG_WETTURTLE3 = getImage("wetturtle3");
+	private final Image IMG_WETTURTLE4 = getImage("wetturtle4");
 
 	private double speed;
 	private int frame = 0;
@@ -35,7 +43,7 @@ public class WetTurtle extends Actor{
 		this.speed = s;
 		setX(xpos);
 		setY(ypos);
-		setImage(getImage("turtle1"));
+		setImage(IMG_TURTLE1);
 	}
 
 	@Override
@@ -62,27 +70,27 @@ public class WetTurtle extends Actor{
 		if (frame < wait) {
 			sunk = false;
 			if (frame%20 == 0 || frame%20 == 16)
-				setImage(getImage("turtle2"));
+				setImage(IMG_TURTLE2);
 			else if (frame%20 == 4 || frame%20 == 12)
-				setImage(getImage("turtle3"));
+				setImage(IMG_TURTLE3);
 			else if (frame%20 == 8)
-				setImage(getImage("turtle4"));
+				setImage(IMG_TURTLE4);
 			else if (frame%20 == 20)
-				setImage(getImage("turtle1"));
+				setImage(IMG_TURTLE1);
 		} else if (frame == wait || frame == wait * 2 + 4) {
-			setImage(getImage("wetturtle1"));
+			setImage(IMG_WETTURTLE1);
 			sunk = false;
 		} else if (frame == wait + 4 || frame == wait * 2) {
-			setImage(getImage("wetturtle2"));
+			setImage(IMG_WETTURTLE2);
 			sunk = false;
 		} else if (frame == wait + 8 || frame == wait * 2 - 4) {
-			setImage(getImage("wetturtle3"));
+			setImage(IMG_WETTURTLE3);
 			sunk = false;
 		} else if (frame == wait + 12) {
-			setImage(getImage("wetturtle4"));
+			setImage(IMG_WETTURTLE4);
 			sunk = true;
 		} else if (frame == wait * 2 + 8) {
-			setImage(getImage("turtle1"));
+			setImage(IMG_TURTLE1);
 			sunk = false;
 			frame = 0;
 		}

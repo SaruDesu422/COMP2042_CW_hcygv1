@@ -11,6 +11,10 @@ public class Turtle extends Actor{
 	private final int SIZE_X = 130;
 	private final int SIZE_Y = 50;
 	private final int STEP = 50;
+	private final Image IMG_TURTLE1 = getImage("turtle1");
+	private final Image IMG_TURTLE2 = getImage("turtle2");
+	private final Image IMG_TURTLE3 = getImage("turtle3");
+	private final Image IMG_TURTLE4 = getImage("turtle4");
 	
 	private double speed;
 	private int frame = 0;
@@ -35,7 +39,7 @@ public class Turtle extends Actor{
 		this.speed = speed;
 		setX(x);
 		setY(y);
-		setImage(getImage("turtle1"));
+		setImage(IMG_TURTLE1);
 	}
 
 	@Override
@@ -59,13 +63,13 @@ public class Turtle extends Actor{
 
 		/** Animation */
 		if (frame == 0 || frame == 16)
-			setImage(getImage("turtle2"));
+			setImage(IMG_TURTLE2);
 		else if (frame == 4 || frame == 12)
-			setImage(getImage("turtle3"));
+			setImage(IMG_TURTLE3);
 		else if (frame == 8)
-			setImage(getImage("turtle4"));
+			setImage(IMG_TURTLE4);
 		else if (frame == 20) {
-			setImage(getImage("turtle1"));
+			setImage(IMG_TURTLE1);
 			frame = 0;
 		}
 		frame++;

@@ -9,6 +9,8 @@ import view.Info;
 public class InfoController {
     
     private Info info;
+    private final Image BACK_MOUSE_IN = new Image("file:media/images/buttons/backMouseIn.png");
+    private final Image BACK = new Image("file:media/images/buttons/back.png");
 
 	/**
 	* Controls the actions for key events on info page.
@@ -40,7 +42,7 @@ public class InfoController {
     * @param    event
     */
     public void handleButtonExitMouseIn(MouseEvent event) {
-        ImageView exitMouseIn = new ImageView(new Image("file:media/images/buttons/backMouseIn.png"));
+        ImageView exitMouseIn = new ImageView(BACK_MOUSE_IN);
         exitMouseIn.setFitHeight(30);
 		exitMouseIn.setFitWidth(25);
         info.getExitButton().setGraphic(exitMouseIn);
@@ -52,7 +54,7 @@ public class InfoController {
     * @param    event
     */
     public void handleButtonExitMouseOut(MouseEvent event) {
-        ImageView exitMouseOut = new ImageView(new Image("file:media/images/buttons/back.png"));
+        ImageView exitMouseOut = new ImageView(BACK);
         exitMouseOut.setFitHeight(30);
 		exitMouseOut.setFitWidth(25);
         info.getExitButton().setGraphic(exitMouseOut);

@@ -9,6 +9,8 @@ import view.Game;
 public class GameController {
     
     private Game game;
+    private final Image HOME_MOUSE_IN = new Image("file:media/images/buttons/homeMouseIn.png");
+    private final Image HOME = new Image("file:media/images/buttons/home.png");
 
 	/**
 	* Controls the actions for key events on main menu page.
@@ -40,7 +42,7 @@ public class GameController {
     * @param    event
     */
     public void handleButtonMenuMouseIn(MouseEvent event) {
-        ImageView menuMouseIn = new ImageView(new Image("file:media/images/buttons/homeMouseIn.png"));
+        ImageView menuMouseIn = new ImageView(HOME_MOUSE_IN);
         menuMouseIn.setFitHeight(30);
 		menuMouseIn.setFitWidth(25);
         game.getMenuButton().setGraphic(menuMouseIn);
@@ -52,7 +54,7 @@ public class GameController {
     * @param    event
     */
     public void handleButtonMenuMouseOut(MouseEvent event) {
-        ImageView menuMouseOut = new ImageView(new Image("file:media/images/buttons/home.png"));
+        ImageView menuMouseOut = new ImageView(HOME);
         menuMouseOut.setFitHeight(30);
 		menuMouseOut.setFitWidth(25);
         game.getMenuButton().setGraphic(menuMouseOut);

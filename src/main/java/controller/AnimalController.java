@@ -33,17 +33,17 @@ public class AnimalController {
             if (event.getCode() == KeyCode.W) {
                 animal.move(0, -animal.MOVEMENT_Y);
                 animal.setUpMovement(animal.getUpMovement() + 1);
-                animal.setImage(animal.getImage(animal.IMG_FROGUPJUMP));
+                animal.setImage(animal.IMG_FROGUPJUMP);
             } else if (event.getCode() == KeyCode.A) {
                 animal.move(-animal.MOVEMENT_X, 0);
-                animal.setImage(animal.getImage(animal.IMG_FROGLEFTJUMP));
+                animal.setImage(animal.IMG_FROGLEFTJUMP);
             } else if (event.getCode() == KeyCode.S) {
                 animal.move(0, animal.MOVEMENT_Y);
                 animal.setUpMovement(animal.getUpMovement() - 1);
-                animal.setImage(animal.getImage(animal.IMG_FROGDOWNJUMP));
+                animal.setImage(animal.IMG_FROGDOWNJUMP);
             } else if (event.getCode() == KeyCode.D) {
                 animal.move(animal.MOVEMENT_X, 0);
-                animal.setImage(animal.getImage(animal.IMG_FROGRIGHTJUMP));
+                animal.setImage(animal.IMG_FROGRIGHTJUMP);
             }
         }
     }
@@ -61,16 +61,16 @@ public class AnimalController {
                     animal.setPoints(animal.getPoints() + 10);
                 }
                 animal.move(0, -animal.MOVEMENT_Y);
-                animal.setImage(animal.getImage(animal.IMG_FROGUP));
+                animal.setImage(animal.IMG_FROGUP);
             } else if (event.getCode() == KeyCode.A) {
                 animal.move(-animal.MOVEMENT_X, 0);
-                animal.setImage(animal.getImage(animal.IMG_FROGLEFT));
+                animal.setImage(animal.IMG_FROGLEFT);
             } else if (event.getCode() == KeyCode.S) {
                 animal.move(0, animal.MOVEMENT_Y);
-                animal.setImage(animal.getImage(animal.IMG_FROGDOWN));
+                animal.setImage(animal.IMG_FROGDOWN);
             } else if (event.getCode() == KeyCode.D) {
                 animal.move(animal.MOVEMENT_X, 0);
-                animal.setImage(animal.getImage(animal.IMG_FROGRIGHT));
+                animal.setImage(animal.IMG_FROGRIGHT);
             }
             animal.setFrameMove(false);
         }

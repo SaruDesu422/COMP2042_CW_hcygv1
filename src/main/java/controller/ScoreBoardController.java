@@ -11,6 +11,10 @@ public class ScoreBoardController {
     
     private ScoreBoard scoreBoard;
     private Game game;
+    private final Image CONTINUE_MOUSE_IN = new Image("file:media/images/buttons/continueMouseIn.png");
+    private final Image CONTINUE = new Image("file:media/images/buttons/continue.png");
+    private final Image MAINMENU_MOUSE_IN = new Image("file:media/images/buttons/mainmenuMouseIn.png");
+    private final Image MAINMENU = new Image("file:media/images/buttons/mainmenu.png");
 
 	/**
 	* Controls the actions for key events on main menu page.
@@ -58,7 +62,7 @@ public class ScoreBoardController {
     * @param    event
     */
     public void handleButtonContinueMouseIn(MouseEvent event) {
-        ImageView continueMouseIn = new ImageView(new Image("file:media/images/buttons/continueMouseIn.png"));
+        ImageView continueMouseIn = new ImageView(CONTINUE_MOUSE_IN);
         continueMouseIn.setFitHeight(100);
 		continueMouseIn.setPreserveRatio(true);
         scoreBoard.getContinueButton().setGraphic(continueMouseIn);
@@ -70,7 +74,7 @@ public class ScoreBoardController {
     * @param    event
     */
     public void handleButtonContinueMouseOut(MouseEvent event) {
-        ImageView continueMouseOut = new ImageView(new Image("file:media/images/buttons/continue.png"));
+        ImageView continueMouseOut = new ImageView(CONTINUE);
         continueMouseOut.setFitHeight(100);
 		continueMouseOut.setPreserveRatio(true);
         scoreBoard.getContinueButton().setGraphic(continueMouseOut);
@@ -82,7 +86,7 @@ public class ScoreBoardController {
     * @param    event
     */
     public void handleButtonMenuMouseIn(MouseEvent event) {
-        ImageView menuMouseIn = new ImageView(new Image("file:media/images/buttons/mainmenuMouseIn.png"));
+        ImageView menuMouseIn = new ImageView(MANMENU_MOUSE_IN);
         menuMouseIn.setFitHeight(100);
 		menuMouseIn.setPreserveRatio(true);
         scoreBoard.getMenuButton().setGraphic(menuMouseIn);
@@ -94,7 +98,7 @@ public class ScoreBoardController {
     * @param    event
     */
     public void handleButtonMenuMouseOut(MouseEvent event) {
-        ImageView menuMouseOut = new ImageView(new Image("file:media/images/buttons/mainmenu.png"));
+        ImageView menuMouseOut = new ImageView(MAINMENU);
         menuMouseOut.setFitHeight(100);
 		menuMouseOut.setPreserveRatio(true);
         scoreBoard.getMenuButton().setGraphic(menuMouseOut);

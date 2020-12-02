@@ -17,14 +17,14 @@ public class Animal extends Actor {
 	public final int MAX_Y = 800;
 	public final int MOVEMENT_Y = 25;
 	public final int MOVEMENT_X = 22;
-	public final String IMG_FROGUP = "frogUp";
-	public final String IMG_FROGRIGHT = "frogRight";
-	public final String IMG_FROGDOWN = "frogDown";
-	public final String IMG_FROGLEFT = "frogLeft";
-	public final String IMG_FROGUPJUMP = "frogUpJump";
-	public final String IMG_FROGRIGHTJUMP = "frogRightJump";
-	public final String IMG_FROGDOWNJUMP = "frogDownJump";
-	public final String IMG_FROGLEFTJUMP = "frogLeftJump";
+	public final Image IMG_FROGUP = getImage("frogUp");
+	public final Image IMG_FROGRIGHT = getImage("frogRight");
+	public final Image IMG_FROGDOWN = getImage("frogDown");
+	public final Image IMG_FROGLEFT = getImage("frogLeft");
+	public final Image IMG_FROGUPJUMP = getImage("frogUpJump");
+	public final Image IMG_FROGRIGHTJUMP = getImage("frogRightJump");
+	public final Image IMG_FROGDOWNJUMP = getImage("frogDownJump");
+	public final Image IMG_FROGLEFTJUMP = getImage("frogLeftJump");
 
 	private AnimalController controller;
 
@@ -76,7 +76,7 @@ public class Animal extends Actor {
 		this.endInfo = game.getEnd();
 		setX(START_X);
 		setY(START_Y);
-		setImage(getImage(IMG_FROGUP));
+		setImage(IMG_FROGUP);
 
 		controller = new AnimalController(this);
 		setOnKeyPressed(controller::OnKeyPressed);
@@ -156,7 +156,7 @@ public class Animal extends Actor {
 		if ((waterDeath && deathFrame == 5) || (carDeath && deathFrame == 4)) {
 			setStart();
 			deathFrame = 0;
-			setImage(getImage(IMG_FROGUP));
+			setImage(IMG_FROGUP);
 			move = true;
 			if (points > CHANGE_SCORE) {
 				points -= CHANGE_SCORE;
