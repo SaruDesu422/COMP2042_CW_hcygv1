@@ -52,8 +52,8 @@ public class ScoreBoard extends BorderPane{
 
     /**
     * ScoreBoard has 2 types of characteristic.
-    * 1 - Continue Button & MainMenu Button
-    * 2 - only MainMenu Button
+    * <p>- Continue Button & MainMenu Button
+    * <p>- Only MainMenu Button
     *
     * @param    level   scoreboard characteristic depends on current level
     * @param    points  show points on scoreboard
