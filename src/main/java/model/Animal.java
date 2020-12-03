@@ -93,9 +93,6 @@ public class Animal extends Actor {
 			}
 			System.out.println("");
 		}
-		// for (int i = 0; i < backgroundInfo.size(); i++) {
-		// 	System.out.println(backgroundInfo.get(i).get(0));
-		// }
 	}
 
 	/**

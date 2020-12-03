@@ -173,17 +173,16 @@ public class ScoreBoard extends BorderPane{
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
                 PrintWriter pw = new PrintWriter(bw);
-                for (int i = 0; i < highscoreInfo.length; i++) {
+                for (int i = 0; i < highscoreInfo.length; i++)
                     pw.print(highscoreInfo[i] + COMMA_DELIMITER);
-                }
                 bw.close();
                 pw.close();
             } else {
                 BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
                 PrintWriter pw = new PrintWriter(bw);
-                for (int i = 0; i < MAXLEVEL; i++) {
+                highscoreInfo[level - 1] = Integer.toString(points);
+                for (int i = 0; i < MAXLEVEL; i++)
                     pw.print("0" + COMMA_DELIMITER);
-                }
                 bw.close();
                 pw.close();
             }
