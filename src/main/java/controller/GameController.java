@@ -33,6 +33,7 @@ public class GameController {
     * @param    event
     */
     public void handleButtonMenu(ActionEvent event) {
+        game.stop();
         game.getMainMenu().getApp().showMainMenu();
     }
 

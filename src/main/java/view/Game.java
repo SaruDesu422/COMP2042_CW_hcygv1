@@ -255,7 +255,6 @@ public class Game {
 
         /** Adds header and animal */
         stage.add(new BackgroundImage("header"));
-        stage.add(new Digit(0, 540, 43));
         stage.add(animal);
 
         start();
@@ -310,15 +309,12 @@ public class Game {
             @Override
             public void handle(long now) {
                 List<Actor> actors = stage.getObjects(Actor.class);
+                List<Digit> digits = stage.getObjects(Digit.class);
                 for (Actor anActor:actors) anActor.act(now);
-                // if (animal.getPoints() != currentPoints) {
-                //     currentPoints = animal.getPoints();
-                    setNumber(animal.getPoints());
-                // }
+                for (Digit aDigit:digits) stage.remove(aDigit);
+                setNumber(animal.getPoints());
             	if (animal.getEndActivated() == 5) {
-                    for (Actor anActor:actors) stage.remove(anActor);
-            		stage.stopMusic();
-                    timer.stop();
+                    stop();
                     scoreBoard.show(level, animal.getPoints());
                     mainMenu.getApp().showScoreBoard(scoreBoard);
             	}
@@ -333,6 +329,7 @@ public class Game {
     */
     public void setNumber(int points) {
     	int shift = 0;
+        stage.add(new Digit(0, 540, 43));
     	while (points > 0) {
             int d = points / 10;
             int k = points - d * 10;
@@ -340,6 +337,11 @@ public class Game {
             stage.add(new Digit(k, 540 - shift, 43));
             shift += 30;
     	}
+    }
+
+    public void stop() {
+        stage.stopMusic();
+        timer.stop();
     }
 
     /** Accessors **/
