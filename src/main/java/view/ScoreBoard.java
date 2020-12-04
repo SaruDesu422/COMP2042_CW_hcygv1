@@ -180,9 +180,12 @@ public class ScoreBoard extends BorderPane{
             } else {
                 BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
                 PrintWriter pw = new PrintWriter(bw);
-                highscoreInfo[level - 1] = Integer.toString(points);
-                for (int i = 0; i < MAXLEVEL; i++)
-                    pw.print("0" + COMMA_DELIMITER);
+                for (int i = 0; i < MAXLEVEL; i++) {
+                    if (i == level - 1) 
+                        pw.print(Integer.toString(points) + COMMA_DELIMITER);
+                    else
+                        pw.print("0" + COMMA_DELIMITER);
+                }
                 bw.close();
                 pw.close();
             }
