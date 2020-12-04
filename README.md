@@ -1,5 +1,6 @@
 # **Software Maintenance Course Work**
-## *Frogger game maintenance*
+*Frogger game maintenance*
+
 ![logo](https://user-images.githubusercontent.com/51990168/101153998-b87a2780-3657-11eb-9875-6c445ad04f40.png)
 
 ## **How to compile and run**
