@@ -21,11 +21,13 @@ public abstract class World extends Pane {
     App app;
     
 	/**
-	* Configures events for objects in each panes.
+	* Configures listener for player's keyboard actions and controls
+	* addition and/or removal of actors in MyStage.
 	* <pre>
-	* Method:<br>playMusic()<br>stopMusic()
+	* Method:<br>add(Actor actor)<br>remove(Actor actor)<br>getObjects(Class<A> cls)
 	* </pre>
-    *
+	*
+	* @see		MyStage
 	*/
     public World() {
     	sceneProperty().addListener(new ChangeListener<Scene>() {

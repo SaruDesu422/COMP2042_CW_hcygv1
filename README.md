@@ -7,13 +7,13 @@
 The code are fully restructured according to MVC, where the panes are located in the *view* package, the actors in the *model* package and the button controllers in the *controller* package. The level and highscore information are located in the *data* folder, and the images and audio in the *media* folder. 
 
 **Changes made:**
-1. Moved the *key events* from *Animal.java* to *AnimalController.java*.
-2. Stored all level information into csv files.
-3. Added panes for *scoreBoard, MainMenu and Info pages* and interactive buttons to direct the pages.
-4. Added longer levels, which will scroll according to the y position of the frog.
-5. Improved graphics and animation on every actors and background.
-6. Improved efficiency in the *setNumber* method to prevent lag.
-7. Made it into a maven project and integrated maven wrapper, dismissing the requirement to install maven in the user's computer.
+* Moved the *key events* from *Animal.java* to *AnimalController.java*.
+* Stored all level information into csv files.
+* Added panes for *scoreBoard, MainMenu and Info pages* and interactive buttons to direct the pages.
+* Added longer levels, which will scroll according to the y position of the frog.
+* Improved graphics and animation on every actors and background.
+* Improved efficiency in the *setNumber* method to prevent lag.
+* Made it into a maven project and integrated maven wrapper, dismissing the requirement to install maven in the user's computer.
 
 ## **How to compile and run**
 1. Visual Studio Code

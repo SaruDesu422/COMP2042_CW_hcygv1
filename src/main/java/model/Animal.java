@@ -120,7 +120,6 @@ public class Animal extends Actor {
 			moveDown = true;
 		
 		/* Check Intersect Objects */
-		// List<Integer> intersectLog = getIntersectingObjects(Log.class);
 
 		if (upMovement - 2 >= 0) {
 			if (backgroundInfo.get(upMovement - 2).get(0) == WATER) {
