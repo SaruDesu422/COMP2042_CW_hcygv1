@@ -87,12 +87,6 @@ public class Animal extends Actor {
 		controller = new AnimalController(this);
 		setOnKeyPressed(controller::OnKeyPressed);
 		setOnKeyReleased(controller::OnKeyReleased);
-		for (List<Integer> list : backgroundInfo) {
-			for (Integer info : list) {
-				System.out.print(info + " | ");
-			}
-			System.out.println("");
-		}
 	}
 
 	/**
@@ -107,11 +101,9 @@ public class Animal extends Actor {
 	@Override
 	public void act(long now) {
 		/* Check out of Bounds */
-		if (getY() < 0 || getY() > START_Y + MOVEMENT_Y) {
-			setX(START_X);
+		if (getY() > START_Y + MOVEMENT_Y) {
 			setY(START_Y);
 			upMovement++;
-			System.out.println(upMovement);
 		}
 		if (getX() < 0) move(MOVEMENT_X * 2, 0);
 		if (getX() > 600) move(-MOVEMENT_X * 2, 0);
