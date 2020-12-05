@@ -1,24 +1,56 @@
 package test;
 
-import model.Animal;
-// import javafx.scene.image.Image;
-// import static org.junit.Assert.assertTrue;
+import view.*;
 
-import org.junit.Test;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit test for simple App.
+ * Unit test for certain methods in the app.
+ * 
  */
-public class AppTest {
+public class AppTest extends ApplicationTest {
 
-    Animal animal;
-    /**
-     * Junit Testing
-     */
+    App app;
+    Info info;
+    MainMenu mainMenu;
+    Game game;
+    Node node;
+    ScoreBoard scoreBoard;
+    String[] highscoreInfo;
+
+    @Start
+    public void start(Stage stage) throws Exception {
+        this.app = new App();
+        this.info = new Info(app);
+        this.mainMenu = new MainMenu(app);
+        this.game = new Game(mainMenu);
+        this.scoreBoard = new ScoreBoard(mainMenu, game);
+    }
+
     @Test
-    public void testGetImage()
-    {
-        // assertEquals(animal.getImage(), new Image("file:media/images/frog/" + address + ".png", 0, IMAGE_SIZE, true, true))
-        // assert 
+    void testLevel() {
+        game.startNextLevel();
+        assertEquals(1, game.getLevel());
+    }
+
+    @Test
+    void testUpdateScoreSheet() {
+        int points = 350;
+        for (int i = 0; i < scoreBoard.MAXLEVEL; i++)
+            highscoreInfo = scoreBoard.updateScoreSheet(i + 1, points);
+        for (int i = 0; i < scoreBoard.MAXLEVEL; i++)
+            assertEquals(points, Integer.valueOf(highscoreInfo[i]));
+    }
+
+    @Test
+    void test() {
+        
     }
 }

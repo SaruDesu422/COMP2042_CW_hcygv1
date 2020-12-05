@@ -69,7 +69,7 @@ public class Animal extends Actor {
 		this.secondEndFrame = false;
 		this.frameMove = false;
 		this.points = 0;
-		this.endActivated = 0;
+		this.endActivated = 5;
 		this.deathFrame = 0;
 		this.upMovement = 1;
 		this.downMovement = 0;

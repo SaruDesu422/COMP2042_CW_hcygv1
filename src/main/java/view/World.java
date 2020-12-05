@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
-
 public abstract class World extends Pane {
 
     Animal animal;
@@ -94,9 +93,8 @@ public abstract class World extends Pane {
     public <A extends Actor> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();
         for (Node n: getChildren()) {
-            if (cls.isInstance(n)) {
+            if (cls.isInstance(n))
                 someArray.add((A) n);
-            }
         }
         return someArray;
     }

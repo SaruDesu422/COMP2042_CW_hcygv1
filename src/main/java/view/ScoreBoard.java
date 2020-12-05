@@ -28,7 +28,7 @@ public class ScoreBoard extends BorderPane{
 
     protected Scene scene;
     
-    private final int MAXLEVEL = 10;
+    public final int MAXLEVEL = 10;
     private final String COMMA_DELIMITER = ",";
     private Button btn_continue;
     private Button btn_menu;
@@ -63,8 +63,8 @@ public class ScoreBoard extends BorderPane{
 		add(new BackgroundImage("scoreboardBackground"));
         int highscore = Integer.valueOf(updateScoreSheet(level, points)[level - 1]);
 
-        /** Create a continue button */
         if (level < MAXLEVEL) {
+            /** Create a continue button */
             btn_continue = new Button();
 
             ImageView continueBG = new ImageView(new Image("file:media/images/buttons/continue.png"));
@@ -136,19 +136,23 @@ public class ScoreBoard extends BorderPane{
     private void setNumbers(int temp, int val, int y) {
         int shift = 0;
         int start = 265;
-        while (val > 0) {
-            int k = 1;
-            while (temp > 0) {
-                int d = temp / 10;
-                k = temp - d * 10;
-                temp = d;
-                start += 30;
+        if (val == 0)
+            add(new Digit(0, start + 30, y));
+        else {
+            while (val > 0) {
+                int k = 1;
+                while (temp > 0) {
+                    int d = temp / 10;
+                    k = temp - d * 10;
+                    temp = d;
+                    start += 30;
+                }
+                int d = val / 10;
+                k = val - d * 10;
+                val = d;
+                add(new Digit(k, start - shift, y));
+                shift += 30;
             }
-            int d = val / 10;
-            k = val - d * 10;
-            val = d;
-            add(new Digit(k, start - shift, y));
-            shift += 30;
         }
     }
 
@@ -160,7 +164,7 @@ public class ScoreBoard extends BorderPane{
     * @param    level
     * @param    points
 	*/
-    private String[] updateScoreSheet(int level, int points) {
+    public String[] updateScoreSheet(int level, int points) {
         String[] highscoreInfo = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader("data/highscore.csv"));
@@ -173,8 +177,12 @@ public class ScoreBoard extends BorderPane{
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
                 PrintWriter pw = new PrintWriter(bw);
-                for (int i = 0; i < highscoreInfo.length; i++)
-                    pw.print(highscoreInfo[i] + COMMA_DELIMITER);
+                for (int i = 0; i < MAXLEVEL; i++) {
+                    if (i == MAXLEVEL - 1)
+                        pw.print(highscoreInfo[i]);
+                    else
+                        pw.print(highscoreInfo[i] + COMMA_DELIMITER);
+                }
                 bw.close();
                 pw.close();
             } else {
@@ -183,6 +191,8 @@ public class ScoreBoard extends BorderPane{
                 for (int i = 0; i < MAXLEVEL; i++) {
                     if (i == level - 1) 
                         pw.print(Integer.toString(points) + COMMA_DELIMITER);
+                    else if (i == MAXLEVEL - 1)
+                        pw.print("0");
                     else
                         pw.print("0" + COMMA_DELIMITER);
                 }
@@ -205,7 +215,7 @@ public class ScoreBoard extends BorderPane{
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
-
+    
 	/**
 	* Accessor: Button btn_continue
 	*

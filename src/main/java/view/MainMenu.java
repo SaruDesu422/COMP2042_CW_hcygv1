@@ -50,6 +50,7 @@ public class MainMenu extends BorderPane{
 
 		/* Create a start button */
 		btn_start = new Button();
+		btn_start.setId("start");
 
 		ImageView startBG = new ImageView(new Image("file:media/images/buttons/start.png"));
 		startBG.setFitHeight(100);
@@ -65,9 +66,9 @@ public class MainMenu extends BorderPane{
 		btn_start.setShape(start);
 		btn_start.setPrefSize(200, 100);
 
-
 		/* Create an info button */
 		btn_info = new Button();
+		btn_info.setId("info");
 
 		ImageView infoBG = new ImageView(new Image("file:media/images/buttons/info.png"));
 		infoBG.setFitHeight(30);
@@ -104,7 +105,7 @@ public class MainMenu extends BorderPane{
 	*/
 	public void add(Actor actor) {
         getChildren().add(actor);
-    }
+	}
 
 	/**
 	* Accessor: Button btn_start
