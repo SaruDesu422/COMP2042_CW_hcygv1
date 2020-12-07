@@ -75,7 +75,7 @@ public class Turtle extends Actor{
 		frame++;
 
 		/** Checks out of bounds */
-		double rng = (int)Math.random() * 3;
+		double rng = (int)(Math.random() * 3);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)

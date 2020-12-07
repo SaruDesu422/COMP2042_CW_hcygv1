@@ -39,7 +39,7 @@ public class Obstacle extends Actor {
 	public Image getImage(String address) {
 		String random = "";
 		if (address.equals("car"))
-			random = Integer.toString((int)Math.random() * 3 + 1);
+			random = Integer.toString((int)(Math.random() * 3) + 1);
 		if (speed > 0) 
 			return new Image("file:media/images/obstacles/" + address + random + ".png", 0, SIZE_Y, true, true);
 		else return new Image("file:media/images/obstacles/" + address + random + "left.png", 0, SIZE_Y, true, true);

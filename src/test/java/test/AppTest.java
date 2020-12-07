@@ -1,15 +1,18 @@
 package test;
 
+import controller.*;
+import model.*;
 import view.*;
 
-import javafx.stage.Stage;
-import javafx.scene.Node;
-
-import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
+
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Unit test for certain methods in the app.
@@ -17,40 +20,24 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class AppTest extends ApplicationTest {
 
+    Animal animal;
     App app;
     Info info;
     MainMenu mainMenu;
     Game game;
-    Node node;
     ScoreBoard scoreBoard;
-    String[] highscoreInfo;
+    BorderPane testPane;
 
-    @Start
-    public void start(Stage stage) throws Exception {
-        this.app = new App();
-        this.info = new Info(app);
-        this.mainMenu = new MainMenu(app);
-        this.game = new Game(mainMenu);
-        this.scoreBoard = new ScoreBoard(mainMenu, game);
-    }
-
-    @Test
-    void testLevel() {
-        game.startNextLevel();
-        assertEquals(1, game.getLevel());
-    }
+    // @Before
+    // public void setUp() {
+    //     app = new App();
+    //     info = new Info(app);
+    //     mainMenu = new MainMenu(app);
+    //     game = new Game(mainMenu);
+    //     scoreBoard = new ScoreBoard(mainMenu, game);
+    // }
 
     @Test
-    void testUpdateScoreSheet() {
-        int points = 350;
-        for (int i = 0; i < scoreBoard.MAXLEVEL; i++)
-            highscoreInfo = scoreBoard.updateScoreSheet(i + 1, points);
-        for (int i = 0; i < scoreBoard.MAXLEVEL; i++)
-            assertEquals(points, Integer.valueOf(highscoreInfo[i]));
-    }
-
-    @Test
-    void test() {
-        
+    public void test() {
     }
 }

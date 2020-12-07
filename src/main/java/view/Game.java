@@ -93,42 +93,37 @@ public class Game {
             List<Integer> list;
             String[] values;
             while ((line = br.readLine()) != null) {
+                values = line.split(COMMA_DELIMITER);
                 if (line.charAt(0) == TYPE_OBSTACLE) {
-                    values = line.split(COMMA_DELIMITER);
                     obstacleInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(LAND);
                     list.add(Integer.valueOf(obstacleInfo.get(obstacleInfo.size() - 1).get(YPOS)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == TYPE_TURTLE) {
-                    values = line.split(COMMA_DELIMITER);
                     turtleInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(WATER);
                     list.add(Integer.valueOf(turtleInfo.get(turtleInfo.size() - 1).get(YPOS)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == TYPE_WETTURTLE) {
-                    values = line.split(COMMA_DELIMITER);
                     wetTurtleInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(WATER);
                     list.add(Integer.valueOf(wetTurtleInfo.get(wetTurtleInfo.size() - 1).get(YPOS)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == TYPE_LOG) {
-                    values = line.split(COMMA_DELIMITER);
                     logInfo.add(Arrays.asList(values));
                     list = new ArrayList<Integer>();
                     list.add(WATER);
                     list.add(Integer.valueOf(logInfo.get(logInfo.size() - 1).get(YPOS)));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == TYPE_REST) {
-                    values = line.split(COMMA_DELIMITER);
                     list = new ArrayList<Integer>();
                     list.add(REST);
                     list.add(Integer.valueOf(values[YPOS]));
                     backgroundInfo.add(list);
                 } else if (line.charAt(0) == TYPE_END) {
-                    values = line.split(COMMA_DELIMITER);
                     endInfo = Integer.parseInt(values[YPOS]);
                     list = new ArrayList<Integer>();
                     list.add(END);
@@ -314,7 +309,6 @@ public class Game {
                 for (Digit aDigit:digits) stage.remove(aDigit);
                 setNumber(animal.getPoints());
             	if (animal.getEndActivated() == 5) {
-                    stop();
                     scoreBoard.show(level, animal.getPoints());
                     mainMenu.getApp().showScoreBoard(scoreBoard);
             	}

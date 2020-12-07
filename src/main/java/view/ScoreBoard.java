@@ -18,51 +18,65 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ScoreBoard extends BorderPane{
+public class ScoreBoard extends BorderPane {
 
-	private MainMenu mainMenu;
+    private MainMenu mainMenu;
     private Game game;
     private ScoreBoardController controller;
 
     protected Scene scene;
-    
+
     public final int MAXLEVEL = 10;
+    private final int MAXSCORESTORAGE = 10;
     private final String COMMA_DELIMITER = ",";
     private Button btn_continue;
     private Button btn_menu;
-    
+    private int highscore;
+    private List<String[]> highScoreList;
+
     /**
-    * Sets up the pane for the scoreboard pane to be shown on.
-    * <pre>
-    * Methods:<br>show(int level, int points)<br>setNumbers(int temp, int val, int y)<br>updateScoreSheet(int level, int points)
-    * </pre>
-    *
-    * @param    mainMenu
-    * @param    game
-    * @see      MainMenu
-    * @see      Game
-    */
+     * Sets up the pane for the scoreboard pane to be shown on.
+     * 
+     * <pre>
+     * Methods:<br>show(int level, int points)<br>setNumbers(int temp, int val, int y)<br>updateScoreSheet(int level, int points)
+     * </pre>
+     *
+     * @param mainMenu
+     * @param game
+     * @see MainMenu
+     * @see Game
+     */
     public ScoreBoard(MainMenu mainMenu, Game game) {
         this.mainMenu = mainMenu;
         this.game = game;
         this.scene = new Scene(this, 600, 800);
+        this.highScoreList = readData();
     }
 
     /**
-    * ScoreBoard has 2 types of characteristic.
-    * <p>- Continue Button & MainMenu Button
-    * <p>- Only MainMenu Button
-    *
-    * @param    level   scoreboard characteristic depends on current level
-    * @param    points  show points on scoreboard
-	*/
+     * ScoreBoard has 2 types of characteristic.
+     * <p>
+     * - Continue Button & MainMenu Button
+     * <p>
+     * - Only MainMenu Button
+     *
+     * @param level  scoreboard characteristic depends on current level
+     * @param points show points on scoreboard
+     */
     public void show(int level, int points) {
         this.setPrefSize(600, 800);
-		add(new BackgroundImage("scoreboardBackground"));
-        int highscore = Integer.valueOf(updateScoreSheet(level, points)[level - 1]);
-
+        game.stop();
+        add(new BackgroundImage("scoreboardBackground"));
+        highScoreList.set(level - 1, updateData(level, points, highScoreList.get(level - 1)));
+        // updateData(level, points, highScoreList); 
+        highscore = Integer.valueOf(highScoreList.get(level - 1)[0]);
+        writeData(highScoreList);
+        // go to the method, the writeData method
         if (level < MAXLEVEL) {
             /** Create a continue button */
             btn_continue = new Button();
@@ -81,7 +95,7 @@ public class ScoreBoard extends BorderPane{
             btn_continue.setShape(continueShape);
             btn_continue.setPrefSize(200, 100);
         }
-        
+
         /** Create a menu button */
         btn_menu = new Button();
 
@@ -92,9 +106,9 @@ public class ScoreBoard extends BorderPane{
 
         Rectangle menuShape = new Rectangle();
         menuShape.setArcHeight(50);
-		menuShape.setArcWidth(50);
-		menuShape.setHeight(100);
-		menuShape.setWidth(200);
+        menuShape.setArcWidth(50);
+        menuShape.setHeight(100);
+        menuShape.setWidth(200);
         menuShape.setStrokeWidth(10);
         btn_menu.setShape(menuShape);
         btn_menu.setPrefSize(200, 100);
@@ -125,14 +139,14 @@ public class ScoreBoard extends BorderPane{
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
         btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
     }
-    
+
     /**
-    * Sets every digits to a new digit object.
-    * 
-    * @param    temp
-    * @param    val
-    * @param    y
-    */
+     * Sets every digits to a new digit object.
+     * 
+     * @param temp
+     * @param val
+     * @param y
+     */
     private void setNumbers(int temp, int val, int y) {
         int shift = 0;
         int start = 265;
@@ -156,54 +170,76 @@ public class ScoreBoard extends BorderPane{
         }
     }
 
-	/**
-    * Reads the highscore file and copy the data into an array. Then
-    * updates the array with the new highscore and overwrite the file
-    * with the data in the array.
+    /**
+    * Reads the highscore file and store in a list of array of string.
 	*
+    * @return   highScoreList
+	*/
+    public List<String[]> readData() { 
+        String file = "data/highscore.csv";
+        List<String[]> highScoreList = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = "";
+            while ((line = reader.readLine()) != null)
+                highScoreList.add(line.split(","));
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highScoreList;
+    }
+
+    /**
+    * Update the array of String according to level and points, and sorts it
+    * in an ascending order.
+    *
     * @param    level
     * @param    points
+    * @param    levelHighScoreList
+    * @return   levelHighScoreList
 	*/
-    public String[] updateScoreSheet(int level, int points) {
-        String[] highscoreInfo = null;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("data/highscore.csv"));
-            String line;
-
-            if ((line = br.readLine()) != null) {
-                highscoreInfo = line.split(COMMA_DELIMITER);
-                if (Integer.valueOf(highscoreInfo[level - 1]) < points)
-                    highscoreInfo[level - 1] = Integer.toString(points);
-
-                BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
-                PrintWriter pw = new PrintWriter(bw);
-                for (int i = 0; i < MAXLEVEL; i++) {
-                    if (i == MAXLEVEL - 1)
-                        pw.print(highscoreInfo[i]);
-                    else
-                        pw.print(highscoreInfo[i] + COMMA_DELIMITER);
+    public String[] updateData(int level, int points, String[] levelHighScoreList) {
+        int index = MAXSCORESTORAGE - 1;
+        String temp;
+        if (points > Integer.valueOf(levelHighScoreList[index])){
+            levelHighScoreList[index] = Integer.toString(points);
+            while (index > 0) {
+                if (Integer.valueOf(levelHighScoreList[index]) > Integer.valueOf(levelHighScoreList[index - 1])) {
+                    temp = levelHighScoreList[index - 1];
+                    levelHighScoreList[index - 1] = levelHighScoreList[index];
+                    levelHighScoreList[index] = temp;
+                    index--;
+                } else {
+                    break;
                 }
-                bw.close();
-                pw.close();
-            } else {
-                BufferedWriter bw = new BufferedWriter(new FileWriter("data/highscore.csv", false));
-                PrintWriter pw = new PrintWriter(bw);
-                for (int i = 0; i < MAXLEVEL; i++) {
-                    if (i == level - 1) 
-                        pw.print(Integer.toString(points) + COMMA_DELIMITER);
-                    else if (i == MAXLEVEL - 1)
-                        pw.print("0");
-                    else
-                        pw.print("0" + COMMA_DELIMITER);
-                }
-                bw.close();
-                pw.close();
             }
-            br.close();
+        }
+        return levelHighScoreList;
+    }
+  
+    /**
+    * Overwrites the designated csv file with the highScoreList array.
+	*
+    * @param   highScoreList
+	*/  
+    public void writeData(List<String[]> highScoreList) {
+        String file = "data/highscore.csv";
+        try {
+            BufferedWriter bWriter = new BufferedWriter(new FileWriter(file, false));
+            PrintWriter pWriter = new PrintWriter(bWriter);
+            for (int i = 0; i < MAXLEVEL; i++) {
+                for (int j = 0; j < MAXSCORESTORAGE; j++) {
+                    pWriter.print(highScoreList.get(i)[j]);
+                    if (j != MAXSCORESTORAGE - 1)
+                        pWriter.print(COMMA_DELIMITER);
+                }
+                bWriter.newLine();
+            }
+            pWriter.close();
+            bWriter.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return highscoreInfo;
     }
 
 	/**
