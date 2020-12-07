@@ -4,7 +4,7 @@ import model.Actor;
 import model.BackgroundImage;
 import model.Digit;
 import controller.ScoreBoardController;
-
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -72,7 +72,21 @@ public class ScoreBoard extends BorderPane {
         this.setPrefSize(600, 800);
         game.stop();
         add(new BackgroundImage("scoreboardBackground"));
+        System.out.println("Before Update:");
+        for (int i = 0; i < MAXLEVEL; i++) {
+            for (int j = 0; j < MAXSCORESTORAGE; j++) {
+                System.out.print(highScoreList.get(i)[j] + ",");
+            }
+            System.out.println();
+        }
         highScoreList.set(level - 1, updateData(level, points, highScoreList.get(level - 1)));
+        System.out.println("After Update:");
+        for (int i = 0; i < MAXLEVEL; i++) {
+            for (int j = 0; j < MAXSCORESTORAGE; j++) {
+                System.out.print(highScoreList.get(i)[j] + ",");
+            }
+            System.out.println();
+        }
         // updateData(level, points, highScoreList); 
         highscore = Integer.valueOf(highScoreList.get(level - 1)[0]);
         writeData(highScoreList);
@@ -138,15 +152,33 @@ public class ScoreBoard extends BorderPane {
         btn_menu.setOnAction(controller::handleButtonMenu);
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
         btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
+        showLeaderBoard(level, points);
     }
 
     /**
-     * Sets every digits to a new digit object.
-     * 
-     * @param temp
-     * @param val
-     * @param y
-     */
+    * Create a new alert to show top 10 highscores stored.
+    * 
+    * @param    level
+    * @param    points
+    */
+    private void showLeaderBoard(int level, int points) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        String scores = "History:\n";
+        alert.setTitle("Frogger Leader Board");
+        alert.setHeaderText("Level " + level + " Score: " + points);
+        for (int i = 0; i < MAXSCORESTORAGE; i++)
+            scores += highScoreList.get(level - 1)[i] + "\n";
+        alert.setContentText(scores);
+        alert.show();
+    }
+
+    /**
+    * Sets every digits to a new digit object.
+    * 
+    * @param    temp
+    * @param    val
+    * @param    y
+    */
     private void setNumbers(int temp, int val, int y) {
         int shift = 0;
         int start = 265;
@@ -178,10 +210,21 @@ public class ScoreBoard extends BorderPane {
     public List<String[]> readData() { 
         String file = "data/highscore.csv";
         List<String[]> highScoreList = new ArrayList<>();
+        String[] emptyFile = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = "";
-            while ((line = reader.readLine()) != null)
-                highScoreList.add(line.split(","));
+            if ((line = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null)
+                    highScoreList.add(line.split(","));
+                int diff = MAXLEVEL - highScoreList.size();
+                while (diff > 0) {
+                    diff--;
+                    highScoreList.add(emptyFile);
+                }
+            } else {
+                for (int i = 0; i < MAXLEVEL; i++)
+                    highScoreList.add(emptyFile);
+            }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
