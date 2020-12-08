@@ -61,9 +61,6 @@ public class ScoreBoard extends BorderPane {
         this.game = game;
         this.scene = new Scene(this, 600, 800);
         this.highScoreList = readData();
-        for (int i = 0; i < MAXSCORESTORAGE; i++) 
-            System.out.print(highScoreList.get(0)[i] + ",");
-        System.out.println("\n");
     }
 
     /**
@@ -246,10 +243,6 @@ public class ScoreBoard extends BorderPane {
     public String[] updateData(int level, int points, String[] levelHighScoreList) {
         int index = MAXSCORESTORAGE - 1;
         String temp;
-        for (int i = 0; i < MAXSCORESTORAGE; i++)
-            System.out.print(levelHighScoreList[i] + ",");
-        System.out.println();
-        System.out.println();
         if (points > Integer.valueOf(levelHighScoreList[index])){
             levelHighScoreList[index] = Integer.toString(points);
             while (index > 0) {
@@ -261,9 +254,6 @@ public class ScoreBoard extends BorderPane {
                 } else {
                     break;
                 }
-                for (int i = 0; i < MAXSCORESTORAGE; i++)
-                    System.out.print(levelHighScoreList[i] + ",");
-                System.out.println();
             }
         }
         return levelHighScoreList;
