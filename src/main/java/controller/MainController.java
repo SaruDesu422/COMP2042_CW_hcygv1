@@ -11,6 +11,7 @@ import view.MainMenu;
 public class MainController {
     
     private MainMenu mainMenu;
+    private Game game;
     private Info info;
     private final Image START_MOUSE_IN = new Image("file:media/images/buttons/startMouseIn.png");
     private final Image START = new Image("file:media/images/buttons/start.png");
@@ -34,6 +35,7 @@ public class MainController {
     public MainController(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
         this.info = new Info(mainMenu.getApp());
+        this.game = new Game(mainMenu);
     }
 
     /**
@@ -42,7 +44,7 @@ public class MainController {
     * @param    event
     */
     public void handleButtonStart(ActionEvent event) {
-        Game game = new Game(mainMenu);
+        game.resetLevel();
         game.startNextLevel();
         mainMenu.getApp().changePage(game.getStage());
     }

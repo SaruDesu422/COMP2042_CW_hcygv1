@@ -83,14 +83,12 @@ public abstract class World extends Pane {
     }
 
 	/**
-	* Puts objects into an array.
-	*
-    * @param    <A> Actor
-    * @param    cls object array
-    * @return   someArray
-	*/
+	 * Puts objects into an array.
+	 * @param cls object array
+	 * @return someArray
+	 */
     @SuppressWarnings("unchecked")
-    public <A extends Actor> List<A> getObjects(Class<A> cls) {
+    public <A extends model.Actor> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();
         for (Node n: getChildren()) {
             if (cls.isInstance(n))

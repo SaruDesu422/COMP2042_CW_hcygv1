@@ -377,6 +377,15 @@ public class Game {
     }
 
 	/**
+	* Mutator: int level
+    *
+    * @param	level
+	*/
+    public void resetLevel() {
+        this.level = 0;
+    }
+
+	/**
 	* Accessor: Button btn_menu
     *
     * @return	btn_menu
