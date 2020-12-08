@@ -72,21 +72,21 @@ public class ScoreBoard extends BorderPane {
         this.setPrefSize(600, 800);
         game.stop();
         add(new BackgroundImage("scoreboardBackground"));
-        System.out.println("Before Update:");
-        for (int i = 0; i < MAXLEVEL; i++) {
-            for (int j = 0; j < MAXSCORESTORAGE; j++) {
-                System.out.print(highScoreList.get(i)[j] + ",");
-            }
-            System.out.println();
-        }
+//        System.out.println("Before Update:");
+//        for (int i = 0; i < MAXLEVEL; i++) {
+//            for (int j = 0; j < MAXSCORESTORAGE; j++) {
+//                System.out.print(highScoreList.get(i)[j] + ",");
+//            }
+//            System.out.println();
+//        }
         highScoreList.set(level - 1, updateData(level, points, highScoreList.get(level - 1)));
         System.out.println("After Update:");
-        for (int i = 0; i < MAXLEVEL; i++) {
-            for (int j = 0; j < MAXSCORESTORAGE; j++) {
-                System.out.print(highScoreList.get(i)[j] + ",");
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < MAXLEVEL; i++) {
+//            for (int j = 0; j < MAXSCORESTORAGE; j++) {
+//                System.out.print(highScoreList.get(i)[j] + ",");
+//            }
+//            System.out.println();
+//        }
         // updateData(level, points, highScoreList); 
         highscore = Integer.valueOf(highScoreList.get(level - 1)[0]);
         writeData(highScoreList);
@@ -210,7 +210,6 @@ public class ScoreBoard extends BorderPane {
     public List<String[]> readData() { 
         String file = "data/highscore.csv";
         List<String[]> highScoreList = new ArrayList<>();
-        String[] emptyFile = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = "";
             if ((line = reader.readLine()) != null) {
@@ -218,12 +217,15 @@ public class ScoreBoard extends BorderPane {
                     highScoreList.add(line.split(","));
                 int diff = MAXLEVEL - highScoreList.size();
                 while (diff > 0) {
+                    String[] emptyFile = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
                     diff--;
                     highScoreList.add(emptyFile);
                 }
             } else {
-                for (int i = 0; i < MAXLEVEL; i++)
+                for (int i = 0; i < MAXLEVEL; i++) {
+                    String[] emptyFile = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
                     highScoreList.add(emptyFile);
+                }
             }
             reader.close();
         } catch (IOException e) {
