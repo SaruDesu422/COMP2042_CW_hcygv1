@@ -32,6 +32,7 @@ public class App extends Application {
 	/**
 	* Change Scene of primary stage to MainMenu.
 	*
+	* @see		MainMenu
 	*/
 	public void showMainMenu() {
 		primaryStage.setScene(mainMenu.getScene());
@@ -45,6 +46,26 @@ public class App extends Application {
 	*/
 	public void showScoreBoard(ScoreBoard scoreBoard) {
 		primaryStage.setScene(scoreBoard.getScene());
+	}
+
+	/**
+	* Change Scene of primary stage to Info.
+	* 
+	* @param	info
+	* @see		info
+	*/
+	public void showInfo(Info info) {
+		primaryStage.setScene(info.getScene());
+	}
+
+	/**
+	* Change Scene of primary stage to LeaderBoard.
+	* 
+	* @param	leaderBoard
+	* @see		leaderBoard
+	*/
+	public void showLeaderBoard(LeaderBoard leaderBoard) {
+		primaryStage.setScene(leaderBoard.getScene());
 	}
 
 	/**

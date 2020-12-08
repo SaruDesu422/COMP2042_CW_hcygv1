@@ -53,7 +53,7 @@ public class MainController {
     * @param    event
     */
     public void handleButtonInfo(ActionEvent event) {
-        mainMenu.getApp().changePage(info);
+        mainMenu.getApp().showInfo(info);
     }
 
     /**

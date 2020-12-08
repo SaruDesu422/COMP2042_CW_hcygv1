@@ -4,13 +4,15 @@ import model.Actor;
 import model.BackgroundImage;
 import model.Digit;
 import controller.ScoreBoardController;
-import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Scene;
 
@@ -36,7 +38,10 @@ public class ScoreBoard extends BorderPane {
     private final String COMMA_DELIMITER = ",";
     private Button btn_continue;
     private Button btn_menu;
+    private Button btn_leader;
     private int highscore;
+    private int level;
+    private int points;
     private List<String[]> highScoreList;
 
     /**
@@ -56,6 +61,9 @@ public class ScoreBoard extends BorderPane {
         this.game = game;
         this.scene = new Scene(this, 600, 800);
         this.highScoreList = readData();
+        for (int i = 0; i < MAXSCORESTORAGE; i++) 
+            System.out.print(highScoreList.get(0)[i] + ",");
+        System.out.println("\n");
     }
 
     /**
@@ -70,26 +78,16 @@ public class ScoreBoard extends BorderPane {
      */
     public void show(int level, int points) {
         this.setPrefSize(600, 800);
+        this.level = level;
+        this.points = points;
         game.stop();
         add(new BackgroundImage("scoreboardBackground"));
-//        System.out.println("Before Update:");
-//        for (int i = 0; i < MAXLEVEL; i++) {
-//            for (int j = 0; j < MAXSCORESTORAGE; j++) {
-//                System.out.print(highScoreList.get(i)[j] + ",");
-//            }
-//            System.out.println();
-//        }
+
+        // update high scores in file
         highScoreList.set(level - 1, updateData(level, points, highScoreList.get(level - 1)));
-        System.out.println("After Update:");
-//        for (int i = 0; i < MAXLEVEL; i++) {
-//            for (int j = 0; j < MAXSCORESTORAGE; j++) {
-//                System.out.print(highScoreList.get(i)[j] + ",");
-//            }
-//            System.out.println();
-//        }
-        // updateData(level, points, highScoreList); 
         highscore = Integer.valueOf(highScoreList.get(level - 1)[0]);
         writeData(highScoreList);
+
         // go to the method, the writeData method
         if (level < MAXLEVEL) {
             /** Create a continue button */
@@ -127,6 +125,19 @@ public class ScoreBoard extends BorderPane {
         btn_menu.setShape(menuShape);
         btn_menu.setPrefSize(200, 100);
 
+        /** Create a leaderboard button */
+        btn_leader = new Button();
+
+        ImageView leaderBG = new ImageView(new Image("file:media/images/buttons/leader.png"));
+        leaderBG.setFitHeight(30);
+        leaderBG.setFitWidth(25);
+        btn_leader.setGraphic(leaderBG);
+
+        Circle circle = new Circle();
+        circle.setRadius(15);
+        btn_leader.setShape(circle);
+        btn_leader.setPrefSize(30, 30);
+
         /** Show highscore, score and level */
         setNumbers(highscore, highscore, 168);
         setNumbers(points, points, 227);
@@ -149,27 +160,16 @@ public class ScoreBoard extends BorderPane {
             setCenter(btn_menu);
             setMargin(btn_menu, new Insets(450, 0, 0, 0));
         }
+        setTop(btn_leader);
+        setAlignment(btn_leader, Pos.TOP_RIGHT);
+        setMargin(btn_leader, new Insets(15, 15, 0, 0));
+
         btn_menu.setOnAction(controller::handleButtonMenu);
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
         btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
-        showLeaderBoard(level, points);
-    }
-
-    /**
-    * Create a new alert to show top 10 highscores stored.
-    * 
-    * @param    level
-    * @param    points
-    */
-    private void showLeaderBoard(int level, int points) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        String scores = "History:\n";
-        alert.setTitle("Frogger Leader Board");
-        alert.setHeaderText("Level " + level + " Score: " + points);
-        for (int i = 0; i < MAXSCORESTORAGE; i++)
-            scores += highScoreList.get(level - 1)[i] + "\n";
-        alert.setContentText(scores);
-        alert.show();
+        btn_leader.setOnAction(controller::handleButtonLeader);
+        btn_leader.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonLeaderMouseIn);
+        btn_leader.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonLeaderMouseOut);
     }
 
     /**
@@ -217,14 +217,14 @@ public class ScoreBoard extends BorderPane {
                     highScoreList.add(line.split(","));
                 int diff = MAXLEVEL - highScoreList.size();
                 while (diff > 0) {
-                    String[] emptyFile = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
+                    String[] emptyLine = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
+                    highScoreList.add(emptyLine);
                     diff--;
-                    highScoreList.add(emptyFile);
                 }
             } else {
                 for (int i = 0; i < MAXLEVEL; i++) {
-                    String[] emptyFile = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
-                    highScoreList.add(emptyFile);
+                    String[] emptyLine = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
+                    highScoreList.add(emptyLine);
                 }
             }
             reader.close();
@@ -246,6 +246,10 @@ public class ScoreBoard extends BorderPane {
     public String[] updateData(int level, int points, String[] levelHighScoreList) {
         int index = MAXSCORESTORAGE - 1;
         String temp;
+        for (int i = 0; i < MAXSCORESTORAGE; i++)
+            System.out.print(levelHighScoreList[i] + ",");
+        System.out.println();
+        System.out.println();
         if (points > Integer.valueOf(levelHighScoreList[index])){
             levelHighScoreList[index] = Integer.toString(points);
             while (index > 0) {
@@ -257,6 +261,9 @@ public class ScoreBoard extends BorderPane {
                 } else {
                     break;
                 }
+                for (int i = 0; i < MAXSCORESTORAGE; i++)
+                    System.out.print(levelHighScoreList[i] + ",");
+                System.out.println();
             }
         }
         return levelHighScoreList;
@@ -298,6 +305,33 @@ public class ScoreBoard extends BorderPane {
     }
     
 	/**
+	* Accessor: int level
+	*
+    * @param    level
+	*/
+    public int getLevel() {
+        return this.level;
+    }
+    
+	/**
+	* Accessor: int points
+	*
+    * @param    points
+	*/
+    public int getPoints() {
+        return this.points;
+    }
+    
+	/**
+	* Accessor: List<String[]> highScoreList
+	*
+    * @param    highScoreList
+	*/
+    public List<String[]> getHighScoreList() {
+        return this.highScoreList;
+    }
+    
+	/**
 	* Accessor: Button btn_continue
 	*
     * @param    btn_continue
@@ -313,6 +347,15 @@ public class ScoreBoard extends BorderPane {
 	*/
     public Button getMenuButton() {
         return this.btn_menu;
+    }
+
+	/**
+	* Accessor: Button btn_leader
+	*
+    * @param    btn_leader
+	*/
+    public Button getLeaderButton() {
+        return this.btn_leader;
     }
 
 	/**

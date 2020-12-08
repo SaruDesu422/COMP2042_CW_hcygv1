@@ -3,7 +3,7 @@ package view;
 import model.Actor;
 import controller.InfoController;
 import model.BackgroundImage;
-
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,10 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 
-public class Info extends BorderPane{
+public class Info extends BorderPane {
 
 	private Button btn_exit;
 	private App app;
+
+	protected Scene scene;
 
 	private InfoController controller;
 
@@ -31,11 +33,12 @@ public class Info extends BorderPane{
     */
     public Info(App app) {
         this.app = app;
+		this.scene = new Scene(this, 600, 800);
         initialize();
 	}
 
 	/**
-	* Adds the buttons and backgrounds to the pane.
+	* Adds the buttons and background to the pane.
     *
 	*/
 	public void initialize() {
