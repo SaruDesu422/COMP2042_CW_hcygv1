@@ -23,17 +23,14 @@ public class Turtle extends Actor{
 	boolean bool = true;
 
 	/**
-	* Sets a turtle as an actor, allows movements.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-    *
-	* @param  	x
-	* @param  	y
-	* @param  	speed
-	* @param	animal
-	* @see		Animal
-	*/
+	 * Sets a turtle as an actor, allows movements.
+	 * 
+	 * @param	x
+	 * @param	y
+	 * @param	speed
+	 * @param	animal
+	 * @see		Animal
+	 */
 	public Turtle(int x, int y, double speed, Animal animal) {
 		this.animal = animal;
 		this.speed = speed;
@@ -50,13 +47,11 @@ public class Turtle extends Actor{
 	}
 	
 	/**
-	* Every frame, this method:<p>
-	* - Sets image as part of animation<p>
-	* - Checks out of bounds<p>
-	* - Checks for vertical movements
-    *
-    * @param  now  current frame
-	*/
+	 * Every frame, this method sets image according to the frame,
+	 * checks for out of bounds and vertical movements.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		move(speed, 0);
@@ -89,10 +84,10 @@ public class Turtle extends Actor{
 	}
 	
 	/**
-	* Accessor: double speed
-	*
-	* @return	speed
-	*/
+	 * Accessor: double speed
+	 * 
+	 * @return	speed
+	 */
 	public double getSpeed() {
 		return speed;
 	}

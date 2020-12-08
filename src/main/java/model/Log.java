@@ -15,19 +15,15 @@ public class Log extends Actor {
 	private Animal animal;
 
 	/**
-	* Sets a log as an actor, allows movements.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-    *
-    * @param  	imageLink
-	* @param  	size
-	* @param  	x
-	* @param  	y
-	* @param  	speed
-	* @param	animal
-	* @see		Animal
-	*/
+	 * Sets a log as an actor, allows movements.
+	 * 
+	 * @param 	imageLink
+	 * @param 	x
+	 * @param 	y
+	 * @param 	speed
+	 * @param 	animal
+	 * @see		Animal
+	 */
 	public Log(String imageLink, int x, int y, double speed, Animal animal) {
 		this.animal = animal;
 		this.speed = speed;
@@ -42,12 +38,11 @@ public class Log extends Actor {
 	}
 
 	/**
-	* Every frame, this method:<p>
-	* - Checks out of bounds<p>
-	* - Checks for vertical movements
-    *
-    * @param  now  current frame
-	*/
+	 * Every frame, this method checks for out of bounds and
+	 * vertical movements.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		move(speed, 0);
@@ -67,10 +62,10 @@ public class Log extends Actor {
 	}
 
 	/**
-	* Accessor: double speed
-	* 
-	* @return	speed
-	*/
+	 * Accessor: double speed
+	 * 
+	 * @return	speed
+	 */
 	public double getSpeed() {
 		return speed;
 	}

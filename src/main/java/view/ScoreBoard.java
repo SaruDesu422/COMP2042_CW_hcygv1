@@ -45,16 +45,12 @@ public class ScoreBoard extends BorderPane {
     private List<String[]> highScoreList;
 
     /**
-     * Sets up the pane for the scoreboard pane to be shown on.
+     * Sets up the pane for the ScoreBoard page to be shown on.
      * 
-     * <pre>
-     * Methods:<br>show(int level, int points)<br>setNumbers(int temp, int val, int y)<br>updateScoreSheet(int level, int points)
-     * </pre>
-     *
-     * @param mainMenu
-     * @param game
-     * @see MainMenu
-     * @see Game
+     * @param   mainMenu
+     * @param   game
+     * @see     MainMenu
+     * @see     Game
      */
     public ScoreBoard(MainMenu mainMenu, Game game) {
         this.mainMenu = mainMenu;
@@ -64,14 +60,11 @@ public class ScoreBoard extends BorderPane {
     }
 
     /**
-     * ScoreBoard has 2 types of characteristic.
-     * <p>
-     * - Continue Button & MainMenu Button
-     * <p>
-     * - Only MainMenu Button
-     *
-     * @param level  scoreboard characteristic depends on current level
-     * @param points show points on scoreboard
+     * ScoreBoard shows the continue button for all levels except
+     * for the last level. Mainmenu button is always on the page.
+     * 
+     * @param   level
+     * @param   points
      */
     public void show(int level, int points) {
         this.setPrefSize(600, 800);
@@ -170,12 +163,12 @@ public class ScoreBoard extends BorderPane {
     }
 
     /**
-    * Sets every digits to a new digit object.
-    * 
-    * @param    temp
-    * @param    val
-    * @param    y
-    */
+     * Sets every digits to a new Digit object.
+     * 
+     * @param   temp
+     * @param   val
+     * @param   y
+     */
     private void setNumbers(int temp, int val, int y) {
         int shift = 0;
         int start = 265;
@@ -200,10 +193,10 @@ public class ScoreBoard extends BorderPane {
     }
 
     /**
-    * Reads the highscore file and store in a list of array of string.
-	*
-    * @return   highScoreList
-	*/
+     * Reads the highscore file and store in a list of array of string.
+     * 
+     * @return  highScoreList
+     */
     public List<String[]> readData() { 
         String file = "data/highscore.csv";
         List<String[]> highScoreList = new ArrayList<>();
@@ -232,14 +225,14 @@ public class ScoreBoard extends BorderPane {
     }
 
     /**
-    * Update the array of String according to level and points, and sorts it
-    * in an ascending order.
-    *
-    * @param    level
-    * @param    points
-    * @param    levelHighScoreList
-    * @return   levelHighScoreList
-	*/
+     * Update the array of String according to level and points, and sort it
+     * in an ascending order.
+     * 
+     * @param   level
+     * @param   points
+     * @param   levelHighScoreList
+     * @return  levelHighScoreList
+     */
     public String[] updateData(int level, int points, String[] levelHighScoreList) {
         int index = MAXSCORESTORAGE - 1;
         String temp;
@@ -260,10 +253,10 @@ public class ScoreBoard extends BorderPane {
     }
   
     /**
-    * Overwrites the designated csv file with the highScoreList array.
-	*
-    * @param   highScoreList
-	*/  
+     * Overwrites the designated csv file with the highScoreList list.
+     * 
+     * @param   highScoreList
+     */
     public void writeData(List<String[]> highScoreList) {
         String file = "data/highscore.csv";
         try {
@@ -284,75 +277,75 @@ public class ScoreBoard extends BorderPane {
         }
     }
 
-	/**
-	* Adds actor to current pane.
-	*
-	* @param	actor
-    * @see		Actor
-	*/
+    /**
+     * Adds actor to the current pane.
+     * 
+     * @param   actor
+     * @see     Actor
+     */
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
     
-	/**
-	* Accessor: int level
-	*
-    * @param    level
-	*/
+    /**
+     * Accessor: int level
+     * 
+     * @return  level
+     */
     public int getLevel() {
         return this.level;
     }
     
-	/**
-	* Accessor: int points
-	*
-    * @param    points
-	*/
+    /**
+     * Accessor: int points
+     * 
+     * @return  points
+     */
     public int getPoints() {
         return this.points;
     }
     
-	/**
-	* Accessor: List<String[]> highScoreList
-	*
-    * @param    highScoreList
-	*/
+    /**
+     * Accessor: List of String[] highScoreList
+     * 
+     * @return  highScoreList
+     */
     public List<String[]> getHighScoreList() {
         return this.highScoreList;
     }
     
-	/**
-	* Accessor: Button btn_continue
-	*
-    * @param    btn_continue
-	*/
+    /**
+     * Accessor: Button btn_continue
+     * 
+     * @return  btn_continue
+     */
     public Button getContinueButton() {
         return this.btn_continue;
     }
 
-	/**
-	* Accessor: Button btn_menu
-	*
-    * @param    btn_menu
-	*/
+    /**
+     * Accessor: Button btn_menu
+     * 
+     * @return  btn_menu
+     */
     public Button getMenuButton() {
         return this.btn_menu;
     }
 
-	/**
-	* Accessor: Button btn_leader
-	*
-    * @param    btn_leader
-	*/
+    /**
+     * Accessor: Button btn_leader
+     * 
+     * @return  btn_leader
+     */
     public Button getLeaderButton() {
         return this.btn_leader;
     }
 
-	/**
-	* Accessor: MainMenu mainMenu
-	*
-    * @param    mainMenu
-	*/
+    /**
+     * Accessor: MainMenu mainMenu
+     * 
+     * @return  mainMenu
+     */
     public MainMenu getMainMenu() {
         return this.mainMenu;
     }

@@ -12,35 +12,30 @@ public class InfoController {
     private final Image BACK_MOUSE_IN = new Image("file:media/images/buttons/backMouseIn.png");
     private final Image BACK = new Image("file:media/images/buttons/back.png");
 
-	/**
-	* Controls the actions for key events on info page.
-	* <pre>
-    * Methods:<br>handleButtonExit(ActionEvent event)
-    * handleButtonExitMouseIn(MouseEvent event)
-    * handleButtonExitMouseOut(MouseEvent event)
-	* </pre>
-    *
-    * @param    info
-    * @see      Info
-	*/
+    /**
+     * Controls the actions for mouse event on info page.
+     * 
+     * @param   info
+     * @see     Info
+     */
     public InfoController(Info info) {
         this.info = info;
     }
 
     /**
-    * Change page to main menu page when the exit button is clicked.
-    * 
-    * @param    event
-    */
+     * Change page to main menu page when the exit button is clicked.
+     * 
+     * @param   event
+     */
     public void handleButtonExit(ActionEvent event) {
         info.getApp().showMainMenu();
     }
 
     /**
-    * Configures image when the mouse is hovering on the exit button.
-    * 
-    * @param    event
-    */
+     * Configures image when the cursor is hovering on the exit button.
+     * 
+     * @param event
+     */
     public void handleButtonExitMouseIn(MouseEvent event) {
         ImageView exitMouseIn = new ImageView(BACK_MOUSE_IN);
         exitMouseIn.setFitHeight(30);
@@ -49,10 +44,10 @@ public class InfoController {
     }
     
     /**
-    * Configures image when the mouse is moved away from the exit button.
-    * 
-    * @param    event
-    */
+     * Configures image when the cursor is moved away from the exit button.
+     * 
+     * @param   event
+     */
     public void handleButtonExitMouseOut(MouseEvent event) {
         ImageView exitMouseOut = new ImageView(BACK);
         exitMouseOut.setFitHeight(30);

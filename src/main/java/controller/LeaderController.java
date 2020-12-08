@@ -12,35 +12,30 @@ public class LeaderController {
     private final Image BACK_MOUSE_IN = new Image("file:media/images/buttons/backMouseIn.png");
     private final Image BACK = new Image("file:media/images/buttons/back.png");
 
-	/**
-	* Controls the actions for key events on leaderboard page.
-	* <pre>
-    * Methods:<br>handleButtonExit(ActionEvent event)
-    * handleButtonExitMouseIn(MouseEvent event)
-    * handleButtonExitMouseOut(MouseEvent event)
-	* </pre>
-    *
-    * @param    leader
-    * @see      leader
-	*/
+    /**
+     * Controls the actions for mouse events on leaderbaord page.
+     * 
+     * @param   leader
+     * @see     LeaderBoard
+     */
     public LeaderController(LeaderBoard leader) {
         this.leader = leader;
     }
 
     /**
-    * Change page to main menu page when the exit button is clicked.
-    * 
-    * @param    event
-    */
+     * Change page to scoreBoard page when the exit button is clicked.
+     * 
+     * @param   event
+     */
     public void handleButtonExit(ActionEvent event) {
         leader.getApp().showScoreBoard(leader.getScoreBoard());
     }
 
     /**
-    * Configures image when the mouse is hovering on the exit button.
-    * 
-    * @param    event
-    */
+     * Configures image when the cursor is hovering on the exit button.
+     * 
+     * @param   event
+     */
     public void handleButtonExitMouseIn(MouseEvent event) {
         ImageView exitMouseIn = new ImageView(BACK_MOUSE_IN);
         exitMouseIn.setFitHeight(30);
@@ -49,10 +44,10 @@ public class LeaderController {
     }
     
     /**
-    * Configures image when the mouse is moved away from the exit button.
-    * 
-    * @param    event
-    */
+     * Configures image when the cursor is moved away from the exit button.
+     * 
+     * @param   event
+     */
     public void handleButtonExitMouseOut(MouseEvent event) {
         ImageView exitMouseOut = new ImageView(BACK);
         exitMouseOut.setFitHeight(30);

@@ -27,20 +27,17 @@ public class WetTurtle extends Actor{
 	private boolean sunk = false;
 
 	/**
-	* Sets a wet turtle as an actor, allows movements.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-    *
-	* @param  	x
-	* @param  	y
-	* @param  	speed
-	* @param	animal
-	* @see		Animal
-	*/
-	public WetTurtle(int xpos, int ypos, double s, Animal animal) {
+	 * Sets a wet turtle as an actor, allows movements.
+	 * 
+	 * @param 	xpos
+	 * @param 	ypos
+	 * @param 	speed
+	 * @param 	animal
+	 * @see		Animal
+	 */
+	public WetTurtle(int xpos, int ypos, double speed, Animal animal) {
 		this.animal = animal;
-		this.speed = s;
+		this.speed = speed;
 		setX(xpos);
 		setY(ypos);
 		setImage(IMG_TURTLE1);
@@ -54,13 +51,11 @@ public class WetTurtle extends Actor{
 	}
 	
 	/**
-	* Every frame, this method:<p>
-	* - Sets image as part of animation<p>
-	* - Checks out of bounds<p>
-	* - Checks for vertical movements
-    *
-    * @param  now  current frame
-	*/
+	 * Every frame, this method sets image according to the frame,
+	 * checks for out of bounds and vertical movements.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		move(speed, 0);
@@ -111,19 +106,19 @@ public class WetTurtle extends Actor{
 	}
 
 	/**
-	* Accessor: boolean sunk
-    *
-	* @return	sunk
-	*/
+	 * Accessor: boolean sunk
+	 * 
+	 * @return	sunk
+	 */
 	public boolean isSunk() {
 		return sunk;
 	}
 	
 	/**
-	* Accessor: double speed
-    *
-	* @return	speed
-	*/
+	 * Accessor: double speed
+	 * 
+	 * @return	speed
+	 */
 	public double getSpeed() {
 		return speed;
 	}

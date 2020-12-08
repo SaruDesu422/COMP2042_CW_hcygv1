@@ -13,18 +13,14 @@ public class End extends Actor{
 	private final String IMG_FROGEND = "frogEnd";
 	private final String IMG_END = "End";
 
-	
 	/**
-	* Sets an end as an actor, allows movement.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-    *
-	* @param  	x
-	* @param  	y
-	* @param	animal
-	* @see		Animal
-	*/
+	 * Sets an end as an actor, allows vertical movements.
+	 * 
+	 * @param	x
+	 * @param	y
+	 * @param	animal
+	 * @see		Animal
+	 */
 	public End(int x, int y, Animal animal) {
 		this.animal = animal;
 		this.activated = false;
@@ -39,10 +35,10 @@ public class End extends Actor{
 	}
 
 	/**
-	* Every frame, checks for vertical movements and move accordingly.
-    *
-    * @param  now current frame
-	*/
+	 * Every frame, checks for vertical movements and move accordingly.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		if (animal.isMoveDown())
@@ -52,19 +48,18 @@ public class End extends Actor{
 	}
 
 	/**
-	* Set end to activated and change image.
-	*
-	*/
+	 * Sets end to activated and change the object's image.
+	 */
 	public void setEnd() {
 		setImage(getImage(IMG_FROGEND));
 		activated = true;
 	}
 	
 	/**
-	* Accessor: boolean activated
-	*
-	* @return	activated
-	*/
+	 * Accessor: boolean activated
+	 * 
+	 * @return	activated
+	 */
 	public boolean isActivated() {
 		return activated;
 	}

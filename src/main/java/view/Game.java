@@ -62,14 +62,11 @@ public class Game {
     int rest;
 
     /**
-    * Sets up the pane for the current level to be shown on.
-    * <pre>
-    * Methods:<br>initializeLevelInfo()<br>startNextLevel()<br>createTimer()
-    * </pre>
-    *
-    * @param    mainMenu
-    * @see      MainMenu
-    */
+     * Sets up the pane for the current level to be shown on.
+     * 
+     * @param   mainMenu
+     * @see     MainMenu  
+     */
     public Game(MainMenu mainMenu) {
         this.level = 0;
         this.mainMenu = mainMenu;
@@ -77,10 +74,9 @@ public class Game {
     }
 
     /**
-    * Reads the level file, stores the data in arrays and 
-    * sorts the backgroundInfo array.
-    *
-    */
+     * Reads the level file, stores the data in arrays and
+     * sorts the backgroundInfo array.
+     */
     public void initializeLevelInfo() {
         logInfo = new ArrayList<List<String>>();
         turtleInfo = new ArrayList<List<String>>();
@@ -149,9 +145,8 @@ public class Game {
     }
 
     /**
-    * Sets up the stage for the level and adds objects.
-    * 
-    */
+     * Sets up the stage for the level and adds objects
+     */
     public void startNextLevel() {
         level++;
         initializeLevelInfo();
@@ -256,10 +251,11 @@ public class Game {
     }
 
     /**
-    * Creates a new array for each steps whether it is water or not.
-    *
-    * @return   water
-    */
+     * Creates a new array containing information regarding the
+     * background type.
+     * 
+     * @return  water
+     */
     public List<Integer> getWater() {
         List<Integer> water = new ArrayList<Integer>();
         water.add(0);
@@ -281,9 +277,8 @@ public class Game {
     }
 
     /**
-    * Initiates the starting routine of every level.
-    * 
-    */
+     * Initiates the starting routine of every level.
+     */
     public void start() {
         stage.playMusic();
     	createTimer();
@@ -291,15 +286,13 @@ public class Game {
     }
 
     /**
-    * Create a new AnimationTimer to start the game. 
-    * Every frame, this method:<p>
-    * - Calls the act method on every objects<p>
-    * - Sets the scores<p>
-    * - Checks for end of level
-    *
-    */
+     * Creates a new AnimationTimer to start the game.
+     * Every frame, this method:<p>
+     * - Calls the act method on every objects<p>
+     * - Sets the scores<p>
+     * - Checks for end of level
+     */
     public void createTimer() {
-        // int currentPoints = 0;
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -307,7 +300,7 @@ public class Game {
                 List<Digit> digits = stage.getObjects(Digit.class);
                 for (Actor anActor:actors) anActor.act(now);
                 for (Digit aDigit:digits) stage.remove(aDigit);
-                setNumber(animal.getPoints());
+                setNumbers(animal.getPoints());
             	if (animal.getEndActivated() == 5) {
                     scoreBoard.show(level, animal.getPoints());
                     mainMenu.getApp().showScoreBoard(scoreBoard);
@@ -317,11 +310,11 @@ public class Game {
     }
     
     /**
-    * Sets every digits in points to a new digit object.
-    * 
-    * @param    points
-    */
-    public void setNumber(int points) {
+     * Sets every digits in points to a new Digit object.
+     * 
+     * @param   points
+     */
+    public void setNumbers(int points) {
     	int shift = 0;
         stage.add(new Digit(0, 540, 43));
     	while (points > 0) {
@@ -338,67 +331,65 @@ public class Game {
         timer.stop();
     }
 
-    /** Accessors **/
-
-	/**
-	* Accessor: List<List<Integer>> backgroundInfo
-    *
-    * @return	backgroundInfo
-	*/
+    /**
+     * Accessor: List of Lists of Integers background Info
+     * 
+     * @return  backgroundInfo
+     */
     public List<List<Integer>> getBackgroundInfo() {
         return this.backgroundInfo;
     }
 
-	/**
-	* Accessor: int endInfo
-    *
-    * @return	endInfo
-	*/
+    /**
+     * Accessor: int endInfo
+     * 
+     * @return  endInfo
+     */
     public int getEnd() {
         return endInfo;
     }
 
-	/**
-	* Accessor: MyStage stage
-    *
-    * @return	stage
-	*/
+    /**
+     * Accessor: MyStage stage
+     * 
+     * @return  stage
+     */
     public MyStage getStage() {
         return this.stage;
     }
 
-	/**
-	* Accessor: int level
-    *
-    * @return	level
-	*/
+    /**
+     * Accessor: int level
+     * 
+     * @return  level
+     */
     public int getLevel() {
         return this.level;
     }
 
-	/**
-	* Mutator: int level
-    *
-    * @param	level
-	*/
+    /**
+     * Mutator: int level
+     * 
+     * level = 0
+     */
     public void resetLevel() {
         this.level = 0;
     }
 
-	/**
-	* Accessor: Button btn_menu
-    *
-    * @return	btn_menu
-	*/
+    /**
+     * AccessorL Button btn_menu
+     * 
+     * @return  btn_menu
+     */
     public Button getMenuButton() {
 		return this.btn_menu;
     }
     
-	/**
-	* Accessor: MainMenu mainMenu
-    *
-    * @return	mainMenu
-	*/
+    /**
+     * Accessor: MainMenu mainMenu
+     * 
+     * @return  mainMenu
+     */
     public MainMenu getMainMenu() {
         return this.mainMenu;
     }

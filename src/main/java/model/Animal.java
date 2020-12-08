@@ -51,12 +51,11 @@ public class Animal extends Actor {
 	int temp = 0;
 
 	/**
-	* Frog that can be controlled by the player to play the game.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-	*
-	*/
+	 * Frog that can be controlled by the player to play the game.
+	 * 
+	 * @param 	game
+	 * @see		Game
+	 */
 	public Animal(Game game) {
 		
 		water = new ArrayList<Integer>();
@@ -90,14 +89,11 @@ public class Animal extends Actor {
 	}
 
 	/**
-	* Every frames, this method:<p>
-	* - Checks out of Bounds<p>
-	* - Checks move down<p>
-	* - Checks intersect objects<p>
-	* - Sets death animation
-	*
-	* @param	now current frame
-	*/
+	 * Every frame, this method checks for out of bounds,
+	 * move down, intersecting objects and sets death animation.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		/* Check out of Bounds */
@@ -183,9 +179,9 @@ public class Animal extends Actor {
 	}
 	
 	/**
-	* Sets the animal back to the starting point and resets end position.
-    *
-	*/
+	 * Sets the animal back to the starting point and resets the ends
+	 * y position
+	 */
 	private void setStart() {
 		moveBG = false;
 		endInfo += downMovement;
@@ -204,122 +200,120 @@ public class Animal extends Actor {
 			return new Image("file:media/images/death/" + address + deathFrame + ".png", IMAGE_SIZE, IMAGE_SIZE, true, true);
 		else return new Image("file:media/images/frog/" + address + ".png", 0, IMAGE_SIZE, true, true);
 	}
-	
-	/** Accessors & Mutators **/
 
 	/**
-	* Accessor: boolean frameMove
-    *
-    * @return	frameMove
-	*/
+	 * Accessor: boolean frameMove
+	 * 
+	 * @return	frameMove
+	 */
 	public boolean isFrameMove() {
 		return this.frameMove;
 	}
 
 	/**
-	* Mutators: boolean frameMove
-    *
-    * @param	frameMove
-	*/
+	 * Mutators: boolean frameMove
+	 * 
+	 * @param	frameMove
+	 */
 	public void setFrameMove(boolean frameMove) {
 		this.frameMove = frameMove;
 	}
 
 	/**
-	* Accessor: boolean move
-    *
-    * @return	move
-	*/
+	 * Accessor: boolean move
+	 * 
+	 * @return	move
+	 */
 	public boolean isMove() {
 		return this.move;
 	}
 	
 	/**
-	* Accessor: boolean moveBG
-    *
-    * @return	moveBG
-	*/
+	 * Accessor: boolean moveBG
+	 * 
+	 * @return	moveBG
+	 */
 	public boolean isMoveBG() {
 		return this.moveBG;
 	}
 
 	/**
-	* Accessor: boolean moveDown
-    *
-    * @return	moveDown
-	*/
+	 * Accessor: boolean moveDown
+	 * 
+	 * @return	moveDown
+	 */
 	public boolean isMoveDown() {
 		return this.moveDown;
 	}
 
 	/**
-	* Accessor: int endActivated
-    *
-    * @return	endActivated
-	*/
+	 * Accessor: int endActivated
+	 * 
+	 * @return endActivated
+	 */
 	public int getEndActivated() {
 		return endActivated;
 	}
 
 	/**
-	* Accessor: int points
-    *
-    * @return	points
-	*/
+	 * Accessor: int points
+	 * 
+	 * @return	points
+	 */
 	public int getPoints() {
 		return this.points;
 	}
 
 	/**
-	* Mutators: int points
-    *
-    * @param	points
-	*/
+	 * Mutators: int points
+	 * 
+	 * @param	points
+	 */
 	public void setPoints(int points) {
 		this.points = points;
 	}
 
 	/**
-	* Accessor: int upMovement
-    *
-    * @return	upMovement
-	*/
+	 * Accessor: int upMovement
+	 * 
+	 * @return	upMovement
+	 */
 	public int getUpMovement() {
 		return this.upMovement;
 	}
 
 	/**
-	* Mutators: int upMovement
-    *
-    * @param	upMovement
-	*/
+	 * Mutators: int upMovement
+	 * 
+	 * @param	upMovement
+	 */
 	public void setUpMovement(int upMovement) {
 		this.upMovement = upMovement;
 	}
 
 	/**
-	* Accessor: double highest_y
-    *
-    * @return	highest_y
-	*/
+	 * Accessor: double highest_y
+	 * 
+	 * @return	highest_y
+	 */
 	public double getHighestY() {
 		return this.highest_y;
 	}
 
 	/**
-	* Mutators: double highest_y
-    *
-    * @param	highscore_y
-	*/
+	 * Mutators: double highest_y
+	 * 
+	 * @param	highest_y
+	 */
 	public void setHighestY(double highest_y) {
 		this.highest_y = highest_y;
 	}
 
 	/**
-	* Accessor: int downMovement
-    *
-    * @return	downMovement
-	*/
+	 * Accessor: int downMovement
+	 * 
+	 * @return	downMovement
+	 */
 	public int getDownMovement() {
 		return this.downMovement;
 	}

@@ -12,28 +12,22 @@ public class BackgroundImage extends Actor{
 	private final String IMG_STARTBACKGROUND = "startBackground";
 
 	/**
-	* Sets an immovable background.
-	* <pre>
-	* Methods:<br>getImage(String address)
-	* </pre>
-    *
-    * @param  	imageLink
-	*/
+	 * Sets an immovable background.
+	 * 
+	 * @param	imageLink
+	 */
 	public BackgroundImage(String imageLink) {
 		setImage(new Image("file:media/images/background/" + imageLink + ".png", MAX_X, 0, true, true));
 	}
 
 	/**
-	* Sets a background as an actor, allows vertical movements.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-    *
-    * @param  	imageLink
-	* @param  	y
-	* @param	animal
-	* @see		Animal
-	*/
+	 * Sets a background as an actor, allows vertical movements.
+	 * 
+	 * @param 	imageLink
+	 * @param 	y
+	 * @param 	animal
+	 * @see		Animal
+	 */
 	public BackgroundImage(String imageLink, int y, Animal animal) {
 		this.animal = animal;
 		setY(y);
@@ -49,10 +43,10 @@ public class BackgroundImage extends Actor{
 	}
 
 	/**
-	* Every frame, checks for vertical movements and move accordingly.
-	* 
-	* @param	now current frame
-	*/
+	 * Every frame, checks for vertical movements and move accordingly.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		if (animal == null) return;

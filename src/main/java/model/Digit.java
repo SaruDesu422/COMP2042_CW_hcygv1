@@ -7,15 +7,12 @@ public class Digit extends Actor{
 	private final int DIM = 30;
 	
 	/**
-	* Sets a digit as an actor.
-	* <pre>
-	* Methods:<br>getImage(String address)
-	* </pre>
-    *
-	* @param  	number
-	* @param  	x
-	* @param  	y
-	*/
+	 * Sets a digit as an actor
+	 * 
+	 * @param 	number
+	 * @param 	x
+	 * @param 	y
+	 */
 	public Digit(int number, int x, int y) {
 		setImage(getImage(Integer.toString(number)));
 		setX(x);

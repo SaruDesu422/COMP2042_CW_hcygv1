@@ -25,15 +25,12 @@ public class MainMenu extends BorderPane{
 
 	private MainController controller;
 
-    /**
-    * Sets up the pane for the main menu pane to be shown on.
-    * <pre>
-    * Methods:<br>initialize()
-    * </pre>
-    *
-	* @param    app
-	* @see		App
-    */
+	/**
+	 * Sets up the pane for the MainMenu page to be shown on.
+	 * 
+	 * @param 	app
+	 * @see		App
+	 */
     public MainMenu(App app) {
 		this.app = app;
 		this.scene = new Scene(this, 600, 800);
@@ -41,9 +38,8 @@ public class MainMenu extends BorderPane{
 	}
 
 	/**
-	* Adds the buttons and backgrounds to the pane.
-    *
-	*/
+	 * Adds the buttons and background to the pane.
+	 */
 	public void initialize() {
 		this.setPrefSize(600, 800);
 		add(new BackgroundImage("menuBackground"));
@@ -96,38 +92,38 @@ public class MainMenu extends BorderPane{
 	}
 	
 	/**
-	* Adds actor to current pane.
-	*
-	* @param	actor
-    * @see		Actor
-	*/
+	 * Adds actor the the current pane.
+	 * 
+	 * @param	actor
+	 * @see		Actor
+	 */
 	public void add(Actor actor) {
         getChildren().add(actor);
 	}
 
 	/**
-	* Accessor: Button btn_start
-	*
-    * @return	btn_start
-	*/
+	 * Accessor: Button btn_start
+	 * 
+	 * @return	btn_start
+	 */
     public Button getStartButton() {
 		return this.btn_start;
 	}
 
 	/**
-	* Accessor: Button btn_info
-	*
-    * @return	btn_info
-	*/
+	 * Accessor: Button btn_info
+	 * 
+	 * @return	btn_info
+	 */
 	public Button getInfoButton() {
 		return this.btn_info;
 	}
 
 	/**
-	* Accessor: App app
-	*
-    * @return	app
-	*/
+	 * Accessor: App app
+	 * 
+	 * @return	app
+	 */
 	public App getApp() {
 		return this.app;
 	}

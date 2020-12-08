@@ -30,49 +30,49 @@ public class App extends Application {
 	}
 
 	/**
-	* Change Scene of primary stage to MainMenu.
-	*
-	* @see		MainMenu
-	*/
+	 * Change Scene of primary stage to MainMenu.
+	 * 
+	 * @see		MainMenu
+	 */
 	public void showMainMenu() {
 		primaryStage.setScene(mainMenu.getScene());
 	}
 
 	/**
-	* Change Scene of primary stage to Scoreboard.
-	* 
-	* @param	scoreBoard
-	* @see		ScoreBoard
-	*/
+	 * Change Scene of primary stage to ScoreBoard.
+	 * 
+	 * @param	scoreBoard
+	 * @see		ScoreBoard
+	 */
 	public void showScoreBoard(ScoreBoard scoreBoard) {
 		primaryStage.setScene(scoreBoard.getScene());
 	}
 
 	/**
-	* Change Scene of primary stage to Info.
-	* 
-	* @param	info
-	* @see		info
-	*/
+	 * Change Scene of primary stage to Info.
+	 * 
+	 * @param	info
+	 * @see		Info
+	 */
 	public void showInfo(Info info) {
 		primaryStage.setScene(info.getScene());
 	}
 
 	/**
-	* Change Scene of primary stage to LeaderBoard.
-	* 
-	* @param	leaderBoard
-	* @see		leaderBoard
-	*/
+	 * Change Scene of primary stage to LeaderBoard.
+	 * 
+	 * @param	leaderBoard
+	 * @see		LeaderBoard
+	 */
 	public void showLeaderBoard(LeaderBoard leaderBoard) {
 		primaryStage.setScene(leaderBoard.getScene());
 	}
 
 	/**
-	* Change Scene of primary stage to a specific pane.
-    *
-	* @param	pane
-	*/
+	 * Change Scene of primary stage to a specific pane.
+	 * 
+	 * @param 	pane
+	 */
 	public void changePage(Pane pane) {
 		primaryStage.setScene(new Scene(pane, 600, 800));
 	}

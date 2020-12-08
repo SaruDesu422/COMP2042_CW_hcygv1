@@ -15,21 +15,18 @@ public class Obstacle extends Actor {
 	private Animal animal;
 
 	/**
-	* Sets an obstacle as an actor, allows movements.
-	* <pre>
-	* Methods:<br>act(long now)<br>getImage(String address)
-	* </pre>
-    *
-    * @param  	imageLink
-	* @param  	xpos
-	* @param  	ypos
-	* @param  	s
-	* @param	animal
-	* @see		Animal
-	*/
-	public Obstacle(String imageLink, int xpos, int ypos, double s, Animal animal) {
+	 * Sets an obstacle as an actor, allows movements.
+	 * 
+	 * @param	imageLink
+	 * @param	xpos
+	 * @param	ypos
+	 * @param	speed
+	 * @param	animal
+	 * @see		Animal
+	 */
+	public Obstacle(String imageLink, int xpos, int ypos, double speed, Animal animal) {
 		this.animal = animal;
-		this.speed = s;
+		this.speed = speed;
 		setImage(getImage(imageLink));
 		setX(xpos);
 		setY(ypos);
@@ -46,12 +43,11 @@ public class Obstacle extends Actor {
 	}
 
 	/**
-	* Every frame, this method:<p>
-	* - Checks out of bounds<p>
-	* - Checks for vertical movements
-    *
-	* @param  now current frame
-	*/
+	 * Every frame, this method checks for out of bounds and
+	 * vertical movements.
+	 * 
+	 * @param	now  current frame
+	 */
 	@Override
 	public void act(long now) {
 		move(speed, 0);

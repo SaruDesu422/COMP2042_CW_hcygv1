@@ -9,24 +9,21 @@ public class AnimalController {
 
     private Animal animal;
     
-	/**
-	* Controls the actions for key events.
-	* <pre>
-	* Methods:<br>OnKeyPressed(KeyEvent event)<br>OnKeyReleased(KeyEvent event)
-	* </pre>
-    *
-    * @param    animal
-    * @see      Animal
-	*/
+    /**
+     * Controls the actions for key events.
+     * 
+     * @param   animal
+     * @see     Animal
+     */
     public AnimalController(Animal animal) {
         this.animal = animal;
     }
 
     /**
-    * Configures actions when a key is pressed.
-    * 
-    * @param    event
-    */
+     * Configures actions when a key is pressed.
+     * 
+     * @param   event
+     */
     public void OnKeyPressed(KeyEvent event) {
         if (animal.isMove()) {
             animal.setFrameMove(true);
@@ -49,10 +46,10 @@ public class AnimalController {
     }
 
     /**
-    * Configures actions when a key is released.
-    * 
-    * @param    event
-    */
+     * Configures actions when a key is released.
+     * 
+     * @param   event
+     */
     public void OnKeyReleased(KeyEvent event) {
         if (animal.isFrameMove()) {
             if (event.getCode() == KeyCode.W) {

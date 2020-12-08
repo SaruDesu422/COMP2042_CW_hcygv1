@@ -29,15 +29,13 @@ public class LeaderBoard extends BorderPane {
 	protected Scene scene;
 
     /**
-    * Sets up the pane for the leaderboard pane, showing the
-    * top 10 highest scores stored.
-    * <pre>
-    * Methods:<br>initialize()
-    * </pre>
-    *
-	* @param    app
-	* @see		App
-    */
+     * Sets up the pane for the leaderboard page, showing the
+     * top 10 highest scores stored.
+     * 
+     * @param   app
+     * @param   scoreBoard
+     * @see     App
+     */
     public LeaderBoard(App app, ScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
         this.app = app;
@@ -45,10 +43,9 @@ public class LeaderBoard extends BorderPane {
         initialize();
     }
 
-	/**
-	* Adds the buttons, background and digits to the pane.
-    *
-	*/
+    /**
+     * Adds the buttons, background and digits to the pane.
+     */
     public void initialize() {
         this.highScoreList = scoreBoard.getHighScoreList();
         this.setPrefSize(600, 800);
@@ -91,68 +88,68 @@ public class LeaderBoard extends BorderPane {
     }
 
     /**
-    * Sets every digits to a new digit object.
-    * 
-    * @param    temp
-    * @param    val
-    * @param    y
-    * @param    x
-    */
-    private void setNumbers(int temp, int val, int y, int x) {
+     * Sets every digits to a new Digit object.
+     * 
+     * @param   tempValue
+     * @param   value
+     * @param   y
+     * @param   x
+     */
+    private void setNumbers(int tempValue, int value, int y, int x) {
         int shift = 0;
-        if (val == 0)
+        if (value == 0)
             add(new Digit(0, x + 30, y));
         else {
-            while (val > 0) {
+            while (value > 0) {
                 int k = 1;
-                while (temp > 0) {
-                    int d = temp / 10;
-                    k = temp - d * 10;
-                    temp = d;
+                while (tempValue > 0) {
+                    int d = tempValue / 10;
+                    k = tempValue - d * 10;
+                    tempValue = d;
                     x += 30;
                 }
-                int d = val / 10;
-                k = val - d * 10;
-                val = d;
+                int d = value / 10;
+                k = value - d * 10;
+                value = d;
                 add(new Digit(k, x - shift, y));
                 shift += 30;
             }
         }
     }
     
-	/**
-	* Adds actor to current pane.
-	*
-	* @param	actor
-    * @see		Actor
-	*/
+    /**
+     * Adds actor to the current pane.
+     * 
+     * @param   actor
+     * @see     Actor
+     */
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
 
-	/**
-	* Accessor: Button btn_exit
-	*
-    * @return  btn_exit
-	*/
+    /**
+     * Accessor: Button btn_exit
+     * 
+     * @return  btn_exit
+     */
 	public Button getExitButton() {
 		return this.btn_exit;
 	}
 
-	/**
-	* Accessor: App app
-	*
-    * @return  app
-	*/
+    /**
+     * Accessor: App app
+     * 
+     * @return app
+     */
 	public App getApp() {
 		return this.app;
     }
 
-	/**
-	* Accessor: ScoreBoards scoreBoard
-	*
-    * @return  scoreBoard
-	*/
+    /**
+     * Accessor: ScoreBoard scoreBoard
+     * 
+     * @return  scoreBoard
+     */
 	public ScoreBoard getScoreBoard() {
 		return this.scoreBoard;
     }

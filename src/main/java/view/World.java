@@ -18,16 +18,13 @@ public abstract class World extends Pane {
     MyStage background;
     ScoreBoard scoreBoard;
     App app;
-    
+	
 	/**
-	* Configures listener for player's keyboard actions and controls
-	* addition and/or removal of actors in MyStage.
-	* <pre>
-	* Method:<br>add(Actor actor)<br>remove(Actor actor)<br>getObjects(Class<A> cls)
-	* </pre>
-	*
-	* @see		MyStage
-	*/
+	 * Configures listener for player's keyboard actions and controles
+	 * addition and/or removal of actors in MyStage.
+	 * 
+	 * @see		MyStage
+	 */
     public World() {
     	sceneProperty().addListener(new ChangeListener<Scene>() {
 			@Override
@@ -63,29 +60,31 @@ public abstract class World extends Pane {
     }
 
 	/**
-	* Adds actor to current pane.
-	*
-	* @param	actor
-    * @see		Actor
-	*/
+	 * Adds actor the the current pane
+	 * 
+	 * @param 	actor
+	 * @see		Actor
+	 */
     public void add(Actor actor) {
         getChildren().add(actor);
     }
 
 	/**
-	* Removes actor from current pane.
-	*
-	* @param	actor
-    * @see		Actor
-	*/
+	 * Removes actor from the current pane.
+	 * 
+	 * @param	actor
+	 * @see		Actor
+	 */
     public void remove(Actor actor) {
         getChildren().remove(actor);
     }
 
 	/**
-	 * Puts objects into an array.
-	 * @param cls object array
-	 * @return someArray
+	 * Puts objects into an array
+	 * 
+	 * @param	cls  actor
+	 * @return	someArray
+	 * @see		Actor
 	 */
     @SuppressWarnings("unchecked")
     public <A extends model.Actor> List<A> getObjects(Class<A> cls) {

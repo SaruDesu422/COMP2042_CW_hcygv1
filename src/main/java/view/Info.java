@@ -22,15 +22,12 @@ public class Info extends BorderPane {
 
 	private InfoController controller;
 
-    /**
-    * Sets up the pane for the info pane to be shown on.
-    * <pre>
-    * Methods:<br>initialize()
-    * </pre>
-    *
-	* @param    app
-	* @see		App
-    */
+	/**
+	 * Sets up the pane for the info pane to be shown on.
+	 * 
+	 * @param	app
+	 * @see		App
+	 */
     public Info(App app) {
         this.app = app;
 		this.scene = new Scene(this, 600, 800);
@@ -38,9 +35,8 @@ public class Info extends BorderPane {
 	}
 
 	/**
-	* Adds the buttons and background to the pane.
-    *
-	*/
+	 * Adds the buttons and background to the pane.
+	 */
 	public void initialize() {
 		this.setPrefSize(600, 800);
 		add(new BackgroundImage("infoBackground"));
@@ -72,29 +68,29 @@ public class Info extends BorderPane {
 	}
 	
 	/**
-	* Adds actor to current pane.
-	*
-	* @param	actor
-    * @see		Actor
-	*/
+	 * Adds actor to the current pane.
+	 * 
+	 * @param	actor
+	 * @see		Actor
+	 */
 	public void add(Actor actor) {
         getChildren().add(actor);
     }
 
 	/**
-	* Accessor: Button btn_exit
-	*
-    * @return  btn_exit
-	*/
+	 * Accessor: Button btn_ext
+	 * 
+	 * @return	btn_exit
+	 */
 	public Button getExitButton() {
 		return this.btn_exit;
 	}
 
 	/**
-	* Accessor: App app
-	*
-    * @return  app
-	*/
+	 * Accessor: App app
+	 * 
+	 * @return	app
+	 */
 	public App getApp() {
 		return this.app;
     }
