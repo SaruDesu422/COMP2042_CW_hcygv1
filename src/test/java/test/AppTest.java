@@ -1,18 +1,15 @@
 package test;
 
-//import controller.*;
-//import model.*;
-//import view.*;
-//
+import view.*;
+
 import org.testfx.framework.junit5.ApplicationTest;
-//
-//import javafx.scene.layout.BorderPane;
-//import javafx.stage.Stage;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//import org.junit.Before;
-//import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Test;
 
 /**
  * Unit test for certain methods in the app.
@@ -20,24 +17,19 @@ import org.testfx.framework.junit5.ApplicationTest;
  */
 public class AppTest extends ApplicationTest {
 
-//    Animal animal;
-//    App app;
-//    Info info;
-//    MainMenu mainMenu;
-//    Game game;
-//    ScoreBoard scoreBoard;
-//    BorderPane testPane;
-//
-//    // @Before
-//    // public void setUp() {
-//    //     app = new App();
-//    //     info = new Info(app);
-//    //     mainMenu = new MainMenu(app);
-//    //     game = new Game(mainMenu);
-//    //     scoreBoard = new ScoreBoard(mainMenu, game);
-//    // }
-//
-//    @Test
-//    public void test() {
-//    }
+    @Test
+    public void updateScoreSheetTest() {
+        int score, scoreTest;
+        List<String[]> highScoreTest = new ArrayList<>();
+        for (int i = 0; i < ScoreBoard.MAXLEVEL; i++) {
+            String[] emptyLine = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
+            highScoreTest.add(emptyLine);
+        }
+        for (int i = 0; i < ScoreBoard.MAXLEVEL; i++) {
+            score = (int)(Math.random() * 1000) + 500;
+            highScoreTest.set(i, ScoreBoard.updateData(score, highScoreTest.get(i)));
+            scoreTest = Integer.valueOf(highScoreTest.get(i)[0]);
+            assertEquals(score, scoreTest);
+        }
+    }
 }
