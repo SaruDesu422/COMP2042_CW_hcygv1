@@ -24,7 +24,7 @@ The code are fully restructured according to MVC, where the panes are located in
 * Import the project in Eclipse.
 * Click the Run drop down menu and click Run Configurations.
 * Click Maven Build and then click New launch configuration.
-* Fill in Base directory as "${project_loc:COMP2042.CW.hcygv1}".
+* Fill in Base directory as "${project_loc:COMP2042_CW_hcygv1}".
 * Fill in Goals as "clean install".
 * Create another new launch configuration and fill in Base directory same as above.
 * Fill in Goals as "exec:java".
