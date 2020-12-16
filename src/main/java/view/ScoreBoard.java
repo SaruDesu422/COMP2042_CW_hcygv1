@@ -228,7 +228,6 @@ public class ScoreBoard extends BorderPane {
      * Update the array of String according to level and points, and sort it in an
      * ascending order.
      * 
-     * @param level
      * @param points
      * @param levelHighScoreList
      * @return levelHighScoreList
