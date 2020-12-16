@@ -96,7 +96,7 @@ public class Animal extends Actor {
 	 */
 	@Override
 	public void act(long now) {
-		/* Check out of Bounds */
+		// Check out of Bounds 
 		if (getY() > START_Y + MOVEMENT_Y) {
 			setY(START_Y);
 			upMovement++;
@@ -104,7 +104,7 @@ public class Animal extends Actor {
 		if (getX() < 0) move(MOVEMENT_X * 2, 0);
 		if (getX() > 600) move(-MOVEMENT_X * 2, 0);
 		
-		/* Check Move Down */
+		// Check Move Down 
 		if (moveDown) {
 			move(0, MOVEMENT_Y * 2);
 			highest_y += MOVEMENT_Y * 2;
@@ -115,8 +115,7 @@ public class Animal extends Actor {
 		if (upMovement - downMovement == 6 && endInfo > 12)
 			moveDown = true;
 		
-		/* Check Intersect Objects */
-
+		// Check Intersect Objects 
 		if (upMovement - 2 >= 0) {
 			if (backgroundInfo.get(upMovement - 2).get(0) == WATER) {
 				if (getIntersectingObjects(Log.class).size() >= 1 && move) {
@@ -155,7 +154,7 @@ public class Animal extends Actor {
 			}
 		}
 
-		/* Death Animation */
+		// Death Animation 
 		if (carDeath || waterDeath) {
 			frame++;
 			move = false;

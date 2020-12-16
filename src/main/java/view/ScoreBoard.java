@@ -80,7 +80,7 @@ public class ScoreBoard extends BorderPane {
 
         // go to the method, the writeData method
         if (level < MAXLEVEL) {
-            /** Create a continue button */
+            // Create a continue button
             btn_continue = new Button();
 
             ImageView continueBG = new ImageView(new Image("file:media/images/buttons/continue.png"));
@@ -98,7 +98,7 @@ public class ScoreBoard extends BorderPane {
             btn_continue.setPrefSize(200, 100);
         }
 
-        /** Create a menu button */
+        // Create a menu button
         btn_menu = new Button();
 
         ImageView menuBG = new ImageView(new Image("file:media/images/buttons/mainmenu.png"));
@@ -115,7 +115,7 @@ public class ScoreBoard extends BorderPane {
         btn_menu.setShape(menuShape);
         btn_menu.setPrefSize(200, 100);
 
-        /** Create a leaderboard button */
+        // Create a leaderboard button
         btn_leader = new Button();
 
         ImageView leaderBG = new ImageView(new Image("file:media/images/buttons/leader.png"));
@@ -128,12 +128,12 @@ public class ScoreBoard extends BorderPane {
         btn_leader.setShape(circle);
         btn_leader.setPrefSize(30, 30);
 
-        /** Show highscore, score and level */
+        // Show highscore, score and level
         setNumbers(highscore, highscore, 168);
         setNumbers(points, points, 227);
         setNumbers(level, level, 286);
 
-        /** Buttons controls and positions */
+        // Buttons controls and positions
         this.controller = new ScoreBoardController(this, game);
         if (level < MAXLEVEL) {
             setLeft(btn_continue);

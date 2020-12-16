@@ -60,7 +60,7 @@ public class WetTurtle extends Actor{
 	public void act(long now) {
 		move(speed, 0);
 
-		/** Animation */
+		// Animation 
 		int wait = 150;
 		if (frame < wait) {
 			sunk = false;
@@ -91,14 +91,14 @@ public class WetTurtle extends Actor{
 		}
 		frame++;
 
-		/** Checks out of bounds */
+		// Checks out of bounds 
 		double rng = (int)(Math.random() * 3);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
 		
-		/** Checks for vertical movements and move accordingly */
+		// Checks for vertical movements and move accordingly 
 		if (animal.isMoveDown())
 			move(0, STEP);
 		if (animal.isMoveBG())

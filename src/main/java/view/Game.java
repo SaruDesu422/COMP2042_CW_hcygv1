@@ -135,7 +135,7 @@ public class Game {
             e.printStackTrace();
         }
 
-        /** Sorts the backgroundInfo array according to y position */
+        // Sorts the backgroundInfo array according to y position 
         Collections.sort(this.backgroundInfo, new Comparator<List<Integer>>() {
             @Override
             public int compare(List<Integer> list1, List<Integer> list2) {
@@ -154,7 +154,7 @@ public class Game {
         stage = new MyStage();
         animal = new Animal(this);
 
-        /** Generates background */
+        // Generates background 
         for (int index = 0; index < backgroundInfo.size(); index++) {
             if(backgroundInfo.get(index).get(0).equals(WATER)) {
                 stage.add(new BackgroundImage("waterBackground", 695 - backgroundInfo.get(index).get(YPOS) * STEP, animal));
@@ -173,7 +173,7 @@ public class Game {
         stage.add(new End(398, 685 - (endInfo * STEP), animal));
         stage.add(new End(528, 685 - (endInfo * STEP), animal));
 
-        /** Adds obstacles */
+        // Adds obstacles 
         for (int index = 0; index < obstacleInfo.size(); index++) {
             int y = 695 - STEP * Integer.parseInt(obstacleInfo.get(index).get(YPOS));
             stage.add(new Obstacle(
@@ -185,7 +185,7 @@ public class Game {
             ));
         }
         
-        /** Adds turtles */
+        // Adds turtles 
         for (int index = 0; index < turtleInfo.size(); index++) {
             int y = 695 - STEP * Integer.parseInt(turtleInfo.get(index).get(YPOS));
             stage.add(new Turtle(
@@ -196,7 +196,7 @@ public class Game {
             ));
         }
         
-        /** Adds wet turtles */
+        // Adds wet turtles 
         for (int index = 0; index < wetTurtleInfo.size(); index++) {
             int y = 695 - STEP * Integer.parseInt(wetTurtleInfo.get(index).get(YPOS));
             stage.add(new WetTurtle(
@@ -207,7 +207,7 @@ public class Game {
             ));
         }
         
-        /** Adds logs */
+        // Adds logs 
         for (int index = 0; index < logInfo.size(); index++) {
             int y = 695 - STEP * Integer.parseInt(logInfo.get(index).get(YPOS));
             stage.add(new Log(
@@ -219,7 +219,7 @@ public class Game {
             ));
         }
         
-        /** Creates a menu button */
+        // Creates a menu button 
         btn_menu = new Button();
         
 		ImageView homeBG = new ImageView(new Image("file:media/images/buttons/home.png"));
@@ -232,18 +232,18 @@ public class Game {
         btn_menu.setShape(circle);
         btn_menu.setPrefSize(30, 30);
         
-        /** Configure menu button position */
+        // Configure menu button position 
         btn_menu.setLayoutX(25);
         btn_menu.setLayoutY(710);
 
-        /** Menu button controls */
+        // Menu button controls 
         this.controller = new GameController(this);
 		btn_menu.setOnAction(controller::handleButtonMenu);
         btn_menu.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonMenuMouseIn);
         btn_menu.addEventHandler(MouseEvent.MOUSE_EXITED, controller::handleButtonMenuMouseOut);
         stage.getChildren().add(btn_menu);
 
-        /** Adds header and animal */
+        // Adds header and animal 
         stage.add(new BackgroundImage("header"));
         stage.add(animal);
 

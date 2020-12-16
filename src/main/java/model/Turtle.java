@@ -56,7 +56,7 @@ public class Turtle extends Actor{
 	public void act(long now) {
 		move(speed, 0);
 
-		/** Animation */
+		// Animation 
 		if (frame == 0 || frame == 16)
 			setImage(IMG_TURTLE2);
 		else if (frame == 4 || frame == 12)
@@ -69,14 +69,14 @@ public class Turtle extends Actor{
 		}
 		frame++;
 
-		/** Checks out of bounds */
+		// Checks out of bounds 
 		double rng = (int)(Math.random() * 3);
 		if (getX() > LIMIT_RIGHT && speed > 0)
 			setX(LIMIT_LEFT - rng * 10);
 		if (getX() < LIMIT_LEFT && speed < 0)
 			setX(LIMIT_RIGHT + rng * 10);
 		
-		/** Checks for vertical movements and move accordingly */
+		// Checks for vertical movements and move accordingly 
 		if (animal.isMoveDown())
 			move(0, STEP);
 		if (animal.isMoveBG())

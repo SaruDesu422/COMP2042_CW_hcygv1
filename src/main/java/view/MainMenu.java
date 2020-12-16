@@ -44,7 +44,7 @@ public class MainMenu extends BorderPane{
 		this.setPrefSize(600, 800);
 		add(new BackgroundImage("menuBackground"));
 
-		/* Create a start button */
+		// Create a start button
 		btn_start = new Button();
 
 		ImageView startBG = new ImageView(new Image("file:media/images/buttons/start.png"));
@@ -61,7 +61,7 @@ public class MainMenu extends BorderPane{
 		btn_start.setShape(start);
 		btn_start.setPrefSize(200, 100);
 
-		/* Create an info button */
+		// Create an info button 
 		btn_info = new Button();
 
 		ImageView infoBG = new ImageView(new Image("file:media/images/buttons/info.png"));
@@ -74,14 +74,14 @@ public class MainMenu extends BorderPane{
 		btn_info.setShape(circle);
 		btn_info.setPrefSize(30, 30);
 
-		/** Configure start and info button position */
+		// Configure start and info button position
 		setCenter(btn_start);
 		setTop(btn_info);
 		setAlignment(btn_info, Pos.TOP_RIGHT);
 		setMargin(btn_info, new Insets(25, 25, 25, 25));
 		setMargin(btn_start, new Insets(300, 0, 0, 0));
 
-		/** Start and info button controls */
+		// Start and info button controls
 		controller = new MainController(this);
 		btn_start.setOnAction(controller::handleButtonStart);
         btn_start.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonStartMouseIn);

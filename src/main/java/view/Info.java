@@ -41,7 +41,7 @@ public class Info extends BorderPane {
 		this.setPrefSize(600, 800);
 		add(new BackgroundImage("infoBackground"));
 
-		/** Creates the exit button */
+		// Creates the exit button
 		btn_exit = new Button();
 		
 		ImageView exitBG = new ImageView(new Image("file:media/images/buttons/back.png"));
@@ -55,12 +55,12 @@ public class Info extends BorderPane {
 		btn_exit.setShape(circle);
 		btn_exit.setPrefSize(30, 30);
 
-        /** Configure exit button position */
+        // Configure exit button position 
 		setTop(btn_exit);
 		setAlignment(btn_exit, Pos.TOP_RIGHT);
 		setMargin(btn_exit, new Insets(25,25,25,25));
 
-		/** Exit button controls */
+		// Exit button controls 
 		controller = new InfoController(this);
 		btn_exit.setOnAction(controller::handleButtonExit);
         btn_exit.addEventHandler(MouseEvent.MOUSE_ENTERED, controller::handleButtonExitMouseIn);
